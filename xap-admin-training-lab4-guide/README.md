@@ -15,7 +15,7 @@ In this lab you will start XAP infrastructure services. Deploy a Space, perform 
 
 a.	Go to %XAP_TRAINING_HOME%\gigaspaces-xap\bin <br>
 b.	./gs.sh host run-agent --auto --gsc=4 <br>
-c.	Go to web Management Console (localhost:8099)
+c.	Go to web Management Console (localhost:8099) <br>
 d.	Press on the gsc processes to see the process information and log. <br>
 
 ![Screenshot](./Pictures/Picture1.png)
