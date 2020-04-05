@@ -51,7 +51,7 @@ For Linux use: kill -9 <PID>
 3.4	Stop the runtime grid <br>
 
     a.	Press on the GSA
-    b.	Right click to open GSA menu
+    b.	Click to open GSA Actions
     c.	Select shutdown
     
 ![Screenshot](./Pictures/Picture5.png) 
