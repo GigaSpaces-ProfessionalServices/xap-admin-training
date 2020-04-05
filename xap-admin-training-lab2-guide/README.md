@@ -14,7 +14,7 @@ In this lab you will start XAP infrastructure services. Inspect the runtime grid
     a.	Goto %XAP_TRAINING_HOME%\gigaspaces-xap\bin
     b.	./gs.sh host run-agent --auto --gsc=2
     c.	Start gs-ui:
-        ./gs-ui.sh
+            ./gs-ui.sh
     
 ## 2	Examine the running environment
     
