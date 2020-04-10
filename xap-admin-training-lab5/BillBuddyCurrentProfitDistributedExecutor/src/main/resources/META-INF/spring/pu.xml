@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:os-core="http://www.openspaces.org/schema/core" xmlns:os-jms="http://www.openspaces.org/schema/jms"
+	xmlns:os-events="http://www.openspaces.org/schema/events"
+	xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+	xmlns:os-sla="http://www.openspaces.org/schema/sla" xmlns:tx="http://www.springframework.org/schema/tx"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+       http://www.openspaces.org/schema/core http://www.openspaces.org/schema/11.0/core/openspaces-core.xsd
+       http://www.openspaces.org/schema/events http://www.openspaces.org/schema/11.0/events/openspaces-events.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+       http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/11.0/remoting/openspaces-remoting.xsd">
+	
+	<!-- ANNOTATION AND COMPONENT SCAN CONFIGURATION -->
+	<!-- Enable scan for OpenSpaces and Spring components -->
+	<context:component-scan base-package="com.gs.billbuddy.report" />
+	<!-- Enables the usage of @GigaSpaceContext annotation based injection. -->
+	<os-core:giga-space-context />
+	<!-- Enables Spring Annotation configuration -->
+	<context:annotation-config />
+	<!-- Enables using @Polling and @Notify annotations -->
+	<os-events:annotation-support />
+
+
+	<!-- SPACE CONFIGURATION -->
+	<!-- A bean representing a space (an IJSpace implementation). Note, we do 
+		not specify here the cluster topology of the space. It is declared outside 
+		of the processing unit or within the SLA bean. -->
+	<os-core:space-proxy  id="space" space-name="BillBuddySpace"/>
+	<os-core:giga-space id="gigaSpace" space="space"/>
+	
+</beans>
