@@ -1,6 +1,6 @@
 # xap-admin-training - lab5
 
-#The Bill Buddy Application
+# The Bill Buddy Application
 
 ## Lab Goals
 
