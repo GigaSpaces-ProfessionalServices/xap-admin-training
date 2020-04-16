@@ -70,7 +70,7 @@ https://docs.gigaspaces.com/latest/admin/web-management-monitoring.html#GettingS
 * When using docker sometime Grafana can't be reached by the gs-webui<br><br>
 ![Screenshot](./Pictures/Picture3.png)
 
-To overcome the above plaese use the direct link:
+To overcome the above please use the direct link:
 http://localhost:3000/
 
 ### 7 Space dashboard:
