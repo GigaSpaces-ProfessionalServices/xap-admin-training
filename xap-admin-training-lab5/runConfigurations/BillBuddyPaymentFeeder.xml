@@ -5,7 +5,7 @@
     <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.openspaces.pu.container.integrated.IntegratedProcessingUnitContainer" />
     <module name="BillBuddyPaymentFeeder" />
-    <option name="VM_PARAMETERS" value="-Dcom.gs.jini_lus.groups=yuval-pc" />
+    <option name="VM_PARAMETERS" value="-Dcom.gs.jini_lus.groups=${GS_LOOKUP_GROUPS}" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
