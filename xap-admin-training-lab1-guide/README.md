@@ -16,18 +16,17 @@ https://www.gigaspaces.com/downloads/
 
 https://docs.gigaspaces.com/latest/started/installation.html#DownloadingandInstalling
 
-**Note:** Please extract inside xap-admin-training cloned directory.
 
 ##### 1.2 Put `tryme` license to `gs-license.txt` file located at the root of xap installation directory.
 
-##### 1.3 Go to `$XAP_HOME/bin` open `setenv-overrides.sh` and set: <br>
+##### 1.3 Go to `$GS_HOME/bin` open `setenv-overrides.sh` and set: <br>
    `JAVA_HOME` -> point to you java installation directory <br>
    `GS_LOOKUP_GROUPS` -> set any unique identifier
    
 ##### 1.4 Test your XAP Installation. <br>
    You will start a XAP process (gs-agent) and you will wait to see a message that the gs-agent started successfully with groups [<your user group>]
    
-   cd ${XAP_TRAINING_HOME}/gigaspaces-xap/bin 
+   cd $GS_HOME/bin 
    ./gs.sh host run-agent --auto --gsc=2
    
    The following screen will appear:
