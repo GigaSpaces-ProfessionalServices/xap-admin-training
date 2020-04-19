@@ -2,9 +2,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:os-sla="http://www.openspaces.org/schema/sla"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	   http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.openspaces.org/schema/sla 
-	   http://www.openspaces.org/schema/11.0/sla/openspaces-sla.xsd">
+	   http://www.openspaces.org/schema/15.2/sla/openspaces-sla.xsd">
   
   <!-- The SLA bean used when deploying this processing unit to the Service Grid. -->
     <os-sla:sla cluster-schema="partitioned" 
