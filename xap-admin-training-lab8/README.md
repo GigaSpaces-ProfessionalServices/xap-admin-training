@@ -41,10 +41,10 @@ To login to a vm please follow this screenshot:
 
 **1.** Update gs-license.txt with tryme.<br>
 **2.** `cd $GS_HOME/bin` and set up **GS_MANAGER_SERVERS** in `setenv-overrides.sh` <br>
-export GS_MANAGER_SERVERS=node5,node6,node7
+export GS_MANAGER_SERVERS=node5,node6,node7 <br>
 **3.** ./gs.sh host run-agent --auto
 
-**One you are done with steps 1-3 on all 4 vms you are done! Cluster is ready to be use :-)**
+**Once you are done with steps 1-3 on all 4 vms you are done! Cluster is ready to be use :-)**
 
 ### 4 Explore the cluster:
 
@@ -52,7 +52,7 @@ Please enter the Web Management Console (Web UI)<br>
 It should be available on all manager machines: node-5,node-6 and node-7.<br>
 On node-8 you should'nt be able to use Web Management Console (Web UI) as it is a machine without XAP Manager.<br>
 
-If you see the following lab has been completed successfully by you :-)<br>
+If you see the following, lab has been completed successfully by you :-)<br>
 
 ![Screenshot](./Pictures/Picture3.png)
 
