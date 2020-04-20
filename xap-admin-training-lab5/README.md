@@ -71,7 +71,7 @@ In this lab we will focus on deployment and the application and not be concerned
 
 3.1 From the Intellij run configuration select BillBuddyAccountFeeder and run it.
 
-###### This application writes Users and Merchants to the Space
+###### This application writes Users, Merchants and Contracts to the Space
  
 3.2 Validate Users and Merchants were written to the space using the web Management Console (localhost:8099). <br />
  Go to: Spaces Tab -> Data Types. <br />
@@ -81,7 +81,7 @@ In this lab we will focus on deployment and the application and not be concerned
 3.3 Query the list of Users by executing the following SQL: <br />
 Click the Data Type Name and the sql will be created for you: <br />
 
-    SELECT * FROM com.gs.billbuddy.model.User
+    SELECT * FROM com.gs.billbuddy.model.User WHERE rownum<5000
     
 ###### Note: Fully qualified class name is required.
 
