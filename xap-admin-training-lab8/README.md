@@ -39,12 +39,13 @@ To login to a vm please follow this screenshot:
 
 ![Screenshot](./Pictures/Picture2.png)
 
-**1.** Update gs-license.txt with tryme.<br>
-**2.** `cd $GS_HOME/bin` and set up **GS_MANAGER_SERVERS** in `setenv-overrides.sh` <br>
+**1.**  unzip GS Software distribution.<br>
+**2.** `cd $GS_HOME` and Update gs-license.txt with tryme.<br>
+**3.** `cd $GS_HOME/bin` and set up **GS_MANAGER_SERVERS** in `setenv-overrides.sh` <br>
 export GS_MANAGER_SERVERS=node5,node6,node7 <br>
-**3.** ./gs.sh host run-agent --auto
+**4.** ./gs.sh host run-agent --auto
 
-**Once you are done with steps 1-3 on all 4 vms you are done! Cluster is ready to be use :-)**
+**Once you are done with steps 1-4 on all 4 vms you are done! Cluster is ready to be use :-)**
 
 ### 4 Explore the cluster:
 
