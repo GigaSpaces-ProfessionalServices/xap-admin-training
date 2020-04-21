@@ -142,27 +142,39 @@ Navigate through the application pages and investigate it.
 
 ## 6 Hot Deploy
 
-### 6.1 Change the BillBuddy application logic - we will just change a log message.
+### 6.1 Any ware on your file system, clone Gigaspaces existing Custom Rest Upgrade Plugin
 
-6.1.1 Open com/gs/billbuddy/events/ProcessingFeePollingEventContainer.java class with IntelliJ <br />
-6.1.2 verify that you see this line at the end of the class: <br />
+    $ git clone https://github.com/GigaSpaces-ProfessionalServices/CustomRestPlugins.git
+    Cloning into 'CustomRestPlugins'...
+    remote: Enumerating objects: 12, done.
+    remote: Counting objects: 100% (12/12), done.
+    remote: Compressing objects: 100% (7/7), done.
+    remote: Total 12 (delta 1), reused 12 (delta 1), pack-reused 0
+    Unpacking objects: 100% (12/12), 3.04 KiB | 389.00 KiB/s, done.
+
+6.1.1 Investigate plugin/UpgradePuRestPlugin.java class 
+
+### 6.2 Change the BillBuddy application logic - we will just change a log message.
+
+6.2.1 Open com/gs/billbuddy/events/ProcessingFeePollingEventContainer.java class with IntelliJ <br />
+6.2.2 verify that you see this line at the end of the class: <br />
 
     log.info("ProcessingFeeTransaction updates merchants transactionFeeAmount. Merchant: " + merchant.getName() +
                         " new transactionFeeAmount is " + merchant.getFeeAmount());
                         
-6.1.3 Open the GSA console and verify that you see this printing rolling for each Merchant. <br />
+6.2.3 Open the GSA console and verify that you see this printing rolling for each Merchant. <br />
 
 ![Screenshot](./Pictures/Picture6.png)
 
-6.1.4 Go to the Intellij and change something in this log message. For example: <br />
+6.2.4 Go to the Intellij and change something in this log message. For example: <br />
 
       log.info("ProcessingFeeTransaction updates merchants transactionFeeAmount. Merchant: " + merchant.getName() +
                             " ** My new JAR ** - new transactionFeeAmount is " + merchant.getFeeAmount());
           
           
- ### 6.2 Create a new JAR 
+ ### 6.3 Create a new JAR 
          
-6.2.1 Run mvn install <br />
+6.3.1 Run mvn install <br />
     
  ~/xap-admin-training/xap-admin-training-Lab10$ mvn xap:intellij
     
@@ -176,31 +188,31 @@ Navigate through the application pages and investigate it.
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     
-6.2.2 Copy the jar to a different directory and rename its name <br /> 
+6.3.2 Copy the jar to a different directory and rename its name <br /> 
    
     cp ~/xap-admin-training//xap-admin-training-lab10/BillBuddy_Space/target/BillBuddy_Space.jar ~/tmp
     mv ~/tmp/BillBuddy_Space.jar ~/tmp/BillBuddy_Space_V2.jar
  			
 
-### 6.3 Upload the new JAR
+### 6.4 Upload the new JAR
 
-6.3.1 Open the REST Manager API and navigate to Processing Units PUT /pus/resources (http://localhost:8090/v2/index.html#!/Processing_Units/put_pus_resources) <br />
-6.3.2 Click on "Choose File" button and select BillBuddy_Space_V2.jar <br />
+6.4.1 Open the REST Manager API and navigate to Processing Units PUT /pus/resources (http://localhost:8090/v2/index.html#!/Processing_Units/put_pus_resources) <br />
+6.4.2 Click on "Choose File" button and select BillBuddy_Space_V2.jar <br />
 
 ![Screenshot](./Pictures/Picture7.png)
 
-6.3.3 Click on "Try it out!" button and verify that the response code is 201. <br />
+6.4.3 Click on "Try it out!" button and verify that the response code is 201. <br />
 
 ![Screenshot](./Pictures/Picture11.png)
 
-6.3.4 Verify that the new jar has been copied under: {XAP_HOME}/work/RESTresources/ <br />
+6.4.4 Verify that the new jar has been copied under: {XAP_HOME}/work/RESTresources/ <br />
 
     ls -la {XAP_HOME}/work/RESTresources
     BillBuddy_Space_V2.jar
 
-### 6.4 Update the PU code using the plugin
+### 6.5 Update the PU code using the plugin
  
-6.4.1 Keep the last modification time of {XAP_HOME}/deploy/{oldResource} directory. You can simply run "ls -la" on the deploy directory.
+6.5.1 Keep the last modification time of {XAP_HOME}/deploy/{oldResource} directory. You can simply run "ls -la" on the deploy directory.
 You will use it in a few minutes. <br />
 
     ls -la {XAP_HOME}/deploy/
@@ -208,22 +220,22 @@ You will use it in a few minutes. <br />
 #####    160 Apr 21 11:58 BillBuddy_Space
     160 Apr  1 08:46 templates
 
-6.4.2 Run the following curl command <br />
+6.5.2 Run the following curl command <br />
 
         curl -X PUT --header 'Accept: application/json' 'http://localhost:8090/v2/update/updatePu?oldResource=BillBuddy_Space.jar&newResource=BillBuddy_Space_V2.jar'
         
-6.4.3 Verify that the return code is 0 <br />
+6.5.3 Verify that the return code is 0 <br />
 
         echo $?
         0
         
-6.4.4 you should receive a successful message
+6.5.4 you should receive a successful message
 
 ![Screenshot](./Pictures/Picture12.png)
 
         
-6.4.5 verify that the new jar has been removed from {XAP_HOME}/work/RESTresources/ <br />
-6.4.6 verify that the PU under the deploy directory has been updated.
+6.5.5 verify that the new jar has been removed from {XAP_HOME}/work/RESTresources/ <br />
+6.5.6 verify that the PU under the deploy directory has been updated.
 Run again 'la {XAP_HOME}/deploy/' and compare it to the previous time.
 
     ls -la {XAP_HOME}/deploy/
@@ -231,27 +243,27 @@ Run again 'la {XAP_HOME}/deploy/' and compare it to the previous time.
 #####    160 Apr 21 12:05 BillBuddy_Space
     160 Apr  1 08:46 templates
        
-### 6.5 Use the new PU
-#### 6.5.1 Restart the Backups <br />
-6.5.1.1 Go to the web-ui which should be already open. <br />
-6.5.1.2 Click on the Proccessing Units Tab. <br />
-6.5.1.3 Click on the Settings icon of one of the Backups and choose "restart" <br />
+### 6.6 Use the new PU
+#### 6.6.1 Restart the Backups <br />
+6.6.1.1 Go to the web-ui which should be already open. <br />
+6.6.1.2 Click on the Proccessing Units Tab. <br />
+6.6.1.3 Click on the Settings icon of one of the Backups and choose "restart" <br />
 
 ![Screenshot](./Pictures/Picture10.png)
 
-6.5.1.4 Do the same for the second Backup. <br />
+6.6.1.4 Do the same for the second Backup. <br />
 
 ![Screenshot](./Pictures/Picture8.png)
 
-#### 6.5.2 Demote the primary <br />
-6.5.2.1 In the web-ui go click on Spaces. <br />
-6.5.2.2 Click on the Settings icon of one of the Primaries and choose "demote". <br />
+#### 6.6.2 Demote the primary <br />
+6.6.2.1 In the web-ui go click on Spaces. <br />
+6.6.2.2 Click on the Settings icon of one of the Primaries and choose "demote". <br />
 
 ![Screenshot](./Pictures/Picture9.png)
  
-6.5.2.3 Leave the default 15 seconds and click ok. <br />
+6.6.2.3 Leave the default 15 seconds and click ok. <br />
 
 ![Screenshot](./Pictures/Picture13.png)
 
-6.5.2.3 Do the same for the second primary <br />
-6.5.2.3 Verify the change in the log message.
+6.6.2.3 Do the same for the second primary <br />
+6.6.2.3 Verify the change in the log message.
