@@ -142,7 +142,9 @@ Navigate through the application pages and investigate it.
 
 ## 6 Hot Deploy
 
-### 6.1 Any ware on your file system, clone Gigaspaces existing Custom Rest Upgrade Plugin
+### 6.1 Download Gigaspaces Custom Rest Upgrade Plugin
+
+6.1.1 clone the plugin
 
     $ git clone https://github.com/GigaSpaces-ProfessionalServices/CustomRestPlugins.git
     Cloning into 'CustomRestPlugins'...
@@ -151,8 +153,25 @@ Navigate through the application pages and investigate it.
     remote: Compressing objects: 100% (7/7), done.
     remote: Total 12 (delta 1), reused 12 (delta 1), pack-reused 0
     Unpacking objects: 100% (12/12), 3.04 KiB | 389.00 KiB/s, done.
+    
 
-6.1.1 Investigate plugin/UpgradePuRestPlugin.java class 
+6.1.2 Build the project
+        
+    $ cd CustomRestPlugins/
+    $ mvn install
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Reactor Summary for CustomRestPlugins 1.0-SNAPSHOT:
+    [INFO] 
+    [INFO] CustomRestPlugins .................................. SUCCESS [  0.180 s]
+    [INFO] updatePlugin ....................................... SUCCESS [  0.963 s]
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time:  1.217 s
+    [INFO] Finished at: 2020-04-21T18:33:28+03:00
+    [INFO] ------------------------------------------------------------------------
+
+6.1.3 Copy updatePlugin/target/updatePlugin.jar to {XAP_HOME}/lib/platform/manager/plugins/
 
 ### 6.2 Change the BillBuddy application logic - we will just change a log message.
 
@@ -217,7 +236,7 @@ You will use it in a few minutes. <br />
 
     ls -la {XAP_HOME}/deploy/
     6148 Apr 19 13:57 .DS_Store
-#####    160 Apr 21 11:58 BillBuddy_Space
+    *** 160 Apr 21 11:58 BillBuddy_Space ***
     160 Apr  1 08:46 templates
 
 6.5.2 Run the following curl command <br />
@@ -240,7 +259,7 @@ Run again 'la {XAP_HOME}/deploy/' and compare it to the previous time.
 
     ls -la {XAP_HOME}/deploy/
     6148 Apr 19 13:57 .DS_Store
-#####    160 Apr 21 12:05 BillBuddy_Space
+    *** 160 Apr 21 12:05 BillBuddy_Space ***
     160 Apr  1 08:46 templates
        
 ### 6.6 Use the new PU
@@ -255,7 +274,7 @@ Run again 'la {XAP_HOME}/deploy/' and compare it to the previous time.
 
 ![Screenshot](./Pictures/Picture8.png)
 
-#### 6.6.2 Demote the primary <br />
+#### 6.6.2 Demote the Primary s <br />
 6.6.2.1 In the web-ui go click on Spaces. <br />
 6.6.2.2 Click on the Settings icon of one of the Primaries and choose "demote". <br />
 
