@@ -19,8 +19,10 @@ public class AccountFeeder {
 		// Get a proxy to the space using a configurer
 		
 		String lookupGroups = System.getenv("GS_LOOKUP_GROUPS");
+		String lookupLocators = System.getenv("GS_LOOKUP_LOCATORS");
 		SpaceProxyConfigurer spaceConfigurer = new SpaceProxyConfigurer("BillBuddySpace");
-		spaceConfigurer.lookupGroups("yuval-pc.local");
+		spaceConfigurer.lookupGroups(lookupGroups);
+		spaceConfigurer.lookupLocators(lookupLocators);
 	  	
 	  	// Create a space proxy
 	  	GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
