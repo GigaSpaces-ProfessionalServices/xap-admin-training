@@ -266,4 +266,6 @@ Run again 'la {XAP_HOME}/deploy/' and compare it to the previous time.
 ![Screenshot](./Pictures/Picture13.png)
 
 6.6.2.3 Do the same for the second primary <br />
-6.6.2.3 Verify the change in the log message.
+6.6.2.3 Go to the GSA console and verify the change in the log message.
+
+![Screenshot](./Pictures/Picture14.png)
