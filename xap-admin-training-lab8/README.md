@@ -57,6 +57,17 @@ If you see the following, lab has been completed successfully by you :-)<br>
 
 ![Screenshot](./Pictures/Picture3.png)
 
+### 5 explore Apache ZooKeeper under the hood (Optional Section if time permits)
+
+* `git clone https://github.com/DeemOpen/zkui.git`<br>
+
+* Follow the **Setup** instructions as appear in the readme:<br>
+  https://github.com/DeemOpen/zkui/blob/master/README.md
+
+* Explore GS ZK tree to better understand the concept.<br>
+
+
+
 
 
 
