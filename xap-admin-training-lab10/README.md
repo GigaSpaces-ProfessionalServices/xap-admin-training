@@ -150,8 +150,6 @@ Click the Payment Data Type Name as you did in section 3.3
 
 ![Screenshot](./Pictures/Picture3.png)
 
-4.4 Go to the Data Types view. Which objects counts are increasing?
-
 ## 6 Hot Deploy
 
 ### 6.1 Change the BillBuddy application logic - we will just change a log message.
@@ -202,11 +200,9 @@ Click the Payment Data Type Name as you did in section 3.3
 
 6.3.1 Open the REST Manager API and navigate to Processing Units<br>
  PUT /pus/resources (http://localhost:8090/v2/index.html#!/Processing_Units/put_pus_resources) <br />
+ 
 6.3.2 Click on "Choose File" button and select BillBuddy_Space_V2.jar <br />
-
-![Screenshot](./Pictures/Picture5.png)
-
-6.3.3 Click on "Try it out!" button and verify that the response code is 201. <br />
+      Click on "Try it out!" button and verify that the response code is 201. <br />
 
 ![Screenshot](./Pictures/Picture6.png)
 
@@ -237,6 +233,7 @@ Click the Payment Data Type Name as you did in section 3.3
 ### 6.5 Use the new PU
 #### 6.5.1 Restart the Containers <br />
 First restart backup only after primary:<br>
+Use new GS cli we will elaborate more on it's capabilities on the next lesson and lab.<br>
 ![Screenshot](./Pictures/Picture10.png)
 
 6.5.2 Go to the GSA console and verify the change in the log message.
