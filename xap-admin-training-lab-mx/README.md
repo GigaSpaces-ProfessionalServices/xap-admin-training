@@ -1,4 +1,4 @@
-# xap-admin-training - lab5
+# xap-admin-training - lab-mx (MemoryXtend)
 
 # The Bill Buddy Application
 
@@ -6,6 +6,7 @@
 
 1. Experience an application deployment process. <br />
 2. Get familiar with the BillBuddy application <br />
+3. Use GigaSpaces Memory Extend 
 
 ## Lab Description
 In this lab we will focus on deployment and the application and not be concerned with code, therefore simply focus on the deployment process, you will use similar process throughout the labs.
@@ -21,15 +22,15 @@ In this lab we will focus on deployment and the application and not be concerned
     
 #### 2	Deploy BillBuddy_Space
     
-2.1 Open %XAP_TRAINING_HOME%/xap-admin-training-lab5 project with intellij (open pom.xml) <br />
+2.1 Open %XAP_TRAINING_HOME%/xap-admin-training-lab-mx project with intellij (open pom.xml) <br />
 2.2 Run mvn install <br />
 
-    ~/xap-admin-training/xap-admin-training-lab5$ mvn install
+    ~/xap-admin-training/xap-admin-training-lab-mx$ mvn install
     
     
     [INFO] Reactor Summary:
     [INFO] 
-    [INFO] Lab5 ............................................... SUCCESS [  0.204 s]
+    [INFO] lab-mx ............................................... SUCCESS [  0.204 s]
     [INFO] BillBuddyModel ..................................... SUCCESS [  1.087 s]
     [INFO] BillBuddy_Space .................................... SUCCESS [  0.207 s]
     [INFO] BillBuddyAccountFeeder ............................. SUCCESS [  0.189 s]
@@ -47,9 +48,9 @@ In this lab we will focus on deployment and the application and not be concerned
 
 ###### This will add the predefined Run Configuration Application to your Intellij IDE.
 
-    ~/xap-admin-training/xap-admin-training-lab5$ mvn xap:intellij
+    ~/xap-admin-training/xap-admin-training-lab-mx$ mvn xap:intellij
     
-    [INFO] Lab5 ............................................... SUCCESS [  0.586 s]
+    [INFO] lab-mx ............................................... SUCCESS [  0.586 s]
     [INFO] BillBuddyModel ..................................... SKIPPED
     [INFO] BillBuddy_Space .................................... SKIPPED
     [INFO] BillBuddyAccountFeeder ............................. SKIPPED
@@ -65,7 +66,7 @@ In this lab we will focus on deployment and the application and not be concerned
            
 2.6 Use XAP CLI to deploy BillBuddy_Space
  
-    ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab5/BillBuddy_Space/target/BillBuddy_Space.jar 
+    ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab-mx/BillBuddy_Space/target/BillBuddy_Space.jar 
 
 #### 3	Run BillBuddyAccountFeeder from Intellij
 
@@ -104,25 +105,17 @@ Click the Payment Data Type Name as you did in section 3.3
 
 ![Screenshot](./Pictures/Picture3.png)
 
-4.4 Go to the Data Types view. Which objects counts are increasing?
-
-#### 5 Deploy BillBuddyWebApplication project
-
-5.1 Open a new Terminal and navigate to %XAP_TRAINING_HOME%/gigaspaces-xap/bin/
-
-5.2 Use XAP CLI to deploy BillBuddyWebApplication
- 
-    ./gs.sh pu deploy BillBuddyWebApplication ~/xap-admin-training/xap-admin-training-lab5/BillBuddyWebApplication/target/BillBuddyWebApplication.war
-
-5.3 Validate the application is deployed. 
-Go to Deployed Processing Units tab and expand the BillBuddyWebApplication PU.
+4.4 Go to the Data Types view. see haw many records are in side the space.<br>
 
 ![Screenshot](./Pictures/Picture4.png)
 
-5.4 Click on Config.
-The host, port and context-path should be used as a url to reach the BillBuddy web application: 
+#### 5 Undeploy the application 
+
+5. Undeploy the space:<br>
+   `./gs.sh pu undeploy BillBuddySpace`
+   
+#### 6 Deploy the space and verify that all records were restored from SSD.
+    ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab-mx/BillBuddy_Space/target/BillBuddy_Space.jar <br> 
+* Go to the new UI (new Ops manager) and see that all records indeed restored from the SSD back to the space.<br>
 
 ![Screenshot](./Pictures/Picture5.png)
-
-5.5 Congratulations, you have deployed the BillBuddy web application. 
-Navigate through the application pages and investigate it.
