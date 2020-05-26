@@ -29,7 +29,7 @@ import com.j_spaces.core.client.SQLQuery;
  * SpaceDataEvent reads Merchant by Id, Contract Document and executing Processing Fee 
  * transaction between Merchant and BillBuddy 
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 @EventDriven

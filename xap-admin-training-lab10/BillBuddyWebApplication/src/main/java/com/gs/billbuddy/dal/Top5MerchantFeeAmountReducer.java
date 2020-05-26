@@ -16,7 +16,7 @@ import java.util.List;
  *	{@link RemoteResultReducer} object used to reduce the results
  *	returned from the space.
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 public class Top5MerchantFeeAmountReducer implements RemoteResultReducer<Merchant[], Merchant[]> {

@@ -16,7 +16,7 @@ import com.gigaspaces.metadata.index.SpaceIndexType;
 /** 
 * User class is a POJO which has user account information 
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 @Entity

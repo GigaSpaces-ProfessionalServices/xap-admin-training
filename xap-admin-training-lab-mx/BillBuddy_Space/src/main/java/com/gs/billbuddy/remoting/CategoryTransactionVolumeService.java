@@ -17,7 +17,7 @@ import com.j_spaces.core.client.SQLQuery;
 *  
 * Implements IServiceFinder interface remoting capabilities on top of the space
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 @RemotingService

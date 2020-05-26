@@ -16,7 +16,7 @@ import javax.persistence.Id;
 /** 
 * Payment class is a POJO which has transaction information between user and merchant 
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 @Entity

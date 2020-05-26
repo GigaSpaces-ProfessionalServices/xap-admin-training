@@ -20,7 +20,7 @@ import com.gigaspaces.async.AsyncResult;
  * amounts
  * 
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 @SuppressWarnings("serial")

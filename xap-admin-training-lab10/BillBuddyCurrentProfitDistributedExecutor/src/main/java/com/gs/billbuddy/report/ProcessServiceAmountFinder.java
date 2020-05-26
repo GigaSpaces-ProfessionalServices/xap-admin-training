@@ -5,7 +5,7 @@ package com.gs.billbuddy.report;
 * 
 * Executing a task which gets all Processing Fee amounts
 *  
-* @author 123Completed
+* @author GigaSpaces
 */
 
 import javax.annotation.PostConstruct;

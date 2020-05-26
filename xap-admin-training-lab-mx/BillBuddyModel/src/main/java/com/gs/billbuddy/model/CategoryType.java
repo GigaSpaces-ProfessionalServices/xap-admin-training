@@ -3,7 +3,7 @@ package com.gs.billbuddy.model;
 /** 
 * CategoryType class is an Enum which indicate merchant category type 
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 public enum CategoryType {

@@ -14,7 +14,7 @@ import com.gigaspaces.metadata.index.SpaceIndexType;
 /** 
 * Merchant class is a POJO which has merchant account information 
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 @Entity

@@ -10,7 +10,7 @@ import javax.persistence.Embeddable;
 /** 
 * Address class is a POJO which has user address information 
 * 
-* @author 123Completed
+* @author GigaSpaces
 */ 
 @Embeddable
 @SuppressWarnings("serial")

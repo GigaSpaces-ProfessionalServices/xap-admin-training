@@ -19,7 +19,7 @@ import com.gs.billbuddy.model.Merchant;
  * 
  * The Class also enables creating one static user & write into the space
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 

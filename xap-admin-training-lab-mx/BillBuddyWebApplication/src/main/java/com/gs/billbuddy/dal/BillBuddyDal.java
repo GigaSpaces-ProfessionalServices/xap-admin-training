@@ -31,7 +31,7 @@ import com.j_spaces.core.client.SQLQuery;
  *	Dal object is injected by Spring framework as a singleton, thus, BillBuddy space 
  *	also injected to Dal instance.
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 @Component
 public class BillBuddyDal {

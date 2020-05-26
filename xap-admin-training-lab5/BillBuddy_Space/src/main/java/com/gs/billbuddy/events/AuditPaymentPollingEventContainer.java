@@ -21,7 +21,7 @@ import com.gs.billbuddy.model.TransactionStatus;
  * Pooling Event starts when new Payment with Transaction status NEW written into space
  * It takes the Payment object and change it's status to AUDIT and write it into space
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 @EventDriven

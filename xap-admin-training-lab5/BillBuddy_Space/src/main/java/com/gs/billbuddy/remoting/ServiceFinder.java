@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 *  
 * Implements IServiceFinder interface remoting capabilities on top of the space
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 @RemotingService

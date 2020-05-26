@@ -10,7 +10,7 @@ import com.gs.billbuddy.model.ProcessingFee;
 *  
 * Define method which will be executed by remoting on top of the space
 * 
-* @author 123Completed
+* @author GigaSpaces
 */
 
 public interface IServiceFinder {

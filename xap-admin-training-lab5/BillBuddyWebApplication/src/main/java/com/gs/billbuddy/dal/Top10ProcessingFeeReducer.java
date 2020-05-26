@@ -17,7 +17,7 @@ import com.gs.billbuddy.model.ProcessingFee;
  *	{@link RemoteResultReducer} object used to reduce the results
  *	returned from the space.
  * 
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 

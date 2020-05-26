@@ -9,7 +9,7 @@ import org.openspaces.core.space.SpaceProxyConfigurer;
 /** 
  * UserFeederActivator class create a standalone proxy connection to the space using configurer.
  * The class then activates the UserFeeder to write all user into the space.
- * @author 123Completed
+ * @author GigaSpaces
  */
 
 public class AccountFeeder {
