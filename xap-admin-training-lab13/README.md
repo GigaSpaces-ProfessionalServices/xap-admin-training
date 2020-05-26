@@ -21,7 +21,7 @@ Work with users with different roles.<br>
     `export GS_MANAGER_OPTIONS=-Dcom.gs.manager.rest.ssl.enabled=false`<br>
     `export GS_OPTIONS_EXT=-Dcom.gs.security.enabled=true`
         
-1.2 Start gs-agent with local Manager server and 4 GSCs:
+1.3 Start gs-agent with local Manager server and 4 GSCs:
 
     ./gs.sh host run-agent --auto --gsc=4
     
