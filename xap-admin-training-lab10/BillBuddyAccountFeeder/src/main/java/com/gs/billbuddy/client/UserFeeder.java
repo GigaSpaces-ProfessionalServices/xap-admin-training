@@ -73,7 +73,7 @@ public class UserFeeder {
                 
                 Address tempAddress = new Address();
             	tempAddress.setCountry(CountryNames.values()[new Random().nextInt(CountryNames.values().length)]);
-            	tempAddress.setCity("123Completed.com");
+            	tempAddress.setCity("GigaSpaces.com");
             	tempAddress.setState("GIGASPACES");
             	tempAddress.setStreet("Here and There");
             	tempAddress.setZipCode(new Random().nextInt());
