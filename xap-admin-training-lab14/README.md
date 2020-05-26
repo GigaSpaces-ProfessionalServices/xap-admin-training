@@ -103,21 +103,3 @@ Click on "Monitor my services"
 Click on the "demo" service
 
 ![Screenshot](./Pictures/Picture4.png)
-
-
-### 2. Deploying and Managing "BillBuddy" Data Grid
-
-yuval-pc:~ yuvaldori$ minikube delete
-🔥  Deleting "minikube" in virtualbox ...
-💀  Removed all traces of the "minikube" cluster.
-
-yuval-pc:~ yuvaldori$ rm -rf xap
-
-
-yuval-pc:bin yuvaldori$ ./gs.sh pu upload /Users/yuval/Workspace/xap-admin-training/xap-admin-training-lab14/BillBuddy_Space/target/BillBuddy_Space.jar
-
-
-
-
-
-
