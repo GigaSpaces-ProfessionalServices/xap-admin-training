@@ -68,7 +68,7 @@ Helm 3 will be supported in XAP 15.5 release
     
 #### 1.2  install kubernetes xap demo
        
-    helm install xap --name demo
+    helm install gigaspaces/xap --name demo
      
 #### 1.3  View and monitor kubernetes deployment
 ##### 1.3.1 Verify that the pods are running
@@ -103,3 +103,28 @@ Click on "Monitor my services"
 Click on the "demo" service
 
 ![Screenshot](./Pictures/Picture4.png)
+
+#### 1.4  Scaling with the GigaSpaces Helm Chart
+
+Check the current "demo" service Max:RAM
+
+![Screenshot](./Pictures/Picture5.png)
+
+Increase its memory
+
+    helm upgrade demo xap --set pu.resources.limits.memory=600Mi
+    
+Verify that Max:RAM equals to 450Mi. <br />
+Note: it is not 600Mi because in <USER_HOME>/xap/charts/xap-manager/values.yaml file <br />
+the configuration is "heap: limit-150Mi" <br /> 
+
+
+![Screenshot](./Pictures/Picture6.png)
+
+Start myspace service with HA
+
+    helm install gigaspaces/xap-pu --name myspace --set manager.name=demo,partitions=2,readinessProbe.enabled=true
+
+![Screenshot](./Pictures/Picture7.png)
+
+
