@@ -108,7 +108,7 @@ Click the Payment Data Type Name as you did in section 3.3
 
 ![Screenshot](./Pictures/Picture3.png)
 
-4.4 Go to the Data Types view. see haw many records are in side the space.<br>
+4.4 Go to the Data Types view. see haw many records are in the space.<br>
 
 ![Screenshot](./Pictures/Picture4.png)
 
