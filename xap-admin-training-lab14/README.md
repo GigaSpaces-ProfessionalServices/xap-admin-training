@@ -133,6 +133,7 @@ the configuration is "heap: limit-150Mi" <br />
 
 ![Screenshot](./Pictures/Picture7.png)
 
+
 #### 1.6  Un-deploy demo
     helm del --purge demo
     
