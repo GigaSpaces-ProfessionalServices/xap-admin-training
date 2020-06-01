@@ -8,8 +8,7 @@ Get experience with running XAP PU on Kubernetes cluster. <br />
 
 ## Lab Description
 In this lab we will deploy the pre define xap demo application <br /> 
-and then 
-build and deploy BillBuddy application as DATA POD. <br />
+and then test vertical scaling. <br />
 
 ## Prerequisites
 Before beginning to work with the data grid and xap, 
@@ -62,13 +61,13 @@ Helm 3 will be supported in XAP 15.5 release
     helm repo add gigaspaces https://resources.gigaspaces.com/helm-charts
     
 ##### 1.1.3 Fetch the GigaSpaces Helm Charts from the GigaSpaces Repository 
-(The chart is unpacked in a local folder called xap under your home directory)
+(The chart xap is unpacked in your current directory)
 
     helm fetch gigaspaces/xap --version=15.2.0 --untar
     
 #### 1.2  install kubernetes xap demo
-       
-    helm install gigaspaces/xap --name demo
+    navigate to your home dir
+    helm install xap --name demo --set pu.service.lrmi.enabled=true
      
 #### 1.3  View and monitor kubernetes deployment
 ##### 1.3.1 Verify that the pods are running
@@ -88,10 +87,13 @@ Helm 3 will be supported in XAP 15.5 release
 ###### 1.3.3.1 Get the manager ip by running "Kubectl get services", the manager ip will be the EXTERNAL-IP. in my case 10.106.182.8
 
     Kubectl get services
-    NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                        AGE
-    demo-xap-manager-hs        ClusterIP      None           <none>         2181/TCP,2888/TCP,3888/TCP,4174/TCP            37m
-    demo-xap-manager-service   LoadBalancer   10.106.182.8   10.106.182.8   8090:31489/TCP,4174:30732/TCP,8200:30351/TCP   37m
-    kubernetes                 ClusterIP      10.96.0.1      <none>         443/TCP                                        76m
+    NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                        AGE
+    demo-xap-manager-hs        ClusterIP      None             <none>           2181/TCP,2888/TCP,3888/TCP,4174/TCP            2m54s
+    demo-xap-manager-service   LoadBalancer   10.98.144.38     10.98.144.38     8090:30296/TCP,4174:31624/TCP,8200:31230/TCP   2m54s
+    demo-xap-pu-0-service      LoadBalancer   10.109.229.200   10.109.229.200   8200:30571/TCP                                 2m54s
+    kubernetes                 ClusterIP      10.96.0.1        <none>           443/TCP                                        117m
+
+                                   
 
 ###### 1.3.3.2 Open Gigaspaces Ops Manager by browsing to <EXTERNAL-IP>:8090 
 
@@ -121,10 +123,28 @@ the configuration is "heap: limit-150Mi" <br />
 
 ![Screenshot](./Pictures/Picture6.png)
 
-Start myspace service with HA
+#### 1.5  Feed the demo space with Accounts from Lab-5
 
-    helm install gigaspaces/xap-pu --name myspace --set manager.name=demo,partitions=2,readinessProbe.enabled=true
+1. Edit src/main/java/com/gs/billbuddy/client/AccountFeeder.java <br />
+2. Set xap-15.2.0 as the lookup group <br />
+3. Set the EXTERNAL-IP as the lookup locator (see section 1.3.3.1) <br />
+4. From the Intelij run BillBuddyAccountFeeder <br />
+5. Watch the data in the Ops Manager <br />
 
 ![Screenshot](./Pictures/Picture7.png)
+
+#### 1.6  Un-deploy demo
+    helm del --purge demo
+    
+#### 1.7  delete minikube
+    minikube delete
+  
+  
+This is deploying the space but w/o backup and the feed account dosn't work
+
+    helm install gigaspaces/xap-pu --name billbuddyspace --set manager.name=demo --set pu.ha=true,pu.antiAffinity.enabled=true --set pu.service.lrmi.enabled=true
+    
+    
+
 
 
