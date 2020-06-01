@@ -62,7 +62,7 @@ In this lab we will focus on deployment and the application and not be concerned
 
 2.5 Open a new Terminal and navigate to %XAP_TRAINING_HOME%/gigaspaces-xap/bin/ <br />
 
-    cd %XAP_HOME/bin
+    cd $XAP_HOME/bin
            
 2.6 Use XAP CLI to deploy BillBuddy_Space
  
@@ -79,7 +79,10 @@ In this lab we will focus on deployment and the application and not be concerned
  
 ![Screenshot](./Pictures/Picture1.png)
 
-3.3 Query the list of Users by executing the following SQL: <br />
+3.3 Can be seen in the new Ops Manager (localhost:8090):<br>
+![Screenshot](./Pictures/Picture6.png)
+
+3.4 Query the list of Users by executing the following SQL: <br />
 Click the Data Type Name and the sql will be created for you: <br />
 
     SELECT * FROM com.gs.billbuddy.model.User WHERE rownum<5000
@@ -109,12 +112,28 @@ Click the Payment Data Type Name as you did in section 3.3
 
 ![Screenshot](./Pictures/Picture4.png)
 
-#### 5 Undeploy the application 
+## 5 Deploy BillBuddyWebApplication project
 
-5. Undeploy the space:<br>
+5.1 Open a new Terminal and navigate to %XAP_TRAINING_HOME%/gigaspaces-xap/bin/
+
+5.2 Use XAP CLI to deploy BillBuddyWebApplication
+ 
+    ./gs.sh pu deploy BillBuddyWebApplication ~/xap-admin-training/xap-admin-training-lab-mx/BillBuddyWebApplication/target/BillBuddyWebApplication.war
+
+5.3 Validate the application is deployed. <br>
+![Screenshot](./Pictures/Picture7.png)<br>
+
+5.4 Use the url to provision the BillBuddy web tool: <br>
+* http://localhost:8080/BillBuddyWebApplication <br>
+
+![Screenshot](./Pictures/Picture8.png)<br>
+
+#### 6 Undeploy the application 
+
+* Undeploy the space:<br>
    `./gs.sh pu undeploy BillBuddySpace`
    
-#### 6 Deploy the space and verify that all records were restored from SSD.
+#### 7 Deploy the space and verify that all records were restored from SSD.
     ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab-mx/BillBuddy_Space/target/BillBuddy_Space.jar <br> 
 * Go to the new UI (new Ops manager) and see that all records indeed restored from the SSD back to the space.<br>
 

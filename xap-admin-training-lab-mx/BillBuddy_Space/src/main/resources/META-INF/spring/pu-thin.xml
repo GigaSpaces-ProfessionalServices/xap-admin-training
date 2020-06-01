@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:os-core="http://www.openspaces.org/schema/core"
+	   xmlns:blob-store="http://www.openspaces.org/schema/rocksdb-blob-store"
+
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.openspaces.org/schema/core http://www.openspaces.org/schema/15.2/core/openspaces-core.xsd
+   http://www.openspaces.org/schema/rocksdb-blob-store http://www.openspaces.org/schema/15.2/rocksdb-blob-store/openspaces-rocksdb-blobstore.xsd">
+
+
+	<!-- Enables the usage of @GigaSpaceContext annotation based injection. -->
+	<os-core:giga-space-context />
+	<!-- Enables Spring Annotation configuration -->
+	<context:annotation-config />
+	<os-core:annotation-support />
+	<!--Blob Store-->
+	<!--<blob-store:rocksdb-blob-store id="rocksDbBlobstore" paths="[/tmp/memory-xtend-demo/db1,/tmp/memory-xtend-demo/db2,/tmp/memory-xtend-demo/db3,/tmp/memory-xtend-demo/db4]" mapping-dir="/tmp/memory-xtend-demo/mapping"/>-->
+	<blob-store:rocksdb-blob-store id="rocksDbBlobstore" main-path="/tmp"/>
+
+	<os-core:embedded-space id="space" space-name="BillBuddySpace">
+		<os-core:blob-store-data-policy persistent="true" blob-store-handler="rocksDbBlobstore" cache-entries-percentage="30">
+			<os-core:blob-store-cache-query class="com.gs.billbuddy.model.User" where="userAccountId = 1"/>
+		</os-core:blob-store-data-policy>
+	</os-core:embedded-space>
+	<!-- OpenSpaces simplified space API built on top of IJSpace/JavaSpace. -->
+	<os-core:giga-space id="gigaSpace" space="space"/>
+</beans>
