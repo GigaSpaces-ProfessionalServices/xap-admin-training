@@ -66,7 +66,7 @@ Helm 3 will be supported in XAP 15.5 release
     helm fetch gigaspaces/xap --version=15.2.0 --untar
     
 #### 1.2  install kubernetes xap demo
-    navigate to your home dir
+    
     helm install xap --name demo --set pu.service.lrmi.enabled=true
      
 #### 1.3  View and monitor kubernetes deployment
@@ -141,11 +141,5 @@ the configuration is "heap: limit-150Mi" <br />
     minikube delete
   
   
-This is deploying the space but w/o backup and the feed account dosn't work
-
-    helm install gigaspaces/xap-pu --name billbuddyspace --set manager.name=demo --set pu.ha=true,pu.antiAffinity.enabled=true --set pu.service.lrmi.enabled=true
-    
-    
-
 
 
