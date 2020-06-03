@@ -106,7 +106,18 @@ Click on the "demo" service
 
 ![Screenshot](./Pictures/Picture4.png)
 
-#### 1.4  Scaling with the GigaSpaces Helm Chart
+
+#### 1.4  Feed the demo space with Accounts from Lab-5
+
+1. Edit src/main/java/com/gs/billbuddy/client/AccountFeeder.java <br />
+2. Set xap-15.2.0 as the lookup group <br />
+3. Set the EXTERNAL-IP as the lookup locator (see section 1.3.3.1) <br />
+4. From the Intelij run BillBuddyAccountFeeder <br />
+5. Watch the data in the Ops Manager <br />
+
+![Screenshot](./Pictures/Picture7.png)
+
+#### 1.5  Scaling with the GigaSpaces Helm Chart
 
 Check the current "demo" service Max:RAM
 
@@ -122,16 +133,6 @@ the configuration is "heap: limit-150Mi" <br />
 
 
 ![Screenshot](./Pictures/Picture6.png)
-
-#### 1.5  Feed the demo space with Accounts from Lab-5
-
-1. Edit src/main/java/com/gs/billbuddy/client/AccountFeeder.java <br />
-2. Set xap-15.2.0 as the lookup group <br />
-3. Set the EXTERNAL-IP as the lookup locator (see section 1.3.3.1) <br />
-4. From the Intelij run BillBuddyAccountFeeder <br />
-5. Watch the data in the Ops Manager <br />
-
-![Screenshot](./Pictures/Picture7.png)
 
 
 #### 1.6  Un-deploy demo
