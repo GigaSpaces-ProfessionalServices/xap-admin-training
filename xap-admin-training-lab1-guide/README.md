@@ -26,8 +26,8 @@ https://docs.gigaspaces.com/latest/started/installation.html#DownloadingandInsta
 ##### 1.4 Test your XAP Installation. <br>
    You will start a XAP process (gs-agent) and you will wait to see a message that the gs-agent started successfully with groups [<your user group>]
    
-   cd $GS_HOME/bin 
-   ./gs.sh host run-agent --auto --gsc=2
+    cd $GS_HOME/bin
+    ./gs.sh host run-agent --auto --gsc=2
    
    The following screen will appear:
    (Search for the message marked below):

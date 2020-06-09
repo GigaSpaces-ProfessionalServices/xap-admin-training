@@ -13,7 +13,7 @@ To better know its capabilities you will use GigaSpaces Admin API for your conve
 
 ### 1	Start gs-agent
 
-1.1 Navigate to %XAP_HOME/bin <br />
+1.1 Navigate to $XAP_HOME/bin <br />
         
 1.2 Start run the following:
 
@@ -22,7 +22,7 @@ To better know its capabilities you will use GigaSpaces Admin API for your conve
     ./gs.sh space deploy --partitions 2 --ha demo
     
 #### 1 Relocate
- * `export XAPHOMEDIR=XAP_HOME` 
+ * `export XAPHOMEDIR=$XAP_HOME` 
  * `cd Relocate` 
  * `./build.sh`  
  * `./admin.groovy.sh` 
