@@ -27,7 +27,7 @@ https://www.vagrantup.com/downloads.html
 **2)**   `vagrant up` <br>
 **3)**  Wait until all 4 virtual machines are booted and ready.
 
-See in the following screenshot node-3 is done (booted and ready)and right afterwords node-2 is starting booting...<br><br>
+See in the following screenshot node3 is done (booted and ready)and right afterwords node2 is starting booting...<br><br>
 ![Screenshot](./Pictures/Picture1.png)
 
 **Note:** For your convenient some more information on "How to Set Up a Local Linux Environment with Vagrant":<br>
