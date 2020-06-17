@@ -134,7 +134,7 @@ Click the Payment Data Type Name as you did in section 3.3
    `./gs.sh pu undeploy BillBuddySpace`
    
 #### 7 Deploy the space and verify that all records were restored from SSD.
-    ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab-mx/BillBuddy_Space/target/BillBuddy_Space.jar <br> 
+    ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab-mx/BillBuddy_Space/target/BillBuddy_Space.jar
 * Go to the new UI (new Ops manager) and see that all records indeed restored from the SSD back to the space.<br>
 
 ![Screenshot](./Pictures/Picture5.png)
