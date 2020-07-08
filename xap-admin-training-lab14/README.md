@@ -1,14 +1,15 @@
 # xap-admin-training - lab14
 
-# Kubernetes
+# Kubernetes & Vertical scaling
 
 ## Lab Goals
 
 Get experience with running XAP PU on Kubernetes cluster. <br /> 
+Perform scale of a statefull pu. <br/>
 
 ## Lab Description
-In this lab we will deploy the pre define xap demo application <br /> 
-and then test vertical scaling. <br />
+In this lab we will deploy manager, statefull processor pu and stateless feeder <br /> 
+We will perform scaling of the processor pu <br />
 
 ## Prerequisites
 Before beginning to work with the data grid and xap, 
@@ -25,7 +26,7 @@ Helm 3 will be supported in XAP 15.5 release
 ##### 1. Configure memory and cpu:
 
     minikube config set memory 4096
-    minikube config set cpus 2
+    minikube config set cpus 4
     
 ##### 2. After installation, configure the VM driver 
 (for example: in case you installed VirtualBox as the Hypervisor run the following):
@@ -50,7 +51,7 @@ Helm 3 will be supported in XAP 15.5 release
     minikube tunnel
     
 
-### 1. Deploying and Managing "xap demo" Data Grid
+### 1. Deploying and Managing "xap processor feeder application"
 #### 1.1  Get the required GigaSpaces Helm charts
 ##### 1.1.1 run: helm init
 
@@ -65,80 +66,205 @@ Helm 3 will be supported in XAP 15.5 release
 
     helm fetch gigaspaces/xap --version=15.2.0 --untar
     
-#### 1.2  install kubernetes xap demo
-    
-    helm install xap --name demo --set pu.service.lrmi.enabled=true
+#### 1.2  Deploy a Management Pod called testmanager:
+
+    cd xap/charts
+    helm install xap-manager --name testmanager
      
 #### 1.3  View and monitor kubernetes deployment
-##### 1.3.1 Verify that the pods are running
+##### 1.3.1 Verify that the pod is running
 
     Kubectl get pods
-    NAME                 READY   STATUS    RESTARTS   AGE
-    demo-xap-manager-0   1/1     Running   0          30m
-    demo-xap-pu-0        1/1     Running   0          30m
+    NAME                        READY   STATUS    RESTARTS   AGE
+    testmanager-xap-manager-0   1/1     Running   0          5m48s
 
 ##### 1.3.2 In a separate terminal open Minikube Dashboard. the browser will automatically open.
 
-    minikube dashboard
+    minikube dashboard &
        
 ![Screenshot](./Pictures/Picture1.png)
 
 ##### 1.3.3 Open Gigaspaces Ops Manager
-###### 1.3.3.1 Get the manager ip by running "Kubectl get services", the manager ip will be the EXTERNAL-IP. in my case 10.106.182.8
+
+###### 1.3.3.1 Get the manager ip by running "Kubectl get services", the manager ip will be the EXTERNAL-IP. in this case 10.108.7.199
 
     Kubectl get services
-    NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                        AGE
-    demo-xap-manager-hs        ClusterIP      None             <none>           2181/TCP,2888/TCP,3888/TCP,4174/TCP            2m54s
-    demo-xap-manager-service   LoadBalancer   10.98.144.38     10.98.144.38     8090:30296/TCP,4174:31624/TCP,8200:31230/TCP   2m54s
-    demo-xap-pu-0-service      LoadBalancer   10.109.229.200   10.109.229.200   8200:30571/TCP                                 2m54s
-    kubernetes                 ClusterIP      10.96.0.1        <none>           443/TCP                                        117m
-
+    NAME                              TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                        AGE
+    kubernetes                        ClusterIP      10.96.0.1      <none>         443/TCP                                        4m17s
+    testmanager-xap-manager-hs        ClusterIP      None           <none>         2181/TCP,2888/TCP,3888/TCP,4174/TCP            19s
+    testmanager-xap-manager-service   LoadBalancer   10.108.7.199   10.108.7.199   8090:32221/TCP,4174:31234/TCP,8200:31837/TCP   19s
                                    
-
+                                   
 ###### 1.3.3.2 Open Gigaspaces Ops Manager by browsing to <EXTERNAL-IP>:8090 
 
 ![Screenshot](./Pictures/Picture2.png)
 
-Click on "Monitor my services"
+#### 1.4  Generate the process and feeder jars and upload them
+
+1. `cd <GS_HOME>/examples/data-app/event-processing`
+2. `./build.sh package`
+3. `<GS_HOME>/bin/gs.sh --server 10.108.7.199`
+4. `pu upload <GS_HOME>/examples/data-app/event-processing/processor/target/data-processor.jar`<br>
+    **The result should be:**<br>
+    [data-processor.jar] successfully uploaded
+    Resource URL: http://10.108.7.199:8090/v2/resources/data-processor.jar
+5. `pu upload <GS_HOME>/examples/data-app/event-processing/feeder/target/data-feeder.jar`<br>
+    **The result should be:**<br>
+    [data-feeder.jar] successfully uploaded
+    Resource URL: http://10.108.7.199:8090/v2/resources/data-feeder.jar
+    
+#### 1.5 Deploy a Data Pod with the processor service
+
+`helm install xap-pu --name processor --set manager.name=testmanager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
+
+    kubectl get pod
+    NAME                        READY   STATUS    RESTARTS   AGE
+    processor-xap-pu-1-0        0/1     Running   0          11s
+    processor-xap-pu-2-0        0/1     Running   0          11s
+    testmanager-xap-manager-0   1/1     Running   0          18m
+
+#### 1.5 Deploy a Data Pod with the feeder service
+
+`helm install xap-pu --name feeder --set manager.name=testmanager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
+
+    NAME                        READY   STATUS    RESTARTS   AGE
+    feeder-xap-pu-0             1/1     Running   0          11s
+    processor-xap-pu-1-0        1/1     Running   0          168m
+    processor-xap-pu-1-1        1/1     Running   0          168m
+    processor-xap-pu-2-0        1/1     Running   0          174m
+    processor-xap-pu-2-1        1/1     Running   0          174m
+    testmanager-xap-manager-0   1/1     Running   0          3h21m
+    
+#### 1.6 View and monitor GS kubernetes deployment
+
+##### 1.6.1 Minikube dashboard
+
 ![Screenshot](./Pictures/Picture3.png)
 
-Click on the "demo" service
+##### 1.6.1 GS Ops Manager 
+
+Click on "Monitor my services"<br>
 
 ![Screenshot](./Pictures/Picture4.png)
 
-
-#### 1.4  Feed the demo space with Accounts from Lab-5
-
-1. Edit src/main/java/com/gs/billbuddy/client/AccountFeeder.java <br />
-2. Set xap-15.2.0 as the lookup group <br />
-3. Set the EXTERNAL-IP as the lookup locator (see section 1.3.3.1) <br />
-4. From the Intelij run BillBuddyAccountFeeder <br />
-5. Watch the data in the Ops Manager <br />
-
-![Screenshot](./Pictures/Picture7.png)
-
-#### 1.5  Scaling with the GigaSpaces Helm Chart
-
-Check the current "demo" service Max:RAM
+Click on "Space"<br>
 
 ![Screenshot](./Pictures/Picture5.png)
 
-Increase its memory
-
-    helm upgrade demo xap --set pu.resources.limits.memory=600Mi
-    
-Verify that Max:RAM equals to 450Mi. <br />
-Note: it is not 600Mi because in <USER_HOME>/xap/charts/xap-manager/values.yaml file <br />
-the configuration is "heap: limit-150Mi" <br /> 
-
+Query the data:<br>
 
 ![Screenshot](./Pictures/Picture6.png)
 
 
-#### 1.6  Un-deploy demo
-    helm del --purge demo
+### 2  Vertical Scaling with the GigaSpaces CLI
+
+#### 2.1 Review current RAM occupied by the processor service
+
+1. Click on the "processor" service <br>
+
+   ![Screenshot](./Pictures/Picture7.png)
+   
+2. Check the current "processor" service memory using the minikube dashboard:<br>
+   
+   ![Screenshot](./Pictures/Picture8.png)
+   
+3. Click on Space overview: <br>
+
+   ![Screenshot](./Pictures/Picture9.png)
+
+#### 2.2 Perform memory scale using GS CLI
+
+1. Scale processor partition 2:
+   `pu scale processor 2 --memory 600Mi`<br>
+   
+   **The result should be:**<br>
+   Request ID     1    
+   
+   Status can be tracked using the command: request status 1
+   
+   `request status 1`<br>
+   
+   **The result should be:**<br>
+   REQUEST DETAILS    
+   ID                 1                                                      
+   Description        Patch request for StatefulSet: [processor-xap-pu-2]    
+   Status             running                                                
+   Submitted By       anonymous                                              
+   Submitted From     192.168.99.1                                           
+   Submitted At       2020-07-08 09:52:23 
+   
+   **Finally the result should be:**<br>
+   `request status 1`<br>
+   
+   REQUEST DETAILS    
+   ID                 1                                                      
+   Description        Patch request for StatefulSet: [processor-xap-pu-2]    
+   Status             successful                                             
+   Submitted By       anonymous                                              
+   Submitted From     192.168.99.1                                           
+   Submitted At       2020-07-08 09:52:23                                    
+   Completed At       2020-07-08 09:54:28
+   
+2. Partition 2 Memory should be bigger:<br>
+   Looking at GS Ops manager service view:<br>
+   
+   ![Screenshot](./Pictures/Picture10.png)
+   
+   Looking at the minikube dashboard pods view:
+   ![Screenshot](./Pictures/Picture11.png)
+   
+3. Scale processor partition 2:
+   `pu scale processor 1 --memory 600Mi`<br>
+   
+   **The result should be:**<br>
+   Request ID     2    
+   
+   Status can be tracked using the command: request status 2
+   
+   `request status 2`<br>
+      
+   **The result should be:**<br>
+   REQUEST DETAILS    
+   ID                 2                                                      
+   Description        Patch request for StatefulSet: [processor-xap-pu-1]    
+   Status             running                                                
+   Submitted By       anonymous                                              
+   Submitted From     192.168.99.1                                           
+   Submitted At       2020-07-08 09:54:53
+   
+   **Finally the result should be:**<br>
+   `request status 2`<br>
+   
+   REQUEST DETAILS    
+   ID                 2                                                      
+   Description        Patch request for StatefulSet: [processor-xap-pu-1]    
+   Status             successful                                             
+   Submitted By       anonymous                                              
+   Submitted From     192.168.99.1                                           
+   Submitted At       2020-07-08 09:54:53                                    
+   Completed At       2020-07-08 09:56:37
+   
+4. Both Partitions Total Memory should be bigger:<br>
+      Looking at GS Ops manager service view:<br>
+      
+      ![Screenshot](./Pictures/Picture12.png)<br>
+      
+      Looking at the Space Overview view:<br>
+      ![Screenshot](./Pictures/Picture13.png)
+
+5. No data is lost and feeder is still working:<br>
+   ![Screenshot](./Pictures/Picture14.png)
+
+6. There is an option also to scale down again.<br>
+   `pu scale processor 1 --memory 400Mi`<br>
+   
+   
+### 3  Undeploy the services
+    helm del --purge feeder
+    helm del --purge processor
+    helm del --purge testmanager
     
-#### 1.7  delete minikube
+### 4 delete and stop the minikube
     minikube delete
   
   
