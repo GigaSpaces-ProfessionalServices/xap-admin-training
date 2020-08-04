@@ -74,7 +74,7 @@ Helm 3 will be supported in XAP 15.5 release
 #### 1.3  View and monitor kubernetes deployment
 ##### 1.3.1 Verify that the pod is running
 
-    Kubectl get pods
+    kubectl get pods
     NAME                        READY   STATUS    RESTARTS   AGE
     testmanager-xap-manager-0   1/1     Running   0          5m48s
 
