@@ -112,7 +112,7 @@ Click the Payment Data Type Name as you did in section 3.3
 
 5.2 Use XAP CLI to deploy BillBuddyWebApplication
  
-    ./gs.sh pu deploy BillBuddyWebApplication ~/xap-admin-training/xap-admin-training-lab5/BillBuddyWebApplication/target/BillBuddyWebApplication.war
+    ./gs.sh pu deploy --property=web.port=8082 BillBuddyWebApplication ~/xap-admin-training/xap-admin-training-lab5/BillBuddyWebApplication/target/BillBuddyWebApplication.war
 
 5.3 Validate the application is deployed. 
 Go to Deployed Processing Units tab and expand the BillBuddyWebApplication PU.
