@@ -8,6 +8,7 @@ https://docs.google.com/spreadsheets/d/10Svq6s90eDw-Ger8TJogyVWLy0FcdfSF3EgtilCd
 ## Following are the list of labs:
 
 * Lab1 - XAP setup and installation
+* Lab1.1 - One Click Deploy
 * Lab2 - XAP Basic Grid Overview
 * Lab3 - Grid Service Components
 * Lab4 - Application Level Components
