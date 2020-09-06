@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <!-- This password encoder is provided for getting started and testing purposes only and is not considered secure. -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <bean id="authProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+    <property name="userDetailsService" ref="roleBasedUserService" />
+    <property name="passwordEncoder" ref="passwordEncoder" />
+    </bean>
+
+    <!-- Predefined role to privileges mapping (ROLE_ANALYST, ROLE_DEVELOPER, ROLE_ADMIN). -->
+    <util:map id="roles">
+        <entry key="ROLE_ADMIN"     value="MONITOR_JVM, MONITOR_PU, SPACE_READ, PROVISION_PU, MANAGE_GRID, MANAGE_PU"/>
+        <entry key="ROLE_DEVELOPER" value="MONITOR_JVM, MONITOR_PU, SPACE_READ, PROVISION_PU,"/>
+        <entry key="ROLE_ANALYST"   value="MONITOR_JVM, MONITOR_PU, SPACE_READ"/>
+    </util:map>
+
+    <!-- Populates user details with authorities declared by associated role -->
+    <bean id="roleBasedUserService" class="com.gigaspaces.security.spring.RoleBasedUserService">
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="roles"/>
+    </bean>
+
+
+    <sec:authentication-manager>
+        <sec:authentication-provider user-service-ref="roleBasedUserService"/>
+        <sec:authentication-provider>
+            <sec:password-encoder ref="passwordEncoder"/> <!-- prefer BCrypt -->
+            <sec:user-service id="userService">
+                <sec:user name="anna"  password="$2a$10$vTZn7Tv.oJveX0JPHRAkhOMrObut.gAZcePKUgl8lq65oHI4tEebC"  authorities="ROLE_ANALYST"/>
+                <sec:user name="dave"  password="$2a$10$axUxKeRNfts1n5hXR7gJ2OFOxbX9NgIymvXeD6iqzmhKrIabUAR1e"  authorities="ROLE_DEVELOPER"/>
+                <sec:user name="adam" password="$2a$10$tplMRCkc/A3W.Q2YO8xJ0e.8L8pwPrFQsUa.bsPHAwj3YfLuAGDgu" authorities="ROLE_ADMIN"/>
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+</beans>
