@@ -2,7 +2,7 @@ Vagrant.require_version ">= 1.4.3"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-	numNodes = 1
+	numNodes = 4
 	r = numNodes..1
 	(r.first).downto(r.last).each do |i|
 		config.vm.define "node#{i}" do |node|
@@ -19,11 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			end
 			node.vm.hostname = "node#{i}"
 			node.vm.provision "shell", path: "scripts/setup-centos-hosts.sh", args: "-t #{numNodes}" 
-			node.vm.provision "shell", path: "scripts/setup-centos-locales.sh" 
-                        node.vm.provision "file", source: "~/CSM-Magic-Tools/1-Click-Deploy/deploy-gs.sh", destination: "deploy-gs.sh"
-                        node.vm.provision "file", source: "~/CSM-Magic-Tools/1-Click-Deploy/gs_installation.properties", destination: "gs_installation.properties"
-			node.vm.provision "shell", inline: "chmod +x deploy-gs.sh" 
-			#node.vm.provision "shell", path: "scripts/deploy_gs.sh", args: "node1,node2,node3"
+			node.vm.provision "shell", path: "scripts/deploy_gs.sh", args: "node1,node2,node3"
 		end
 	end
 end
