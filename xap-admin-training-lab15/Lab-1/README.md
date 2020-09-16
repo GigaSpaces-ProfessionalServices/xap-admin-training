@@ -25,7 +25,7 @@ To deploy a GigaSpaces cluster in AWS you need the following:
 * Configuration parameters that include a defined aws_region
 
 ### Downloading and Running the Utility
-The gsctl tool can be downloaded from a [dedicated repository](https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl/15.2.0/gsctl.jar).<br>
+The gsctl tool can be downloaded from a [dedicated repository](https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl/15.5.0/gsctl.jar).<br>
  You can start an interactive shell for gsctl and run commands using short notation, or you can run commands from outside the interactive shell (from the OS shell) by adding `java -jar gsctl.jar` before each command.
 
 **Attention:**<br>
@@ -71,13 +71,16 @@ The gsctl utility supports deploying stateful, stateless, and web services. The 
 The gsctl tool comes with sample feeder (stateful) and processor (stateless) services in the Services folder.<br>
 You must use the default artifact repository when deploying the sample services.<br>
 #### To deploy the sample GigaSpaces services:
-1. When deploying the sample services, you should first deploy the processor service.<br>
-   As this is a stateful service, you need to specify both the service type and service name.<br>
+1. `cd $GS_HOME/examples/data-app/event-processing`
+2. `./build.sh pacakge`
+3. Log in to GS cli:<br>
+   `$GS_HOME/bin/gs.sh --server https://<manager host>:8090 --username gs-admin --password <gsctl secretId token>`      
+4. When deploying the sample services, you should first deploy the processor service.<br>
    Type the following command to deploy a processor service called **mySpace**:<br>
-   `deploy --type=stateful mySpace data-processor.jar`
-2. Next, deploy the feeder service. As this is a stateless service, you only have to specify the service name.<br>
+   `pu deploy --property=memory=1024 mySpace $GS_HOME/examples/data-app/event-processing/processor/target/data-processor.jar`
+5. Next, deploy the feeder service.<br>
    Type the following command to deploy a feeder service called **myFeeder**:<br>
-   `deploy --type=stateless myFeeder data-feeder.jar`
+   `pu deploy myFeeder $GS_HOME/examples/data-app/event-processing/feeder/target/data-feeder.jar`
 ## Monitoring the GigaSpaces Services
 After you deploy your GigaSpaces services and microservices, you can monitor them using the following built-in web interfaces:
 
@@ -91,6 +94,10 @@ After you deploy your GigaSpaces services and microservices, you can monitor the
    ![snapshot](Pictures/Picture4.png)
 2. Copy any of the GigaSpacesManager URLs into your browser to open Ops Manager and view the deployed GigaSpaces services:<br>
    ![snapshot](Pictures/Picture5.png)
+   **Note:**<br>
+   To login please use:<br>
+   username: `gs-admin`<br>
+   password: `<gsctl secretId token>` (can be taken from .gstcl dir from the token.yaml file)
 3. Copy the grafana URL to your browser to open Grafana and navigate to the pre-defined dashboards:<br>
    ![snapshot](Pictures/Picture6.png)
 4. Select the Telegraf system metrics dashboard in Grafana to view the cluster metrics:<br>
@@ -102,10 +109,10 @@ After you deploy your GigaSpaces services and microservices, you can monitor the
 You can delete your cluster when you no longer need it, in order to release the cloud resources.<br>
 First, undeploy the GigaSpaces stateful service, and then tear down the cluster.
 #### To remove the GigaSpaces cluster:
-1. In the directory where you deployed the GigaSpaces services, type the following command:<br>
-   `undeploy myFeeder`
+1. From the gs cli where you deployed the GigaSpaces services, type the following command:<br>
+   `pu undeploy myFeeder`
    The Feeder is undeployed from the cluster.<br>
-   `undeploy mySpace`<br>
+   `pu undeploy mySpace`<br>
    The Space is undeployed from the cluster.<br>
 2. In the directory where you created the cluster, run the following command:<br>
    `gsctl.jar destroy`<br>
