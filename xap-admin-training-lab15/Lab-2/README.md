@@ -6,8 +6,11 @@
 #### 1. Create an InsightEdge product gsctl cluster
 #### 2. Deploy an application which consumes flight delay data to make binary predictions (yes/no) about which flights are likely to get delayed.
 
-Please perform the following steps:
 
+## Before starting please perform:
+    ./build.sh
+
+**Please continue with the following steps:**
 1. Enter the GSCTL interactive cli:<br>
    `java -jar gsctl.jar`<br><br>
 2. Change product type from xap to insightedge:<br>
@@ -18,10 +21,10 @@ Please perform the following steps:
    `list-services`<br>
    This returns all the services with their URLs:<br>
    ![snapshot](Pictures/Picture4_ie.png)<br><br>
-5. Change artifact-repo to FlightDelay artifact repo:<br>
-   `config artifact-repo use https://amoll.s3-eu-west-1.amazonaws.com/Services`<br><br>
+5. Log in to GS cli:<br>
+   `$GS_HOME/bin//gs.sh --server https://<manager host>:8090 --username gs-admin --password <gsctl secretId token>`
 6. Deploy flight_delay space (statefull pu which will hold the flights data)<br>
-   `deploy --type=stateful --memory=2048 flights_space flight-delay-0.1.jar`<br><br>
+   `pu deploy --property=memory=2048 flights_space /Users/aharonmoll/IdeaProjects/PartnerWorkShop/Lab-2/flightDelaySpace/target/flight-delay-0.1.jar`<br><br>
 7. Click on the following link and download each of the 2 json files separately:
    * [Flight Delay Zeppelin Notebooks](https://drive.google.com/drive/u/0/folders/12KiV7TOHnGMD3jy9drkPUHpbP_-QheGh)<br><br>
 8. Open zeppelin and import the two notebooks (json files) you downloaded<br>
@@ -31,10 +34,10 @@ Please perform the following steps:
 10. Run all zeppelin paragraphs (one by one) until you reach the Kafka paragraph.<br>
    Before continuing to the kafka section your zeppelin last paragraph should yield accuracy ≈ 0.79<br>
    ![snapshot](Pictures/Picture3.png)<br><br>
-   Flights_space should have the following number of records:<br>
+   flights_space should have the following number of records:<br>
    ![snapshot](Pictures/Picture4.png)<br><br>
 11. Deploy flights_feeder (stateless pu which will read flights from space and send to kafka)<br>
-   `deploy --type=stateless --property=feeder.flights.path=/home/ec2-user/data.csv --property=kafka.bootstrapServer=kafka-0.service.consul:9092 flights_feeder kafka-pers-feeder.jar`<br><br>
+   `pu  deploy --property=feeder.flights.path=/home/ec2-user/data.csv --property=kafka.bootstrapServer=kafka-0.service.consul:9092 flights_feeder /Users/aharonmoll/IdeaProjects/PartnerWorkShop/Lab-2/kafkaFeederPU/target/kafka-pers-feeder.jar`<br><br>
 12. Continue running the kafka streaming paragraph and the remaining zeppelin paragraphs.<br><br>
 13. Last paragraph view should look something like:<br>
    ![snapshot](Pictures/Picture5.png)<br><br>
