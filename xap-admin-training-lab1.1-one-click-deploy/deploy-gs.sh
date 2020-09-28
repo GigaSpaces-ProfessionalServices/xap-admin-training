@@ -80,27 +80,52 @@ else
 	done
 	read -p "To override default number of containers to rise [Default is none]: " -e containerCnt;
 	if [ ! -z "$containerCnt" ]
-        then
+    then
 		read -p "To override default containers heap [Default is 512m] please specify units (m/g): " -e containerMem;
 		if [ ! -z "$containerMem" ]
 		then
 		       export GS_GSC_OPTIONS="-Xmx$containerMem -Xms$containerMem"
 		fi;
-        fi;
+    fi;
+
+    echo List of available machine OS types:
+	echo [1] centos
+	echo [2] ubuntu
+
+	while true; do
+            read -p 'Select machine os type by name or number:[' -i 1']' -e osType
+	    case $osType in
+		1]1|1]|1]centos) osType=centos; break;;
+		1]2|1]ubuntu) osType=ubuntu; break;;
+		* ) echo 'Please enter machine os type by name or number: ';;
+	    esac
+	done
 fi
 
 function installRemoteJava {
-	sudo yum -y install java-1.8.0-openjdk
+    if [ "$osType" == "centos" ]; then
+	    sudo yum -y install java-1.8.0-openjdk
+	elif [ "$osType" == "ubuntu" ]; then
+	    sudo apt -y install openjdk-8-jdk
+	fi
 	echo "install Remote JDK - Done!"
 }
 
 function installZip {
-	sudo yum -y install unzip
+    if [ "$osType" == "centos" ]; then
+	    sudo yum -y install unzip
+	elif [ "$osType" == "ubuntu" ]; then
+	    sudo apt -y install unzip
+	fi
 	echo "install ZIP - Done!"
 }
 
 function installWget {
-	sudo yum -y install wget
+    if [ "$osType" == "centos" ]; then
+	    sudo yum -y install wget
+	elif [ "$osType" == "ubuntu" ]; then
+	    sudo apt -y install wget
+	fi
 	echo "install wget - Done!"
 }
 
@@ -121,7 +146,7 @@ function activateGS {
 		    license="Product=InsightEdge;Version=15.2;Type=ENTERPRISE;Customer=demo_DEV;Expiration=2020-Nov-24;Hash=YVPQhPkEWBRluNvMO9Sx"
 	    elif [ "$gsVersion" == "15.0.0" ]; then
 		    license="Product=InsightEdge;Version=15.0;Type=ENTERPRISE;Customer=demo_DEV;Expiration=2020-Nov-24;Hash=QpNXYXYUV6SQNWPRURZW"
-fi
+        fi
         echo $license>gigaspaces-${gsType}-enterprise-${gsVersion}/gs-license.txt
 	echo "activating GS - Done!"
 }
