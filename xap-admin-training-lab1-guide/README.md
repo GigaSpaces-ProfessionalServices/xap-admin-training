@@ -20,7 +20,7 @@ https://docs.gigaspaces.com/latest/started/installation.html#DownloadingandInsta
 ##### 1.2 Put `tryme` license to `gs-license.txt` file located at the root of xap installation directory.
 
 ##### 1.3 Go to `$GS_HOME/bin` open `setenv-overrides.sh` and set: <br>
-   `JAVA_HOME` -> point to you java installation directory <br>
+   `JAVA_HOME` -> point to your java installation directory <br>
    `GS_LOOKUP_GROUPS` -> set any unique identifier
    
 ##### 1.4 Test your XAP Installation. <br>
