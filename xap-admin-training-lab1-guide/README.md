@@ -4,9 +4,9 @@
 
 #### 1 setup
 
-##### 1.1 Download and install XAP version 15.2:
+##### 1.1 Download and install XAP version 15.5.1:
 
-1. Download XAP 15.2 from:
+1. Download XAP 15.5.1 from:
 
 https://www.gigaspaces.com/downloads/
 
