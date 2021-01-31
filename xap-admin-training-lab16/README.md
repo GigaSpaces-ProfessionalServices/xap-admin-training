@@ -75,10 +75,19 @@ MyBigObject152StorageOpt - size 936 byte
 MyBigObject158Direct - size 472 byte
 ![Screenshot](Pictures/Picture7.png)
 ![Screenshot](Pictures/Picture8.png)
+
+    * In the new HybridEntryData class it is nice to see the division between the serialized and the non-serialized properties.
+    * The new Storage Optimization feature reduced the Space Object by ~60%
 ![Screenshot](Pictures/Picture9.png)
 
 MyBigObject158Sequential - size 448 byte
 ![Screenshot](Pictures/Picture10.png)
 ![Screenshot](Pictures/Picture11.png)
+
+    * In the new HybridEntryData class it is nice to see the division between the serialized and the non-serialized properties.
+    * The new Storage Optimization feature reduced the Space Object by ~60%
 ![Screenshot](Pictures/Picture12.png)
+
+## Summary
+#### The new Storage Optimization feature reduced the Space Object by ~60%
 
