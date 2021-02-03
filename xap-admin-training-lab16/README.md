@@ -62,15 +62,25 @@ select * from com.gigaspaces.internal.server.storage.HybridEntryData where toStr
 
 #### Solution
 
-MyBigObjectNoStorageOpt - Footprint per Object 1,352 byte / Total Heap size = 36.3
+### MyBigObjectNoStorageOpt - Footprint per Object 1,352 byte / Total Heap size = 36.3
 ![Screenshot](Pictures/Picture1.png)
 ![Screenshot](Pictures/Picture3.png)
 
-MyBigObject152StorageOpt - Footprint per Object 936 byte / Total Heap size = 26.9
+<br/>
+<br/>
+<br/>
+<br/>
+
+### MyBigObject152StorageOpt - Footprint per Object 936 byte / Total Heap size = 26.9
 ![Screenshot](Pictures/Picture4.png)
 ![Screenshot](Pictures/Picture6.png)
 
-MyBigObject158Direct - Footprint per Object 472 byte / Total Heap size = 27
+<br/>
+<br/>
+<br/>
+<br/>
+
+### MyBigObject158Direct - Footprint per Object 472 byte / Total Heap size = 27
 ![Screenshot](Pictures/Picture7.png)
 
 
@@ -78,12 +88,22 @@ MyBigObject158Direct - Footprint per Object 472 byte / Total Heap size = 27
     * The new Storage Optimization feature reduced the Space Object by ~60%
 ![Screenshot](Pictures/Picture9.png)
 
-MyBigObject158Sequential - Footprint per Object 448 byte / Total Heap size = 23
+<br/>
+<br/>
+<br/>
+<br/>
+
+### MyBigObject158Sequential - Footprint per Object 448 byte / Total Heap size = 23
 ![Screenshot](Pictures/Picture10.png)
 
     * In the new HybridEntryData class it is nice to see the division between the serialized and the non-serialized properties.
     * The new Storage Optimization feature reduced the Space Object by ~60%
 ![Screenshot](Pictures/Picture12.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
 
 ![Screenshot](Pictures/Picture13.png)
 
