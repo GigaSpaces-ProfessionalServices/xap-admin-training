@@ -64,17 +64,15 @@ select * from com.gigaspaces.internal.server.storage.HybridEntryData where toStr
 
 MyBigObjectNoStorageOpt - size 1,352 byte
 ![Screenshot](Pictures/Picture1.png)
-![Screenshot](Pictures/Picture2.png)
 ![Screenshot](Pictures/Picture3.png)
 
 MyBigObject152StorageOpt - size 936 byte
 ![Screenshot](Pictures/Picture4.png)
-![Screenshot](Pictures/Picture5.png)
 ![Screenshot](Pictures/Picture6.png)
 
 MyBigObject158Direct - size 472 byte
 ![Screenshot](Pictures/Picture7.png)
-![Screenshot](Pictures/Picture8.png)
+
 
     * In the new HybridEntryData class it is nice to see the division between the serialized and the non-serialized properties.
     * The new Storage Optimization feature reduced the Space Object by ~60%
@@ -82,12 +80,10 @@ MyBigObject158Direct - size 472 byte
 
 MyBigObject158Sequential - size 448 byte
 ![Screenshot](Pictures/Picture10.png)
-![Screenshot](Pictures/Picture11.png)
 
     * In the new HybridEntryData class it is nice to see the division between the serialized and the non-serialized properties.
     * The new Storage Optimization feature reduced the Space Object by ~60%
 ![Screenshot](Pictures/Picture12.png)
 
-## Summary
-#### The new Storage Optimization feature reduced the Space Object by ~60%
+![Screenshot](Pictures/Picture13.png)
 
