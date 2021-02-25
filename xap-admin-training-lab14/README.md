@@ -8,7 +8,7 @@ Get experience with running XAP PU on Kubernetes cluster. <br />
 Perform scale of a statefull pu. <br/>
 
 ## Lab Description
-In this lab we will deploy manager, statefull processor pu and stateless feeder <br /> 
+In this lab we will deploy manager, stateful processor pu and stateless feeder <br /> 
 We will perform scaling of the processor pu <br />
 
 ## Prerequisites
@@ -18,18 +18,19 @@ ensure that you have the following installed on your local machine or a VM: <br 
 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 [Helm](https://docs.helm.sh/using_helm/#quickstart-guide) <br />
-Important: You must use Helm 2 with KubeGrid. 
-Helm 3 contains a new chart version, which is a breaking change and is not currently supported by KubeGrid.
-Helm 3 will be supported in XAP 15.5 release
+Important: Previous versions of this lab supported Helm 2 only. 
+As of XAP 15.5, Helm 3 is supported in XAP 15.5 release.
+This lab has been changed to support Helm 3.
 
 [minikube](https://kubernetes.io/docs/setup/minikube/) <br />
+
 ##### 1. Configure memory and cpu:
 
     minikube config set memory 4096
     minikube config set cpus 4
     
 ##### 2. After installation, configure the VM driver 
-(for example: in case you installed VirtualBox as the Hypervisor run the following):
+(For example: in case you installed VirtualBox as the Hypervisor run the following. This step is optional as minikube now prefers to use Docker as the VM driver):
 
     minikube config set vm-driver virtualbox
     
@@ -37,14 +38,22 @@ Helm 3 will be supported in XAP 15.5 release
 
     minikube start
     
-    😄  minikube v1.10.1 on Darwin 10.15.4
-    ✨  Using the virtualbox driver based on user configuration
-    👍  Starting control plane node minikube in cluster minikube
-    🔥  Creating virtualbox VM (CPUs=2, Memory=4096MB, Disk=20000MB) ...
-    🐳  Preparing Kubernetes v1.18.2 on Docker 19.03.8 ...
-    🔎  Verifying Kubernetes components...
-    🌟  Enabled addons: default-storageclass, storage-provisioner
-    🏄  Done! kubectl is now configured to use "minikube"
+😄  minikube v1.17.1 on Ubuntu 18.04
+    ▪ KUBECONFIG=/home/dixson/kubeconfig
+✨  Automatically selected the docker driver. Other choices: virtualbox, ssh, none
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.20.2 preload ...
+    > preloaded-images-k8s-v8-v1....: 491.22 MiB / 491.22 MiB  100.00% 4.38 MiB
+🔥  Creating docker container (CPUs=4, Memory=4096MB) ...
+🐳  Preparing Kubernetes v1.20.2 on Docker 20.10.2 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
     
 ##### 4. In a separate terminal expose Minikube LoadBalancer:
  
@@ -53,23 +62,18 @@ Helm 3 will be supported in XAP 15.5 release
 
 ### 1. Deploying and Managing "xap processor feeder application"
 #### 1.1  Get the required GigaSpaces Helm charts
-##### 1.1.1 run: helm init
-
-    helm init
-
-##### 1.1.2 Add xap Helm Repo to the Repo List 
+##### 1.1.1 Add xap Helm Repo to the Repo List 
  
     helm repo add gigaspaces https://resources.gigaspaces.com/helm-charts
     
-##### 1.1.3 Fetch the GigaSpaces Helm Charts from the GigaSpaces Repository 
-(The chart xap is unpacked in your current directory)
+##### 1.1.2 Fetch the GigaSpaces Helm Charts from the GigaSpaces Repository 
+(The chart xap is unpacked in your current directory - this step is optional)
 
-    helm fetch gigaspaces/xap --version=15.2.0 --untar
+    helm fetch gigaspaces/xap --version=15.8.0 --untar
     
 #### 1.2  Deploy a Management Pod called testmanager:
 
-    cd xap/charts
-    helm install xap-manager --name testmanager
+    helm install testmanager gigaspaces/xap-manager
      
 #### 1.3  View and monitor kubernetes deployment
 ##### 1.3.1 Verify that the pod is running
@@ -88,7 +92,7 @@ Helm 3 will be supported in XAP 15.5 release
 
 ###### 1.3.3.1 Get the manager ip by running "Kubectl get services", the manager ip will be the EXTERNAL-IP. in this case 10.108.7.199
 
-    Kubectl get services
+    kubectl get services
     NAME                              TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                        AGE
     kubernetes                        ClusterIP      10.96.0.1      <none>         443/TCP                                        4m17s
     testmanager-xap-manager-hs        ClusterIP      None           <none>         2181/TCP,2888/TCP,3888/TCP,4174/TCP            19s
