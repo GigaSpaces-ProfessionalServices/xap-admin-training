@@ -5,7 +5,7 @@
 ## Lab Goals
 
 Get experience with running XAP PU on Kubernetes cluster. <br /> 
-Perform scale of a statefull pu. <br/>
+Perform scale of a stateful pu. <br/>
 
 ## Lab Description
 In this lab we will deploy manager, stateful processor pu and stateless feeder <br /> 
@@ -20,9 +20,11 @@ ensure that you have the following installed on your local machine or a VM: <br 
 [Helm](https://docs.helm.sh/using_helm/#quickstart-guide) <br />
 Important: Previous versions of this lab supported Helm 2 only. 
 As of XAP 15.5, Helm 3 is supported in XAP 15.5 release.
-This lab has been changed to support Helm 3.
+This lab has been updated to support Helm 3.
 
 [minikube](https://kubernetes.io/docs/setup/minikube/) <br />
+
+[docker engine](https://docs.docker.com/engine/install/) <br />
 
 ##### 1. Configure memory and cpu:
 
@@ -30,7 +32,7 @@ This lab has been changed to support Helm 3.
     minikube config set cpus 4
     
 ##### 2. After installation, configure the VM driver 
-(For example: in case you installed VirtualBox as the Hypervisor run the following. This step is optional as minikube now prefers to use Docker as the VM driver):
+(Note: If you installed VirtualBox as the Hypervisor run the following. This step is optional as minikube now prefers to use Docker as the VM driver)
 
     minikube config set vm-driver virtualbox
     
@@ -119,7 +121,7 @@ This lab has been changed to support Helm 3.
     
 #### 1.5 Deploy a Data Pod with the processor service
 
-`helm install xap-pu --name processor --set manager.name=testmanager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
+`helm install processor gigaspaces/xap-pu --set manager.name=testmanager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
 
     kubectl get pod
     NAME                        READY   STATUS    RESTARTS   AGE
@@ -129,7 +131,7 @@ This lab has been changed to support Helm 3.
 
 #### 1.5 Deploy a Data Pod with the feeder service
 
-`helm install xap-pu --name feeder --set manager.name=testmanager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
+`helm install feeder gigaspaces/xap-pu --set manager.name=testmanager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
 
     NAME                        READY   STATUS    RESTARTS   AGE
     feeder-xap-pu-0             1/1     Running   0          11s
@@ -168,7 +170,7 @@ Query the data:<br>
 
    ![Screenshot](./Pictures/Picture7.png)
    
-2. Check the current "processor" service memory using the minikube dashboard:<br>
+2. Check the current "processor" service memory using the minikube dashboard. Click on the pod, click on the edit (pencil icon) in the top right corner:<br>
    
    ![Screenshot](./Pictures/Picture8.png)
    
@@ -179,7 +181,7 @@ Query the data:<br>
 #### 2.2 Perform memory scale using GS CLI
 
 1. Scale processor partition 2:
-   `pu scale processor 2 --memory 600Mi`<br>
+   `pu scale-vertical --partitions=2 --memory=600Mi processor` <br>
    
    **The result should be:**<br>
    Request ID     1    
@@ -217,8 +219,8 @@ Query the data:<br>
    Looking at the minikube dashboard pods view:
    ![Screenshot](./Pictures/Picture11.png)
    
-3. Scale processor partition 2:
-   `pu scale processor 1 --memory 600Mi`<br>
+3. Scale processor partition 1:
+   `pu scale-vertical --partitions=1 --memory=600Mi processor` <br>
    
    **The result should be:**<br>
    Request ID     2    
@@ -260,13 +262,13 @@ Query the data:<br>
    ![Screenshot](./Pictures/Picture14.png)
 
 6. There is an option also to scale down again.<br>
-   `pu scale processor 1 --memory 400Mi`<br>
+   `pu scale-vertical --partitions=1 --memory=400Mi processor`<br>
    
    
 ### 3  Undeploy the services
-    helm del --purge feeder
-    helm del --purge processor
-    helm del --purge testmanager
+    helm del feeder
+    helm del processor
+    helm del testmanager
     
 ### 4 delete and stop the minikube
     minikube delete
