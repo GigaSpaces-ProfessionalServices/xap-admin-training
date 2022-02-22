@@ -295,9 +295,13 @@ Run below will start displaying various menu options
  - You can specify zone, number of partitions, space property at time of deployment
  
   ![Screenshot](./pictures/Tieredstorage-deploy.png)
+ 
+ - Run Feeder from manager server
+ 
+  ![Screenshot](./pictures/Tieredstorage-feeder.png)
   
  - By default it will loaded with default criteria file TieredCriteria.tab
-- Verify the deployment on OPS manager  
+ - Verify the deployment on OPS manager  
       
   ![Screenshot](./pictures/Tieredstorage-deploy-ui.png)
    
@@ -316,6 +320,10 @@ Run below will start displaying various menu options
  - After completion of update cache policy Go to OPS manager and see the updated criteria on overview
   
   ![Screenshot](./pictures/Tieredstorage-done.png)
+  
+  - You can observe after changing the TieredCriteria.tab file based on updated criteria data feeded without downtime of space
+  
+  ![Screenshot](./pictures/Tieredstorage-feeder-after.png)
   
 ###### Undeploy
  
