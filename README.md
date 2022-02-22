@@ -23,4 +23,6 @@ https://docs.google.com/spreadsheets/d/10Svq6s90eDw-Ger8TJogyVWLy0FcdfSF3EgtilCd
 * Lab13 - Grid Security
 * Lab14 - Kubernetes
 * Lab15 - GSCTL
+* Lab16 - Storage Optimization feature
+* Lab17 - Gigaspace ODSX
 * Lab-mx - MemoryXtend
