@@ -1,4 +1,4 @@
-# <u>ODSX (Bank Leumi)</u>
+# <u>ODSX</u>
 
 - Repositories needed to run Lab
 
