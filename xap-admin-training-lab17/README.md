@@ -113,7 +113,9 @@ Run below will start displaying various menu options
 **5. Install Space server**
 
 - Verify on browser webui space servers started or not
-
+ - Configure metrics.xml (For influxdb and grafana with gigaspace)
+   - Menu -> Utilities -> Metrics
+      
 **6. Install Northbound server**
 
 - Install northbound with management server
