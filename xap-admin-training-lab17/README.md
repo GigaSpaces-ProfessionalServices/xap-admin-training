@@ -2,7 +2,7 @@
 
 - Repositories needed to run Lab
 
-  -  https://github.com/GigaSpaces-ProfessionalServices/gs-odsx.git
+  -  https://github.com/GigaSpaces-ProfessionalServices/gs-odsx.git  (Currently 23-Feb-2022 latest code is available in di_branch)
   -  https://github.com/GigaSpaces-ProfessionalServices/CSM-Magic-Tools.git
   -  https://github.com/Gigaspaces/insightedge-training/tree/master/Day4/17_TieredStorage
 
