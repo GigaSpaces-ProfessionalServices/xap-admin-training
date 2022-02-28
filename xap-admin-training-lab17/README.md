@@ -86,7 +86,13 @@ Make sure all pre-requisite installation rpms / zip installer available inside o
     
     - influxdb : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/influxdb/influxdb-1.8.4.x86_64.rpm
     
-    - kafka : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/kafka/kafka_2.13-2.8.1.tgz 
+    - kafka : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/kafka/kafka_2.13-2.8.1.tgz
+    
+    - zookeeper : https://dlcdn.apache.org/zookeeper/zookeeper-3.6.3/apache-zookeeper-3.6.3-bin.tar.gz
+    
+    - CR8 : http://download-area-us-east.s3.amazonaws.com/dbshLocalInstall/dbshLocalSetup-rehl7.2-10052021.tar.gz
+    
+         - http://download-area-us-east.s3.amazonaws.com/cr8-packages/cr8-latest/cr8-2.0.9-310.x86_64.rpm 
     
 ### <u>Usage</u>
 
