@@ -93,6 +93,8 @@ Make sure all pre-requisite installation rpms / zip installer available inside o
     - CR8 : http://download-area-us-east.s3.amazonaws.com/dbshLocalInstall/dbshLocalSetup-rehl7.2-10052021.tar.gz
     
          - http://download-area-us-east.s3.amazonaws.com/cr8-packages/cr8-latest/cr8-2.0.9-310.x86_64.rpm 
+         
+    - telegraf : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/telegraf/telegraf-1.19.3-1.x86_64.rpm     
     
 ### <u>Usage</u>
 
