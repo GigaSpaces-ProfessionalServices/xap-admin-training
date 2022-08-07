@@ -1,17 +1,17 @@
 # xap-admin-training - lab2-guide
 
 
-## 	XAP Overview
+## 	GS Overview
 
 ###### Lab Goals
 *   Be introduced and experienced Grid Service Components
 
 ###### Lab Description
-In this lab you will start XAP infrastructure services. Inspect the runtime grid in the GS-UI.
+In this lab you will start GS infrastructure services. Inspect the runtime grid in the GS-UI.
 
 ## 1	Start XAP Infrastructure
 
-    a.	Goto %XAP_TRAINING_HOME%\gigaspaces-xap\bin
+    a.	Goto $GS_HOME\bin
     b.	./gs.sh host run-agent --auto --gsc=2
     c.	Start gs-ui:
             ./gs-ui.sh
@@ -33,3 +33,9 @@ In this lab you will start XAP infrastructure services. Inspect the runtime grid
     g.	You will learn more about it at a later session.
     
 ![Screenshot](./Pictures/Picture3.png)
+
+    h. Open your browser and got localhost:8090
+    i. Examine GS ops manager.
+    j. You will learn more about it at a later session.
+
+![Screenshot](./Pictures/Picture4.png)
