@@ -1,12 +1,12 @@
 # xap-admin-training - lab1-guide
 
-## XAP setup and installation
+## GigaSpaces setup and installation
 
 #### 1 setup
 
-##### 1.1 Download and install XAP version 15.5.1:
+##### 1.1 Download and install GigaSpaces version 16.1.1:
 
-1. Download XAP 15.5.1 from:
+1. Download XAP 16.1.1 from:
 
 https://www.gigaspaces.com/downloads/
 
@@ -45,7 +45,7 @@ https://docs.gigaspaces.com/latest/started/installation.html#DownloadingandInsta
 
 ##### 2.1 Validate internet connectivity by opening a browser and going to GigaSpaces site: 
         www.gigaspaces.com
-##### 2.2 Click on support-> Documents
+##### 2.2 Click on Company -> support -> Documents
 
 ![Screenshot](./Pictures/Picture3.png)
 
