@@ -8,12 +8,12 @@
 •	Experience the self-healing capability of the space <br>
 
 ###### Lab Description
-In this lab you will start XAP infrastructure services. Deploy a Space, perform some benchmarks using a benchmark tool that will test your space and undeploy the space. You will perform most actions using GigaSpaces Web Management Console service 
-(a.k.a. gs-webui). You will also try to check the self-healing capabilities of the space by stopping a GSC and see how XAP heals itself.
+In this lab you will start GS infrastructure services. Deploy a Space, perform some benchmarks using a benchmark tool that will test your space and undeploy the space. You will perform most actions using GigaSpaces Web Management Console service 
+(a.k.a. gs-webui). You will also try to check the self-healing capabilities of the space by stopping a GSC and see how GS heals itself.
 
 ## 1	Start XAP Infrastructure
 
-a.	Go to %XAP_TRAINING_HOME%\gigaspaces-xap\bin <br>
+a.	Go to $GS_HOME/bin <br>
 b.	./gs.sh host run-agent --auto --gsc=4 <br>
 c.	Go to web Management Console (localhost:8099) <br>
 d.	Press on the gsc processes to see the process information and log. <br>
