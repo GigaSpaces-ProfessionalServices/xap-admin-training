@@ -7,11 +7,11 @@
 *   Be introduced and experienced Grid Service Components
 
 ###### Lab Description
-In this lab you will start XAP infrastructure services. Inspect the runtime grid in the GS-UI.
+In this lab you will start GS infrastructure services. Inspect the runtime grid in the GS-UI.
 
-## 1	Start XAP Infrastructure <br>
+## 1	Start GS Infrastructure <br>
 
-    a.	Go to %XAP_TRAINING_HOME%\gigaspaces-xap\bin
+    a.	Go to $GS_HOME/bin
     b.	./gs.sh host run-agent --auto --gsc=2
     
 ## 2	Examine the running environment <br>

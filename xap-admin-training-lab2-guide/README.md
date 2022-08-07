@@ -11,7 +11,7 @@ In this lab you will start GS infrastructure services. Inspect the runtime grid 
 
 ## 1	Start XAP Infrastructure
 
-    a.	Goto $GS_HOME\bin
+    a.	Goto $GS_HOME/bin
     b.	./gs.sh host run-agent --auto --gsc=2
     c.	Start gs-ui:
             ./gs-ui.sh
