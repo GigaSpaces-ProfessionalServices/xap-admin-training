@@ -21,10 +21,26 @@ Work with users with different roles.<br>
 
 #### Solution
 
+##### 1. Edit the security-config.xml as follows
 
 ![Screenshot](Pictures/Picture1.png)
 
 ![Screenshot](Pictures/Picture2.png)
+
+##### 2. Start the grid
+
+        ./gs.sh host run-agent --manager
+        
+##### 3. Open the Ops-UI login page
+        
+         localhost:8090
+         
+##### 4. Verify that you can login with:
+    gs-viewer/gs-viewer
+    gs-mngr/gs-mngr
+    gs-admin/gs-admin
+                 
+          
 
 ### Writing to a Secured Space - Lab Exercise 2
 #### Requirements: <br />
@@ -50,12 +66,14 @@ Work with users with different roles.<br>
 
         ./gs.sh host run-agent --manager
         
+##### 3. Start a container
         
-        
-##### 3. Deploy the PU with the embedded space
+        --username gs-admin --password gs-admin container create --count=1 localhost
+                      
+##### 4. Deploy the PU with the embedded space
 
         ./gs.sh --username gs-admin --password gs-admin pu deploy SecuredSpace ../SecuredSpace/target/SecuredSpace-1.0-SNAPSHOT.jar
 
-##### 4. Verify that the Feeder has been succeeded to connect to the secured space and write the data
+##### 5. Verify that the Feeder has been succeeded to connect to the secured space and write the data
 
 ![Screenshot](Pictures/Picture4.png)
