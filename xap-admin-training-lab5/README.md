@@ -39,7 +39,7 @@ In this lab we will focus on deployment and the application and not be concerned
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
 
-2.3 IntelliJ path Variables (under preferences)
+2.3 IntelliJ path Variables (under File | Settings | Appearance & Behavior | Path Variables)
 
 ###### Add GS_LOOKUP_GROUPS & GS_LOOKUP_LOCATORS
 

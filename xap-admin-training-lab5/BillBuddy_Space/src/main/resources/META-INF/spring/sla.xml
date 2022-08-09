@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	   http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.openspaces.org/schema/sla 
-	   http://www.openspaces.org/schema/15.2/sla/openspaces-sla.xsd">
+	   http://www.openspaces.org/schema/sla/openspaces-sla.xsd">
   
   <!-- The SLA bean used when deploying this processing unit to the Service Grid. -->
     <os-sla:sla cluster-schema="partitioned" 
