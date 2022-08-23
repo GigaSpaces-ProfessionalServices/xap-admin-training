@@ -57,14 +57,30 @@ To login to the machines goto the Vagrant directory and run:<br>
 
 * Explore GS ZK tree to better understand the concept.<br>
 
+### 5 Note:
 
+* If you see the following error:<br/>
 
+The IP address configured for the host-only network is not within the
+allowed ranges. Please update the address used to be within the allowed
+ranges and run the command again.
 
+Continue with the recommndations mentioned. <br/>
 
-
-
-
-      
-
-
-    
+Edit `/etc/vbox/networks.conf`, add the following:
+```
+      * 10.0.0.0/8 192.168.0.0/16
+      * 2001::/64
+```
+* To determine the ip address to access the ui <br/>
+```
+vagrant ssh node1
+ip address show
+```
+For example:
+| Node | IP Address |
+|------|------------|
+| Node1 | http://10.211.55.101:8099/ |
+| Node2 | http://10.211.55.102:8099/ |
+| Node3 | http://10.211.55.103:8099/ |
+| Node4 | 10.211.55.104 (No webui or Manager running)|     
