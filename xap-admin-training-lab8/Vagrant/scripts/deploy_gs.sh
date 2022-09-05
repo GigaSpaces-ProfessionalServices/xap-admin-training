@@ -19,24 +19,24 @@ function installWget {
 }
 
 function downloadGS {
-	wget https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0.zip	
+	wget https://gigaspaces-releases-eu.s3.amazonaws.com/xap/16.1.1/gigaspaces-xap-enterprise-16.1.1.zip
 	echo "download GS - Done!"
 }
 
 function unzipGS {
-        unzip gigaspaces-xap-enterprise-15.2.0.zip	
-	chown -R vagrant:vagrant gigaspaces-xap-enterprise-15.2.0
+        unzip gigaspaces-xap-enterprise-16.1.1.zip	
+	chown -R vagrant:vagrant gigaspaces-xap-enterprise-16.1.1
 	echo "unzipping GS - Done!"
 }
 
 function activateGS {
-        echo "tryme">gigaspaces-xap-enterprise-15.2.0/gs-license.txt 
+        echo "tryme">gigaspaces-xap-enterprise-16.1.1/gs-license.txt 
 	echo "activating GS - Done!"
 }
 
 function startGS {
 echo "#!/bin/bash" > /home/vagrant/start_GS.sh
-        echo " su - vagrant -c \"  /usr/bin/nohup /home/vagrant/gigaspaces-xap-enterprise-15.2.0/bin/gs.sh host run-agent --auto > /home/vagrant/start_GS.out &\"" >> /home/vagrant/start_GS.sh
+        echo " su - vagrant -c \"  /usr/bin/nohup /home/vagrant/gigaspaces-xap-enterprise-16.1.1/bin/gs.sh host run-agent --auto > /home/vagrant/start_GS.out &\"" >> /home/vagrant/start_GS.sh
 	chown vagrant:vagrant /home/vagrant/start_GS.sh
 	chmod 777 /home/vagrant/start_GS.sh
 	/home/vagrant/start_GS.sh
@@ -65,9 +65,8 @@ echo "activating GS"
 activateGS
 if [ "$1" != "" ]; then
 	echo "setting manager GS"
-	echo -e "\nexport GS_MANAGER_SERVERS=$1">>gigaspaces-xap-enterprise-15.2.0/bin/setenv-overrides.sh 	
+	echo -e "\nexport GS_MANAGER_SERVERS=$1">>gigaspaces-xap-enterprise-16.1.1/bin/setenv-overrides.sh 	
 	echo "setting manager GS - Done!"
 fi
 echo "starting GS"
 startGS
-
