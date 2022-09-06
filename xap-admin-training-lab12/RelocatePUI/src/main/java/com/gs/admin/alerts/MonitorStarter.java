@@ -1,4 +1,4 @@
-package com.gs.admin.monitor;
+package com.gs.admin.alerts;
 
 
 /**

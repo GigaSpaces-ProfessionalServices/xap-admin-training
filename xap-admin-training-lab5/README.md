@@ -12,16 +12,16 @@ In this lab we will focus on deployment and the application and not be concerned
 
 #### 1	Start gs-agent
 
-1.1 Navigate to %XAP_HOME/bin <br />
+1.1 Navigate to %GS_HOME%/bin <br />
         
-1.2 Start gs-agent with local Manager server and 5 GSCs:
+1.2 Start the Service Grid with a local Manager server and 5 GSCs:
 
     ./gs.sh host run-agent --auto --gsc=5
     
     
 #### 2	Deploy BillBuddy_Space
     
-2.1 Open %XAP_TRAINING_HOME%/xap-admin-training-lab5 project with intellij (open pom.xml) <br />
+2.1 Open %XAP_TRAINING_HOME%/xap-admin-training-lab5 project with Intellij (open pom.xml) <br />
 2.2 Run mvn install <br />
 
     ~/xap-admin-training/xap-admin-training-lab5$ mvn install
@@ -39,7 +39,7 @@ In this lab we will focus on deployment and the application and not be concerned
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
 
-2.3 IntelliJ path Variables (under preferences)
+2.3 IntelliJ path Variables (under File | Settings | Appearance & Behavior | Path Variables)
 
 ###### Add GS_LOOKUP_GROUPS & GS_LOOKUP_LOCATORS
 
@@ -59,11 +59,11 @@ In this lab we will focus on deployment and the application and not be concerned
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
 
-2.5 Open a new Terminal and navigate to %XAP_TRAINING_HOME%/gigaspaces-xap/bin/ <br />
+2.5 Open a new Terminal and navigate to %GS_HOME%/bin <br />
 
-    cd %XAP_HOME/bin
+    cd %GS_HOME%/bin
            
-2.6 Use XAP CLI to deploy BillBuddy_Space
+2.6 Use GS CLI to deploy BillBuddy_Space
  
     ./gs.sh pu deploy BillBuddySpace ~/xap-admin-training/xap-admin-training-lab5/BillBuddy_Space/target/BillBuddy_Space.jar 
 
@@ -108,9 +108,9 @@ Click the Payment Data Type Name as you did in section 3.3
 
 #### 5 Deploy BillBuddyWebApplication project
 
-5.1 Open a new Terminal and navigate to %XAP_TRAINING_HOME%/gigaspaces-xap/bin/
+5.1 Open a new Terminal and navigate to %GS_HOME%/bin/
 
-5.2 Use XAP CLI to deploy BillBuddyWebApplication
+5.2 Use GS CLI to deploy BillBuddyWebApplication
  
     ./gs.sh pu deploy --property=web.port=8082 BillBuddyWebApplication ~/xap-admin-training/xap-admin-training-lab5/BillBuddyWebApplication/target/BillBuddyWebApplication.war
 

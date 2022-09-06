@@ -1,4 +1,4 @@
-package com.gs.admin.monitor;
+package com.gs.admin.alerts;
 
 import org.openspaces.admin.Admin;
 import org.openspaces.admin.AdminFactory;
@@ -12,8 +12,7 @@ import java.util.Map;
 public class AlertsMonitor {
 
     public AlertsMonitor() {
-        System.out.println("Warning: No lookup group input, using defualt Avi_17");
-        init("Avi_17");
+        init(System.getenv("GS_LOOKUP_GROUPS"));
     }
 
     public AlertsMonitor(String lookupgroup) {
@@ -35,7 +34,7 @@ public class AlertsMonitor {
 
             @Override
             public void alertTriggered(Alert alert) {
-                System.out.println("I am Getting a Picked up Alert");
+                System.out.println("Alert is triggered");
                 System.out.println(alert.toString());
             }
 
