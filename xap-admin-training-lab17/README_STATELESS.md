@@ -1,13 +1,38 @@
 # <u>ODSX</u>
 
-- Repositories needed to run Lab
+## Lab Summary
+
+     1. Repositories needed to run Lab
+     2. AWS Configuration
+     3. Environment setup (STATELESS ODSX)
+     4. Download Installers on mounted folders
+     5. ODSX Configuration setup(STATELESS ODSX)
+     6. ODSX Configuration security setup
+     7. ODSX Configuration new host / supporting jar setup
+     8. Installation
+     9. Usage
+     10. Install DI server(Kafka)
+     11. Grafana Server  
+     12. Influxdb 
+     13. Manager 
+     14. Space Server 
+     15. Tiered Storage 
+     16. Northbound 
+     17. DB2-Feeder 
+     18. MSSQL-Feeder 
+     19. MQ-Connector- Adabas service 
+     20. MQ-Connector- Kafka consumer
+     21. Alerts-Kapacitor 
+     22. Alerts-Catalouge 
+      
+##### 1. Repositories needed to run Lab
 
   -  https://github.com/GigaSpaces-ProfessionalServices/gs-odsx.git  (Currently 23-Feb-2022 latest code is available in di_branch)
   -  https://github.com/GigaSpaces-ProfessionalServices/CSM-Magic-Tools.git
   -  https://github.com/Gigaspaces/insightedge-training/tree/master/Day4/17_TieredStorage
 
 
-## <u>AWS Configurations</u>
+##### 2. AWS Configurations
 1. Create EC2- Instances on AWS based on your requirement (OS: Redhat:7.7 RHEL)
    Minimum Setup : Pivot (ODSX)-1,Manager-3, Space-2,DataIntegration-1,Grafana and Influx - (pivot),Northbound server-1,Northbound management-1, kapacitor (DataIntegration)
    Leumi Env : Pivot (ODSX)-1,Manager-3, Space-4, DataIntegration-4,Grafana and Influx -(pivot),Northbound server-3,Northbound management-3
@@ -36,7 +61,7 @@
     mkdir /dbagigasoft
     '
 
-### <u>Environment setup (STATELESS ODSX)</u>
+##### 3. Environment setup (STATELESS ODSX)
   - Select EFS from AWS :
   ![Screenshot](./pictures/EFS_aws.png)
   - In AWS go to EFS -> create -> 
@@ -52,7 +77,7 @@
   - Run / Install NFS : sudo yum install -y nfs-utils
   - Mount shared file location /dbagigashare/current in AWS with all installer servers (NFS).
 
-### <u>Download Installers on mounted folders </u>
+##### 4. Download Installers on mounted folders 
   - Copy respected installers inside folders 
       
       - /dbagigashare/current/unzip : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/unzip/unzip-6.0-21.el7.x86_64.rpm
@@ -110,7 +135,7 @@
       - Copy <odsx>/config/nb.conf.template To -  /dbagigashare/current/applicative 
                                               - /dbagigashare/current/management
 
-### <u>Installers on mount </u>
+##### 4.1  Installers on mount 
   - Listed directories after creation on mounted servers/ hosts
   - ![Screenshot](./pictures/EFS_pivot.png)
   - ![Screenshot](./pictures/EFS_files_1.png)
@@ -118,7 +143,7 @@
   - ![Screenshot](./pictures/EFS_files_3.png)
   - ![Screenshot](./pictures/EFS_files_4.png) 
 
-### <u>ODSX Configuration setup(STATELESS ODSX)</u>
+##### 5. ODSX Configuration setup(STATELESS ODSX)
   - GIT URL : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx/tags
   ![Screenshot](./pictures/GIT_tags.png)
   - Download suffix with release so you will get mail branch which is simillar to bank env 
@@ -140,7 +165,7 @@
             - For unsecure installation : app.setup.profile= (keep blank)
   - If you are on DR envirounment app.setup.env=#dr (remove #) app.setup.env=dr
 
-### <u>ODSX Configuration security setup</u>
+##### 6. ODSX Configuration security setup
   - app.config : app.setup.profile=security
   - After security installation of Manager, Space servers go to /dbagiga/gigaspaces-smart-ods/config/security/security.properties Make sure below configuration is present
     - com.gs.security.security-manager.class=com.gigaspaces.security.spring.SpringSecurityManager
@@ -150,7 +175,7 @@
         username = "gs-admin"#str(getUsernameByHost(managerHost,appId,safeId,objectId))
         password = "gs-admin"#str(getPasswordByHost(managerHost,appId,safeId,objectId))
 
-### <u>ODSX Configuration new host / supporting jar setup</u>
+##### 7. ODSX Configuration new host / supporting jar setup
   - Configurations for new host section need to be done under utils/ods_cluster_config.py
   - To add new host Example : 2 space servers but need to add 4 then
   - host.yaml -> add entries host1,host2 ... host4 and mention the respected IP / hostname
@@ -161,7 +186,7 @@
            log:
              xap_logging: xap_logging.properties
                 
-### <u>Installation</u>
+##### 8. Installation
 
 1. Clone this project from git repository.
    
@@ -179,17 +204,15 @@
 
   - chmod 400 gs-odsx/aharon_ami.pem
 
-### <u>SetupFiles</u>
-
-### <u>Usage</u>
+##### 9. Usage
 
     Go to main Project directory from terminal window (cd gs-odsx-3.46-sox-release/)
-### <u>Host configurations</u>
+##### 9.1 Host configurations</u>
   - Copy <gs-odsx-home>/config/app.config, host.yaml, app.yaml -> files into /dbagigashare/current/odsx/
   - Configure required hosts for respected feature installer
     
   - ![Screenshot](./pictures/odsx_sox_hostyaml.png)
-**Menu driven** 
+##### 9.2 Menu driven** 
 
 Run below will start displaying various menu options 
 
@@ -197,7 +220,7 @@ Run below will start displaying various menu options
 
 ![Screenshot](./pictures/odsx_sox_menu.png)
 
-**1. Install DI server(Kafka) Menu -> Servers -> DI**
+##### 10. Install DI server(Kafka) Menu -> Servers -> DI**
 ###  Install
  - Install DI with cluster mode
    - 3/4 host / servers needed to install 
@@ -231,7 +254,7 @@ Run below will start displaying various menu options
    - ![Screenshot](./pictures/odsx_sox_di_remove_2.png)
    - Verify by List
 
-**Grafana Server (Menu -> Servers -> Grafana)**
+##### 11. Grafana Server (Menu -> Servers -> Grafana)**
 
 ###### Install
 
@@ -257,8 +280,8 @@ Run below will start displaying various menu options
 ###### Remove
 - It will Remove and uninstall Grafana host
 
-**Influxdb (Menu -> Servers -> Influxdb)**
-
+##### 12. Influxdb (Menu -> Servers -> Influxdb)**
+ 
 ###### Install
 - Keep rpm file under /dbagigashare/current/influx/ 
 - By default service will start and create default database mydb
@@ -300,8 +323,8 @@ Run below will start displaying various menu options
 - It will Remove and uninstll Infuxdb host
 
 
-**Manager (Menu -> Servers -> Manager)**
-
+##### 13. Manager (Menu -> Servers -> Manager)**
+ 
 ###### Install  
   - This option will install manager and prerequisite software for running Manager (**On Remote machine**).
     ![Screenshot](./pictures/odsx_sox_manager_install_1.png)
@@ -382,8 +405,8 @@ Run below will start displaying various menu options
 
 
 
-**Space Server (Menu -> Servers -> Space)**
-
+##### 14. Space Server (Menu -> Servers -> Space)**
+ 
 ###### Install
 
   - This option will install space server and prerequisite software for running Space server (**On Remote machine**).
@@ -425,8 +448,8 @@ Run below will start displaying various menu options
 - It will remove installed manager servers from cluster config and optional to remove supported software java / unzip 
 
 
-**Tiered Storage (Menu -> Tiered Storage)**
-
+##### 15. Tiered Storage (Menu -> Tiered Storage)**
+ 
 ###### Deploy
 
  - You can find it from git repository https://github.com/GigaSpaces-ProfessionalServices/CSM-Magic-Tools.git
@@ -488,8 +511,8 @@ Run below will start displaying various menu options
 
 
 
-**Northbound (Menu -> Servers -> Northbound)**
-
+##### 16. Northbound (Menu -> Servers -> Northbound)**
+ 
 ###### Install
   - NB Applicative - different host
   - NB Management -  different host
@@ -539,7 +562,7 @@ Run below will start displaying various menu options
 
 - It will remove and uninstall northbound service on specified server
 
-**DB2-Feeder (Menu -> DataEngine -> DB2-Feeder -> Install-Deploy)**
+##### 17. DB2-Feeder (Menu -> DataEngine -> DB2-Feeder -> Install-Deploy)**
 
 ###### Install-Deploy
    - For AWS we are using jars of tiered storage which will be deployed as feeder
@@ -574,8 +597,8 @@ Run below will start displaying various menu options
    
    ![Screenshot](./pictures/odsx_sox_dataengine_db2feeder_undeploy.png)
 
-**MSSQL-Feeder (Menu -> DataEngine -> MSSQL-Feeder -> Install-Deploy)**
-
+##### 18. MSSQL-Feeder (Menu -> DataEngine -> MSSQL-Feeder -> Install-Deploy)**
+ 
 ###### Install-Deploy
    - For AWS we are using jars of tiered storage which will be deployed as feeder
       (Bcoz MQ setup is not there)
@@ -614,8 +637,8 @@ Run below will start displaying various menu options
    ![Screenshot](./pictures/odsx_sox_dataengine_mssqlfeeder_undeploy_2.png)   
    
    
-**MQ-Connector- Adabas service (Menu -> DataEngine -> MQ-connector -> Adabas-service)**
-
+##### 19. MQ-Connector- Adabas service (Menu -> DataEngine -> MQ-connector -> Adabas-service)**
+ 
 ###### Install-Deploy
 
    - Keep required service file under : /dbagigashare/current/mq-connector/adabas/jars/
@@ -639,7 +662,7 @@ Run below will start displaying various menu options
    
    
   
-**MQ-Connector- Kafka consumer (Menu -> DataEngine -> MQ-connector -> Kafka consumer)**
+##### 20. MQ-Connector- Kafka consumer (Menu -> DataEngine -> MQ-connector -> Kafka consumer)**
 
 ###### Install-Deploy
 
@@ -660,4 +683,58 @@ Run below will start displaying various menu options
 
 ##### Undeploy
    ![Screenshot](./pictures/odsx_sox_kafkacons_install_5.png)   
-        
+
+##### 21. Alerts-Kapacitor ( MENU -> MONITORS -> ALERTS -> SERVICES -> KAPACITOR)
+
+##### Install
+  - It will install kapacitor services on pivot machine  
+  - Copy kapacitor template file from <odsx>/config into /dbagigashare/current/kapacitor/config/kapacitor.conf.template
+  - Put respected rpms under /dbagigashare/current/kapacitor/
+  ![Screenshot](./pictures/odsx_sox_kapacitor_install_1.png)
+  
+  ![Screenshot](./pictures/odsx_sox_kapacitor_install_2.png)
+  
+  ![Screenshot](./pictures/odsx_sox_kapacitor_install_3.png)
+##### Start
+ - This command will start kapacitor services 
+  ![Screenshot](./pictures/odsx_sox_kapacitor_install_4.png)
+  
+  ![Screenshot](./pictures/odsx_sox_kapacitor_install_5.png)
+
+##### Stop
+ - This command will stop kapacitor services 
+ - ![Screenshot](./pictures/odsx_sox_kapacitor_install_4.png)
+##### List
+   ![Screenshot](./pictures/odsx_sox_kapacitor_install_6.png) 
+##### Remove
+  - This command will remove kapacitor services
+##### Restart    
+  - This command will stop and start kapacitor service    
+  
+##### 22. Alerts-Catalouge  (Menu -> Monitors -> Alerts -> Catalogue )
+
+##### Add
+   
+   ![Screenshot](./pictures/odsx_sox_catalouge_1.png)
+   
+   ![Screenshot](./pictures/odsx_sox_catalouge_add.png)
+   
+   ![Screenshot](./pictures/odsx_sox_catalouge_list.png)
+    
+##### Enable
+   ![Screenshot](./pictures/odsx_sox_catalouge_enable.png)
+   
+   ![Screenshot](./pictures/odsx_sox_catalouge_enable2.png)
+   
+   ![Screenshot](./pictures/odsx_sox_catalouge_enable3.png) 
+
+##### Disable
+
+   ![Screenshot](./pictures/odsx_sox_catalouge_diable.png)
+   
+   ![Screenshot](./pictures/odsx_sox_catalouge_disable.png)
+   
+##### List
+
+   ![Screenshot](./pictures/odsx_sox_catalouge_list.png)
+    
