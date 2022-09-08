@@ -264,7 +264,7 @@ Run below will start displaying various menu options
    - ![Screenshot](./pictures/odsx_sox_di_remove_2.png)
    - Verify by List
 
-#### 4.2. Grafana Server (Menu -> Servers -> Grafana)**
+#### 4.2 Grafana Server (Menu -> Servers -> Grafana)**
 
 ##### 4.2.1 Install
 
@@ -291,7 +291,7 @@ Run below will start displaying various menu options
 
    - It will Remove and uninstall Grafana host
 
-#### 4.3. Influxdb (Menu -> Servers -> Influxdb)
+#### 4.3 Influxdb (Menu -> Servers -> Influxdb)
  
 ##### 4.3.1 Install
 - Keep rpm file under /dbagigashare/current/influx/ 
@@ -334,7 +334,7 @@ Run below will start displaying various menu options
 - It will Remove and uninstll Infuxdb host
 
 
-#### 4.4. Manager (Menu -> Servers -> Manager)
+#### 4.4 Manager (Menu -> Servers -> Manager)
  
 ##### 4.4.1 Install  
   - This option will install manager and prerequisite software for running Manager (**On Remote machine**).
@@ -416,7 +416,7 @@ Run below will start displaying various menu options
 
 
 
-#### 4.5. Space Server (Menu -> Servers -> Space)
+#### 4.5 Space Server (Menu -> Servers -> Space)
  
 ##### 4.5.1 Install
 
@@ -456,4 +456,56 @@ Run below will start displaying various menu options
 
 ##### 4.5.4 Remove
 
-- It will remove installed manager servers from cluster config and optional to remove supported software java / unzip 
+- It will remove installed space servers from cluster config and optional to remove supported software java / unzip 
+
+
+#### 4.6 Northbound (Menu -> Servers -> Northbound)
+ 
+##### 4.6.1 Install
+  - NB Applicative - different host
+  - NB Management -  different host
+  - NB Agent - Space host
+  - Installation is two type all or individual
+    -Individual - one can perform individual installation of NB Applicative / Management / Agent
+    - All - one can install all at once
+  - Copy <odsx>/config/nb.conf.template into 
+    - /dbagigashare/current/nb/management
+    - /dbagigashare/current/nb/applicative
+    ![Screenshot](./pictures/odsx_sox_nb_config.png)
+  - Applicative : 
+   -  Verify configuration and sever details
+    ![Screenshot](./pictures/odsx_sox_nb_app_install.png)
+    
+    ![Screenshot](./pictures/odsx_sox_nb_app_install_2.png)
+    
+    ![Screenshot](./pictures/odsx_sox_nb_app_install_3.png)
+    
+    
+    - Verify it on odsx status
+  - Management :
+   -  Verify configuration and sever details
+    ![Screenshot](./pictures/odsx_sox_nb_mgt_install.png)
+    
+    ![Screenshot](./pictures/odsx_sox_nb_mgt_install_1.png)
+    
+    ![Screenshot](./pictures/odsx_sox_nb_mgt_install_list.png)
+    - Verify it on odsx status
+  - Agent :
+    -  Verify configuration and sever details
+    ![Screenshot](./pictures/odsx_sox_nb_agt_install.png)
+    
+    ![Screenshot](./pictures/odsx_sox_nb_agt_install_1.png)
+    
+    ![Screenshot](./pictures/odsx_sox_nb_agt_install_2.png)
+    - Verify it on odsx status
+    ![Screenshot](./pictures/odsx_sox_nb_agt_install_list.png)
+##### 4.6.2 Start
+
+- It will start northbound service on specified server   
+##### 4.6.3 Stop
+
+- It will stop northbound service on specified server
+
+##### 4.6.4 Remove
+
+  - It will remove and uninstall northbound service on specified server
