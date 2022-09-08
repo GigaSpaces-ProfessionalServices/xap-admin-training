@@ -1,9 +1,9 @@
 # ODSX Lab-A
 
 ## Lab Summary
-   <ol>
-    <li>Repositories needed to run Lab</li>
-    <li>AWS Configuration</li>
+   
+     1.Repositories needed to run Lab
+     2.AWS Configuration
      3. Environment setup (STATELESS ODSX)
         3.1 Download Installers on mounted folders
         3.2  Installers on mount
@@ -23,7 +23,7 @@
             4.6.1 Applicative
             4.6.2 Management
             4.6.3 Agent
-   </ol> 
+    
 
 ### 1. Repositories needed to run Lab
 
