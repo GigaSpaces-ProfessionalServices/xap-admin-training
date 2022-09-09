@@ -91,11 +91,9 @@
    - GSC container which will create based on script file name + pu deployed based on script file name
    - Entries will be persisted in sqlite3 database as displayed path in summary
    
-   ![Screenshot](./pictures/odsx_sox_dataengine_mssqlfeeder_install.png)
+   ![Screenshot](./pictures/odsx_sox_dataengine_mssqlfeeder_install_1.png)
    
    - completion of feeeder deployment
-   
-   ![Screenshot](./pictures/odsx_sox_dataengine_mssqlfeeder_install_2.png)
    
    ![Screenshot](./pictures/odsx_sox_dataengine_mssqlfeeder_install_3.png)
 
