@@ -286,7 +286,7 @@ Run below will start displaying various menu options
 ##### 4.2.3 Stop
 
 - It will stop Grafana service on installed host
-  - ![Screenshot](./pictures/odsx_sox_di_stop_1.png)
+  - ![Screenshot](./pictures/odsx_sox_grafana_stop.png)
 ##### 4.2.4 Remove
 
    - It will Remove and uninstall Grafana host
