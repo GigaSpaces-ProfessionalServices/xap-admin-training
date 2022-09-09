@@ -43,6 +43,8 @@
  - Go to any manager machine and start feeder to feed data inot objects
  - Or you can deploy feeder as pu by OPS manager or CLI
  
+ ![Screenshot](./pictures/odsx_sox_tieredstorage_feeder1.png)
+ 
  - By default it will loaded with default criteria file TieredCriteria.tab
  - Verify the deployment on OPS manager
  
