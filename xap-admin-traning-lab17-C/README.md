@@ -54,29 +54,31 @@
    - GSC container which will create based on script file name + pu deployed based on script file name
    - Entries will be persisted in sqlite3 database as displayed path in summary
    
-   ![Screenshot](./pictures/odsx_sox_dataengine_db2feeder_install.png)
+   ![Screenshot](./pictures/odsx_sox_db2_deploy_1.png)
    
    - completion of feeeder deployment
    
-   ![Screenshot](./pictures/odsx_sox_dataengine_db2feeder_install_2.png)
+   ![Screenshot](./pictures/odsx_sox_db2_deploy_2.png)
 
 ##### 1.1.2 List
    - Verify feeder status on odsx and UI it should be intact
        
-   ![Screenshot](./pictures/odsx_sox_dataengine_db2feeder_list.png)
+   ![Screenshot](./pictures/odsx_sox_db2_deploy_list.png)
    
-   ![Screenshot](./pictures/odsx_sox_dataengine_db2feeder_UI.png)
+   ![Screenshot](./pictures/odsx_sox_db2_deploy_list_ui.png)
 
 ##### 1.1.3 Start
    - This command will start feeder but work in bank or where ever mq connectivity is present
+   ![Screenshot](./pictures/odsx_sox_db2_start.png)
 ##### 1.1.4 Stop   
-   - This command will stop feeder but work in bank or where ever mq connectivity is present 
+   - This command will stop feeder but work in bank or where ever mq connectivity is present
+   ![Screenshot](./pictures/odsx_sox_db2_stop.png) 
 ##### 1.1.5 Reset_database
    - This command will reset the database table entires to avoid port conflict    
 ##### 1.1.6 Undeploy
    - This will undeploy the deployed feeder and kill the created GSCs
    
-   ![Screenshot](./pictures/odsx_sox_dataengine_db2feeder_undeploy.png)
+   ![Screenshot](./pictures/odsx_sox_db2_undeploy.png)
 
 ##### 1.2.1 MSSQL-Feeder (Menu -> DataEngine -> MSSQL-Feeder -> Install-Deploy)**
    GIT URL : https://github.com/GigaSpaces-ProfessionalServices/leumi-feeder-from-db2
@@ -106,8 +108,10 @@
 
 ##### 1.2.4 Start
    - This command will start feeder but work in bank or where ever mq connectivity is present
+   ![Screenshot](./pictures/odsx_sox_mssql_start.png)
 ##### 1.2.5 Stop   
-   - This command will stop feeder but work in bank or where ever mq connectivity is present 
+   - This command will stop feeder but work in bank or where ever mq connectivity is present
+   ![Screenshot](./pictures/odsx_sox_mssql_stop.png) 
 ##### 1.2.6 Reset_database
    - This command will reset the database table entires to avoid port conflict    
 ##### 1.2.7 Undeploy
