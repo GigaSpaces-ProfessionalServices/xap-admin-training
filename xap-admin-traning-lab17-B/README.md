@@ -18,62 +18,9 @@
 - Build jar : https://github.com/GigaSpaces-ProfessionalServices/CSM-Magic-Tools/tree/master/Bi_Optional_pu  
   - Check out project and build jar
 
-tapan@tapan-laptop:~/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu$ mvn clean install
-WARNING: An illegal reflective access operation has occurred
-WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$1 (file:/usr/share/maven/lib/guice.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
-WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$1
-WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
-WARNING: All illegal access operations will be denied in a future release
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] ---------------------< com.gs.bll:bi_optional_pu >----------------------
-[INFO] Building bi_optional_pu 0.1
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ bi_optional_pu ---
-[INFO] Deleting /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/target
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ bi_optional_pu ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 5 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ bi_optional_pu ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 2 source files to /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/target/classes
-[INFO] 
-[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ bi_optional_pu ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/src/test/resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ bi_optional_pu ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 1 source file to /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/target/test-classes
-[INFO] 
-[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ bi_optional_pu ---
-[INFO] Surefire report directory: /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/target/surefire-reports
+![Screenshot](./pictures/odsx_sox_tieredstorage_build1.png)
 
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-
-Results :
-
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO] 
-[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ bi_optional_pu ---
-[INFO] Building jar: /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/target/bi_optional_pu-0.1.jar
-[INFO] 
-[INFO] --- maven-install-plugin:2.4:install (default-install) @ bi_optional_pu ---
-[INFO] Installing /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/target/bi_optional_pu-0.1.jar to /home/tapan/.m2/repository/com/gs/bll/bi_optional_pu/0.1/bi_optional_pu-0.1.jar
-[INFO] Installing /home/tapan/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu/pom.xml to /home/tapan/.m2/repository/com/gs/bll/bi_optional_pu/0.1/bi_optional_pu-0.1.pom
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.298 s
-[INFO] Finished at: 2022-09-09T07:20:26+05:30
-[INFO] ------------------------------------------------------------------------
-tapan@tapan-laptop:~/Gigaspace/Bank_Leumi/GS_Aharon/CSM/CSM-Magic-Tools/Bi_Optional_pu$    
+![Screenshot](./pictures/odsx_sox_tieredstorage_build2.png)
 
 #### 1.2 Deploy
   - Specify source path of this jar at time of Deploy Step
