@@ -28,15 +28,22 @@
 ### 1. Repositories needed to run Lab
 
   -  Main : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx.git
-  -  Release : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx/tree/bll-stateless-odsx-on-prem-release 
+  -  Release : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx/releases/tag/v3.51-sox-release 
   -  https://github.com/GigaSpaces-ProfessionalServices/CSM-Magic-Tools.git
   -  https://github.com/Gigaspaces/insightedge-training/tree/master/Day4/17_TieredStorage
 
 
 ### 2. AWS Configurations
 1. Create EC2- Instances on AWS based on your requirement (OS: Redhat:7.7 RHEL)
-   Minimum Setup : Pivot (ODSX)-1,Manager-3, Space-2,DataIntegration-1,Grafana and Influx - (pivot),Northbound server-1,Northbound management-1, kapacitor (DataIntegration)
-   Leumi Env : Pivot (ODSX)-1,Manager-3, Space-4, DataIntegration-4,Grafana and Influx -(pivot),Northbound server-3,Northbound management-3
+   Minimum Setup :
+   Pivot (ODSX)-1
+   Manager-3
+   Space-2
+   DataIntegration-1
+   Grafana and Influx - (pivot)
+   Northbound applicative-1
+   Northbound management-1
+   kapacitor (DataIntegration)
 
 2. Make each ec2- instances root(user) accessible.
 
