@@ -142,8 +142,8 @@
       - /dbagigashare/current/gs/config/license/gs-license.txt write tryme or if you have valid license then put it.
       
       - Copy <odsx>/config/metrics.xml.template - /dbagigashare/current/gs/config/metrics/
-      - Copy <odsx>/config/nb.conf.template To -  /dbagigashare/current/applicative 
-                                              - /dbagigashare/current/management
+      - Copy <odsx>/config/nb.conf.template To -  /dbagigashare/current/nb/applicative
+                                                 - /dbagigashare/current/nb/management
 
 ##### 3.2  Installers on mount
  
