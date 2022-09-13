@@ -129,7 +129,7 @@
       - /dbagigashare/current/data-integration/mdm/ : https://giga-di.s3.eu-west-1.amazonaws.com/di-packages/manualBuild/di-mdm-0.0.12.4.tar.gz 
       - /dbagigashare/current/data-integration/flink : https://giga-di.s3.eu-west-1.amazonaws.com/Flink/flink-1.15.0-bin-scala_2.12.tgz
       
-      Consider to add this step to a script 
+      ## llConsider to add this step to a script 
       - /dbagigashare/current/gs/config/license/gs-license.txt write tryme or if you have valid license then put it.
       
       These folders are created in the prevoius step (or in a script)
