@@ -169,7 +169,11 @@
   - Security : app.setup.profile=security  if you want to do secure setup
             - For unsecure installation : app.setup.profile= (keep blank)
   - If you are on DR envirounment app.setup.env=#dr (remove #) app.setup.env=dr
-
+  - To Create Tag: 
+    - git tag -a v1.1 -m 'tag for release 1.1'
+    - git push origin v1.1
+    - Release branch tag need to keep updated to release with latest
+                        
 ##### 3.4 ODSX Configuration security setup
 
   - app.config : app.setup.profile=security
