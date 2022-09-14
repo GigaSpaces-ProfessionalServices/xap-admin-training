@@ -128,9 +128,11 @@
       - /dbagigashare/current/data-integration/dim/ : https://giga-di.s3.eu-west-1.amazonaws.com/di-packages/manualBuild/di-manager-0.0.12.4.tar.gz 
       - /dbagigashare/current/data-integration/mdm/ : https://giga-di.s3.eu-west-1.amazonaws.com/di-packages/manualBuild/di-mdm-0.0.12.4.tar.gz 
       - /dbagigashare/current/data-integration/flink : https://giga-di.s3.eu-west-1.amazonaws.com/Flink/flink-1.15.0-bin-scala_2.12.tgz
-                                                   
+      
+      ## Shmulik: Consider to add this step to script 
       - /dbagigashare/current/gs/config/license/gs-license.txt write tryme or if you have valid license then put it.
       
+      ## Shmulik: These folders already created in the prevoius step (or in a script)
       - Copy <odsx>/config/metrics.xml.template - /dbagigashare/current/gs/config/metrics/
       - Copy <odsx>/config/nb.conf.template To -  /dbagigashare/current/applicative 
                                               - /dbagigashare/current/management

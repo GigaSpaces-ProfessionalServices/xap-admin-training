@@ -28,15 +28,22 @@
 ### 1. Repositories needed to run Lab
 
   -  Main : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx.git
-  -  Release : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx/tree/bll-stateless-odsx-on-prem-release 
+  -  Release : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx/releases/tag/v3.51-sox-release 
   -  https://github.com/GigaSpaces-ProfessionalServices/CSM-Magic-Tools.git
   -  https://github.com/Gigaspaces/insightedge-training/tree/master/Day4/17_TieredStorage
 
 
 ### 2. AWS Configurations
 1. Create EC2- Instances on AWS based on your requirement (OS: Redhat:7.7 RHEL)
-   Minimum Setup : Pivot (ODSX)-1,Manager-3, Space-2,DataIntegration-1,Grafana and Influx - (pivot),Northbound server-1,Northbound management-1, kapacitor (DataIntegration)
-   Leumi Env : Pivot (ODSX)-1,Manager-3, Space-4, DataIntegration-4,Grafana and Influx -(pivot),Northbound server-3,Northbound management-3
+   Minimum Setup :
+   Pivot (ODSX)-1
+   Manager-3
+   Space-2
+   DataIntegration-1
+   Grafana and Influx - (pivot)
+   Northbound applicative-1
+   Northbound management-1
+   kapacitor (DataIntegration)
 
 2. Make each ec2- instances root(user) accessible.
 
@@ -83,6 +90,7 @@
  
   - Copy respected installers inside folders 
       
+      - /dbagigashare/current/jdk : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/java/jdk-11.0.11_linux-x64_bin.rpm
       - /dbagigashare/current/unzip : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/unzip/unzip-6.0-21.el7.x86_64.rpm
       - /dbagigashare/current/gs : https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/16.1.1/gigaspaces-smart-dih-enterprise-16.1.1.zip
       - /dbagigashare/current/gs/config/ : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/gs/xap_logging.properties
@@ -135,8 +143,8 @@
       - /dbagigashare/current/gs/config/license/gs-license.txt write tryme or if you have valid license then put it.
       
       - Copy <odsx>/config/metrics.xml.template - /dbagigashare/current/gs/config/metrics/
-      - Copy <odsx>/config/nb.conf.template To -  /dbagigashare/current/applicative 
-                                              - /dbagigashare/current/management
+      - Copy <odsx>/config/nb.conf.template To -  /dbagigashare/current/nb/applicative
+                                                 - /dbagigashare/current/nb/management
 
 ##### 3.2  Installers on mount
  
