@@ -14,11 +14,11 @@
 2. Make each ec2- instances root(user) accessible.
 
   - By default EC2 instance is with default user ec2-user
-
-   
+  
+ `  
     
     sudo sed -e 's/^PermitRootLogin.*/PermitRootLogin without-password/g' -i /etc/ssh/sshd_config
-       
+   
     sudo sed -e 's/^AllowUsers.*/AllowUsers ec2-user root/g' -i /etc/ssh/sshd_config
     
     sudo -s
@@ -32,15 +32,14 @@
     useradd gsods
     
     mkdir /home/dbsh
-    mkdir /opt/Kafka
     
     mkdir /dbagigasoft
     `
-
+    
 ### <u>Installation</u>
 
 1. Clone this project from git repository.
-   
+    
     URL : https://github.com/GigaSpaces-ProfessionalServices/gs-odsx.git
     
 2. Open terminal and go to scripts folder 
@@ -50,11 +49,13 @@
 3. Run setup script using 
 
    ./setup.sh
+   
   - Exit from terminal and Re-login to Pivot (ODSX) machine
+    
 4. Give permission to your pem file
 
   - chmod 400 gs-odsx/aharon_ami.pem
-
+   
 ### <u>SetupFiles</u>
 
 Make sure all pre-requisite installation rpms / zip installer available inside odsx/install/.. respected folders
@@ -69,22 +70,30 @@ Make sure all pre-requisite installation rpms / zip installer available inside o
     ls install/grafana
     ls install/influxdb
     ls install/kafka
-    ls install/jolokia
-
+    
 ### Installer Links :
   - These links are on 24th Feb 2022 please put latest version of installer if required
     
     - Java  : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/java/jdk-11.0.11_linux-x64_bin.rpm
+    
     - Unzip : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/unzip/unzip-6.0-21.el7.x86_64.rpm
+    
     - gs :  https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/gs/gigaspaces-smart-ods-enterprise-16.0.0.zip
+    
     - nb : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/nb/nb-infra-0.0.21.tar.gz
+    
     - grafana : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/grafana/grafana-7.3.7-1.x86_64.rpm
+    
     - influxdb : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/influxdb/influxdb-1.8.4.x86_64.rpm
+    
     - kafka : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/kafka/kafka_2.13-2.8.1.tgz
+    
     - zookeeper : https://dlcdn.apache.org/zookeeper/zookeeper-3.6.3/apache-zookeeper-3.6.3-bin.tar.gz
-    - jolokia : https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/jolokia/jolokia-agent.jar
+    
     - CR8 : http://download-area-us-east.s3.amazonaws.com/dbshLocalInstall/dbshLocalSetup-rehl7.2-10052021.tar.gz
-    - http://download-area-us-east.s3.amazonaws.com/cr8-packages/cr8-latest/cr8-2.0.9-310.x86_64.rpm 
+    
+         - http://download-area-us-east.s3.amazonaws.com/cr8-packages/cr8-latest/cr8-2.0.9-310.x86_64.rpm 
+    
 ### <u>Usage</u>
 
     Go to main Project directory from terminal window (cd gs-odsx/)
@@ -108,10 +117,10 @@ Run below will start displaying various menu options
 - Verify DI servers by logged in to any of host and execute below command:
 
  ![Screenshot](./pictures/DI-start.png)
-
-    source /home/dbsh/setenv.sh;
-    $ZOOKEEPERPATH/bin/zkCli.sh -server localhost:2181 <<< "ls /brokers/ids" | tail -n 2
-
+  
+    `source /home/dbsh/setenv.sh;
+     $KAFKAPATH/bin/zookeeper-shell.sh localhost:2181 ls /brokers/ids;`
+     
  ![Screenshot](./pictures/DI-Cluster.png)
 
 **2. Install Grafana server**
@@ -123,13 +132,13 @@ Run below will start displaying various menu options
 **4. Install Manager server**
 
 - Verify on browser webui manager servers started or not
-
+ 
 **5. Install Space server**
 
 - Verify on browser webui space servers started or not
  - Configure metrics.xml (For influxdb and grafana with gigaspace)
    - Menu -> Utilities -> Metrics
-
+      
 **6. Install Northbound server**
 
 - Install northbound with management server
@@ -155,9 +164,9 @@ Run below will start displaying various menu options
 
 - It will start Grafana server
  - Verify Grafana started or not by http://< Grafana host >:3000/ web browser
-
+ 
  ![Screenshot](./pictures/Grafana.png)
-
+ 
 ###### Stop
 
 - It will stop Grafana service on installed host
@@ -175,7 +184,7 @@ Run below will start displaying various menu options
 ###### Start
 
 - It will start influxdb service 
-
+ 
 ###### Stop
 
 - It will stop influxdb service on installed host
@@ -228,12 +237,14 @@ Run below will start displaying various menu options
   Verify manager start with browser. 
   
   ![Screenshot](./pictures/Manager-UI.png)
+  
 ###### Stop
 
 - This option will stop the manager which is currently running on remote machine.
 - After Selecting this option it will ask for Host and User of the remote machine for remote connection to kill the manager.
 
   ![Screenshot](./pictures/Manager-stop.png)
+  
 ###### List
 
 - It will list out the configured manager from the cluster.config file.
@@ -244,7 +255,7 @@ Run below will start displaying various menu options
 ###### Remove
 
 - It will remove installed manager servers from cluster config and optional to remove supported software java / unzip
-
+ 
 **Space Server (Menu -> Servers -> Space)**
 
 ###### Install
@@ -253,6 +264,7 @@ Run below will start displaying various menu options
 - At the end it will add the newly installed space server into cluster.config file.
 
   ![Screenshot](./pictures/Space-Install.png)
+  
 ###### Start 
 
 - This option will start the stopped space servers with specified GSC / manager / region at the time of installation
@@ -264,7 +276,7 @@ Run below will start displaying various menu options
 ###### Stop 
 
 - This option will stop the space server
-
+ 
   ![Screenshot](./pictures/Space-stop.png)
 
 ###### Remove
@@ -284,9 +296,11 @@ Run below will start displaying various menu options
   - Northbound applicative servers
   
   ![Screenshot](./pictures/Northbound-Install.png)
+  
 ###### Start
 
 - It will start northbound service on specified server   
+    
 ###### Stop
 
 - It will stop northbound service on specified server
@@ -304,18 +318,18 @@ Run below will start displaying various menu options
  - Specify source path of this jar at time of Deploy Step
  - It will provide you an option for to create GSC
  - You can specify zone, number of partitions, space property at time of deployment
-
+ 
   ![Screenshot](./pictures/Tieredstorage-deploy.png)
-
+ 
  - Run Feeder from manager server
-
+ 
   ![Screenshot](./pictures/Tieredstorage-feeder.png)
-
+  
  - By default it will loaded with default criteria file TieredCriteria.tab
  - Verify the deployment on OPS manager  
-
+      
   ![Screenshot](./pictures/Tieredstorage-deploy-ui.png)
-
+   
 ###### Update Cache Policy
 
  - Modify your criteria / space property required to update from source file
@@ -324,21 +338,22 @@ Run below will start displaying various menu options
    - It will restart backup from couple
    - You can modify waiting time default is 30 sec 
    - Once backup partition restarted it will wait for space to become healthy
-
+ 
  ![Screenshot](./pictures/Tieredstorage-updatecachepolicy.png)
-
+ 
  - This step will demote the selected couple partition
  - After completion of update cache policy Go to OPS manager and see the updated criteria on overview
-
+  
   ![Screenshot](./pictures/Tieredstorage-done.png)
-
+  
   - You can observe after changing the TieredCriteria.tab file based on updated criteria data feeded without downtime of space
-
+  
   ![Screenshot](./pictures/Tieredstorage-feeder-after.png)
-
+  
 ###### Undeploy
-
+ 
 - It will list all available spaces on cluster
 - You can remove / undeploy either one or all available spaces from cluster 
 
     ![Screenshot](./pictures/Tieredstorage-undeploy.png)
+    
