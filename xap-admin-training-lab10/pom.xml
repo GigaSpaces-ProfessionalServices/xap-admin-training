@@ -19,13 +19,14 @@
         </pluginRepository>
     </pluginRepositories>
     <properties>
-        <gsVersion>15.2.0</gsVersion>
+        <!-- 16.0 - 16.2 scanning not working due to spring upgrade-->
+        <gsVersion>15.8.1</gsVersion>
         <gsVersionPlugin>14.0.1</gsVersionPlugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>5.1.7.RELEASE</spring.version>
+        <spring.version>5.1.19.RELEASE</spring.version>
     </properties>
     <modules>
        <module>BillBuddyModel</module>
