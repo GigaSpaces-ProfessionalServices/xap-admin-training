@@ -138,7 +138,7 @@ do
 
         # Create gsods user (if does not exist)
         id -u gsods  &>/dev/null || useradd gsods
-        rm -rf /dbagigashare
+        
         # Create a mountpoint to pivot:/dbagigashare
         if [ ! -d /dbagigashare ]; then
           mkdir /dbagigashare
