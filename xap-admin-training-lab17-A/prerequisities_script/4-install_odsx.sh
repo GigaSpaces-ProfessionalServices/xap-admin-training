@@ -1,21 +1,21 @@
 #!/bin/bash
 if [ `whoami` != "root" ];then
-		echo "This script must be run as root."
-		exit
+                echo "This script must be run as root."
+                exit
 fi
 
 read -p "Please provide gs-odsx ZIP file full path: " odsx_path
-if [ ! -f  ./$odsx_path ];then
-	echo "The file does not exist."
-	exit
+if [ ! -f  $odsx_path ];then
+        echo "The file does not exist."
+        exit
 fi
 
 # Extract gs-odsx ip file
-unzip ./$odsx_path -d /dbagiga
+unzip -f $odsx_path -d /dbagiga
 
 # Create a soft link
-extracted_folder=${odsx_path//.zip/}
-ln -nsf $extracted_folder /dbagiga/gs-odsx
+symlink=`echo $(basename ${odsx_path//.zip/})`
+ln -nsf $symlink /dbagiga/gs-odsx
 
 #Create a tryme license
 echo "tryme" > /dbagigashare/current/gs/config/license/gs-license.txt
@@ -33,5 +33,10 @@ cp /dbagiga/gs-odsx/config/app.yaml /dbagigashare/current/odsx/
 cp /dbagiga/gs-odsx/config/host.yaml /dbagigashare/current/odsx/
 cp /dbagiga/gs-odsx/config/app.config /dbagigashare/current/odsx/
 
-echo "Please update the file `hosts.yaml` at /dbagigashare/current/odsx."
-
+echo
+echo "Please update the file 'hosts.yaml' at /dbagigashare/current/odsx."
+source ~/.bash_profile
+source ~/.bashrc
+clear
+cd /dbagiga/gs-odsx
+./odsx.py
