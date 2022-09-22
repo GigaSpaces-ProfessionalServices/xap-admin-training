@@ -8,8 +8,7 @@ read -p "ssh_key file: " sshkey
 for host in $(cat ${hostsfile});do
 	
 	echo "Connecting to:" ${host}
-	echo 'ssh -i ${sshkey} ${awsuser}@${host} echo -e "Executing ... &&  ${execmd}"'
-	ssh -i ${sshkey} ${awsuser}@${host} echo -e "Executing ... &&  ${execmd}"
+	ssh -i ${sshkey} ${awsuser}@${host} '[[ `df -h | grep "/dbagigashare" |wc -l` -eq 1 ]] && echo ${host}: OK || echo FAILED' 
 	echo "============================================================"
 	echo
 done
