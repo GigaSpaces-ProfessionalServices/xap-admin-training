@@ -85,7 +85,7 @@ On remote hosts:
 3. create gsods user
 "
 
-read -p "Press Y/y to continue or any key to exit." continue
+read -p "Press Y/y to continue or any key to exit. " continue
 if [[ "$continue" == "Y" || "$continue" == "y" ]]; then
         echo "Script #1 is running..."
 else
@@ -93,11 +93,9 @@ else
 fi
 
 # In pivot: set NFS server, set permissions, create gsods user, install required packages
-sudo -i << EOF
 id -u gsods  &>/dev/null || useradd gsods
 
-mkdir -p /dbagigashare /dbagiga
-chmod -R 777 /dbagigashare /dbagiga
+mkdir -m 777 -p /dbagigashare /dbagiga
 
 yum install nfs-utils vim wget unzip -y
 echo "/dbagigashare *" > /etc/exports
@@ -109,7 +107,6 @@ systemctl start rpcbind
 systemctl start nfs-server
 systemctl start nfs-lock
 systemctl start nfs-idmap
-EOF
 
 # Allow to connect to Pivot  via SSH as root
 sed -e 's/^PermitRootLogin.*/PermitRootLogin without-password/g' -i /etc/ssh/sshd_config

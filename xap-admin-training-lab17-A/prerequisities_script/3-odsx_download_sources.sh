@@ -1,19 +1,21 @@
 #!/bin/bash
-dest_download=/dbagigashare/current
-
-if [ `whoami` != "root" ];then
-		echo "This script must be run as root."
-		exit
-fi
-
-read -p "Please enter the destination folder for downloads [$dest_download]: " user_dest_download
-
-if [ ! -z ${user_dest_download} ];then
-	dest_download=$user_dest_download
-fi
-
+default_path=/dbagigashare/current
 wget_cmd="wget --no-check-certificate -P"
-mkdir -p  ${dest_download}
+
+read -p "Enter downloads destination [${default_path}]: " user_dest_download
+
+if [[ -z ${user_dest_download} ]];then
+        echo "set to ${default_path}"
+        dest_download=${default_path}
+else
+	dest_download=${user_dest_download}
+fi
+
+
+
+
+
+echo mkdir -p ${dest_download}
 ${wget_cmd} ${dest_download}/unzip 				-N https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/unzip/unzip-6.0-21.el7.x86_64.rpm
 ${wget_cmd} ${dest_download}/gs 				-N https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/16.1.1/gigaspaces-smart-dih-enterprise-16.1.1.zip
 ${wget_cmd} ${dest_download}/gs/config/				-N https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/gs/xap_logging.properties

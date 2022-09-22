@@ -1,17 +1,19 @@
 #!/bin/bash
 if [ `whoami` != "root" ];then
-                echo "This script must be run as root."
-                exit
+		echo "This script must be run as root."
+		exit
 fi
 
-read -p "Please provide gs-odsx ZIP file full path: " odsx_path
-if [ ! -f  $odsx_path ];then
-        echo "The file does not exist."
-        exit
+read -p "Please provide gs-odsx ZIP file full path: " user_odsx_path
+if [ ! -f  $user_odsx_path ];then
+	echo "The file does not exist."
+	exit
+else
+	odsx_path=`readlink -f ${user_odsx_path}`
 fi
 
 # Extract gs-odsx ip file
-unzip -f $odsx_path -d /dbagiga
+unzip -qq -o $odsx_path -d /dbagiga
 
 # Create a soft link
 symlink=`echo $(basename ${odsx_path//.zip/})`
@@ -34,9 +36,16 @@ cp /dbagiga/gs-odsx/config/host.yaml /dbagigashare/current/odsx/
 cp /dbagiga/gs-odsx/config/app.config /dbagigashare/current/odsx/
 
 echo
-echo "Please update the file 'hosts.yaml' at /dbagigashare/current/odsx."
 source ~/.bash_profile
 source ~/.bashrc
-clear
-cd /dbagiga/gs-odsx
-./odsx.py
+
+echo
+echo "========================================================"
+echo "To use odsx:
+
+        - Please update the file 'hosts.yaml' at /dbagigashare/current/odsx.
+        - Run logout & login as root
+        - cd /dbagiga/gs-odsx
+        - ./odsx.py
+"
+
