@@ -7,6 +7,9 @@ logfile=lab17_prereq.log
 default_path=/dbagigashare/current
 wget_cmd="wget --no-check-certificate -P"
 
+LINE="${pivot_ip}:/dbagigashare    /dbagigashare   nfs defaults 0 0"
+FILE=/etc/fstab
+
 echo > $logfile
 clear
 echo "ODSX lab prerequisits script"
@@ -241,7 +244,38 @@ chmod 400 $ssh_key |tee -a ${logfile}
 while read current_host;
 do
   echo "Running prerequisits script on remote host[${current_host}] ..." |tee -a ${logfile}
-  ssh -tt -q -i ${ssh_key} -o ConnectTimeout=3 -o PasswordAuthentication=no -o StrictHostKeyChecking=no ${aws_user}@${current_host} 'bash -s' < run_remote.sh |tee -a ${logfile} > /dev/null
+  ssh -tt -q -i ${ssh_key} -o ConnectTimeout=3 -o PasswordAuthentication=no -o StrictHostKeyChecking=no ${aws_user}@${current_host} << EOF >/dev/null
+#!/usr/bin/bash
+# Enable root login
+sudo sed -e 's/^PermitRootLogin.*/PermitRootLogin without-password/g' -i /etc/ssh/sshd_config
+sudo sed -e 's/^AllowUsers.*/AllowUsers centos root/g' -i /etc/ssh/sshd_config
+sudo -s
+cd
+sudo sed -e 's/no-port/#no-port/g' -i ~/.ssh/authorized_keys
+sudo sed -e 's/ssh-rsa/\nssh-rsa/g' -i ~/.ssh/authorized_keys
+
+# Install nfs utils
+yum install nfs-utils -y
+
+# Create gsods user (if does not exist)
+id -u gsods  &>/dev/null || useradd gsods
+
+# Create a mountpoint to pivot:/dbagigashare
+if [ ! -d /dbagigashare ]; then
+	mkdir /dbagigashare
+	mkdir -p /dbagigashare
+	LINE="${pivot_ip}:/dbagigashare"
+	FILE=/etc/fstab
+	grep -q ${pivot_ip}:/dbagigashare ${FILE} || echo '${pivot_ip}:/dbagigashare   /dbagigashare   nfs defaults 0 0' >> {$FILE}
+	
+fi
+mount -a
+# Create local folders if does not exist:
+mkdir -p /dbagigalogs /dbagigadata /dbagiga
+exit
+exit
+EOF
+
 sleep 2
 done < $listfile
 
