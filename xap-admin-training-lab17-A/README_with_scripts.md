@@ -245,6 +245,9 @@ cluster.usingPemFile=True
 cluster.pemFile=aharon_ami.pem
 
 ```
+
+<br />
+
 Run below will start displaying various menu options 
 
 ./odsx.py
