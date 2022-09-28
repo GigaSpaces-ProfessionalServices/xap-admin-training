@@ -287,7 +287,7 @@ Testing SSH connection between Pivot and other hosts...
 
 for host in $(cat ${listfile});do
 	echo "Testing SSH as root from Pivot[${pivot_ip}] to ${host} ..."
-	ssh -i ${ssh_key} -o PasswordAuthentication=no -o StrictHostKeyChecking=no root@${host} 'echo SSH[root]: OK && if [[ $(df -h |grep dbagigashare |wc -l) -eq 1 ]];then echo "mount point /dbagigashare OK";else echo "mount point /dbagigashare does NOT exist."; fi && if [[ $(cat /etc/passwd |grep gsods |wc -l) -gt 0 ]];then echo "gsods user: OK";else echo "gsods user does not exist";fi'
+	ssh -i ${ssh_key} -o PasswordAuthentication=no -o StrictHostKeyChecking=no root@${host} 'echo SSH[root]: OK && if [[ $(df -h |grep dbagigashare |wc -l) -eq 1 ]];then echo "mount point /dbagigashare OK";else echo "mount point /dbagigashare does NOT exist."; fi && if [[ $(cat /etc/passwd |grep gsods |wc -l) -gt 0 ]];then echo "gsods user: OK";else echo "gsods user does not exist";fi' |tee -a ${logfile}
 	echo ---------------------------------------------------------------------------------------------
 done
 

@@ -61,18 +61,17 @@
     3. create gsods user
 
 -----------------------------------------------------------------
-   - Connect to the PIVOT machine ans swith user to root.
-   - Upload the pre-req scripts, odsx tar file and your pem (ssh-key) to /tmp. 
-   - Extract the tar file, your work dirctory should be like:
+   - Connect to the PIVOT machine and swith user to root.
+   - Upload the pre-req script, odsx zip file and your pem (ssh-key) to /tmp. 
+   - Your work dirctory should contain:
 
    ```
--rwxrwxr-x. 1 centos centos    4238 Sep 20 12:29 1-odsx_aws_prereq.sh
--rwxrwxr-x. 1 centos centos    1906 Sep 19 13:03 2-odsx_create_folders_in_pivot.sh
--rwxrwxr-x. 1 centos centos    5486 Sep 20 12:57 3-odsx_download_sources.sh
--rwxr-xr-x. 1 centos centos    1434 Sep 20 11:46 4-install_odsx.sh
--rwxr-xr-x. 1 root   root       492 Sep 22 07:54 5-test_ssh_from_pivot_to_all.sh
--r--------. 1 centos centos    1675 Sep 19 13:04 aharon_ami.pem
--rw-r--r--. 1 centos centos 3918775 Sep 19 13:34 gs-odsx-3.55-release.zip
+[root@ip-10-0-3-104 lab17_odsx_prereq_scripts]# ll
+
+-r--------. 1 centos centos    1675 Sep 28 19:29 aharon_ami.pem
+-rw-rw-r--. 1 centos centos 3918775 Sep 28 19:29 gs-odsx-3.55-release.zip
+-rw-rw-r--. 1 centos centos      96 Sep 28 19:30 lab17_aws_hosts.txt
+-rwxrwxr-x. 1 centos centos   15543 Sep 28 20:12 odsx_aws_prereq.sh
 
    ```
   - Create a txt (i.e: lab17_aws_hosts.txt) file which contains your aws instances IP or hostname, one IP on each line.
@@ -84,29 +83,38 @@
 10.0.3.40
 
   ```
-- Run the scripts one-by-one, as root:
+- Run the scripts one-by-one, as root, change mode if required:
   
 ```
-./1-odsx_aws_prereq.sh
+chmod +x odsx_aws_prereq.sh 
+./odsx_aws_prereq.sh
 
-ODSX lab script #1
-==================
+```
+Provide the correct details:
+```
+ODSX lab prerequisits script
+============================
 Pleae enter the aws user [centos] :
-Please enter the pivot private ip or hostname (don't use localhost/127.0.0.1) [10.0.3.70]:
-Please provide the hosts text file wich contains all the aws instances ips EXCLUDING Pivot ip [./hosts.txt]: lab17_aws_hosts.txt
+Please enter the pivot private ip or hostname (don't use localhost/127.0.0.1) [10.0.3.104]:
+Please provide the hosts text file wich contains all the aws instances ips [./lab17_aws_hosts.txt]:
+Enter downloads destination [/dbagigashare/current]:
+Please provide gs-odsx ZIP file full path [/tmp/lab17_odsx_prereq_scripts/gs-odsx-3.55-release.zip]:
 
-
-Pivot IP: 10.0.3.70
+Log file: lab17_prereq.log
+Pivot IP: 10.0.3.104
 ssh_key: ./aharon_ami.pem
-Remote aws hosts ip: 10.0.3.26
-10.0.3.141
-10.0.1.133
-10.0.3.70
-10.0.3.25
-10.0.1.214
-10.0.2.5
+Remote aws hosts ip:
+Save downloads to: /dbagigashare/current
+ODSX arcive file: /tmp/lab17_odsx_prereq_scripts/gs-odsx-3.55-release.zip
+10.0.3.39
+10.0.3.198
+10.0.1.66
 10.0.3.104
-10.0.3.90
+10.0.3.211
+10.0.1.247
+10.0.2.145
+10.0.3.25
+10.0.3.245
 
 The following steps will be done:
 
@@ -117,6 +125,8 @@ On pivot:
 3. Allow SSH to Pivot as root (blocked by default in aws)
 4. Install the required rpms.
 5. Create gsods user
+6. Download require files
+7. Install ODSX
 
 On remote hosts:
 
@@ -124,13 +134,117 @@ On remote hosts:
 2. Allow SSH to Pivot as root (blocked by default in aws)
 3. create gsods user
 
-Press Y/y to continue or any key to exit. y
+Pleas enter [Y/y] to continue or any key to abort: y
+```
+```
+Running prerequisits in PIVOT only...
+Creating local folders in Pivot ...
+Downloading sources to Pivot [/dbagigashare/current] ...
+--2022-09-28 20:45:25--  https://tapangigaspaces.s3.us-east-2.amazonaws.com/odsx/install/unzip/unzip-6.0-21.el7.x86_64.rpm
+Resolving tapangigaspaces.s3.us-east-2.amazonaws.com (tapangigaspaces.s3.us-east-2.amazonaws.com)... 52.219.177.74
+Connecting to tapangigaspaces.s3.us-east-2.amazonaws.com (tapangigaspaces.s3.us-east-2.amazonaws.com)|52.219.177.74|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 175412 (171K) [binary/octet-stream]
+.
+.
+.
+
+Running prerequisits script on remote host[10.0.3.39] ...
+Running prerequisits script on remote host[10.0.3.198] ...
+Running prerequisits script on remote host[10.0.1.66] ...
+Running prerequisits script on remote host[10.0.3.104] ...
+Running prerequisits script on remote host[10.0.3.211] ...
+Running prerequisits script on remote host[10.0.1.247] ...
+Running prerequisits script on remote host[10.0.2.145] ...
+Running prerequisits script on remote host[10.0.3.25] ...
+Running prerequisits script on remote host[10.0.3.245] ...
 
 ```
-        
+After a while the script will test ssh connection as root and dbagigashare mount point.
+NOTE: The Pivot should not have a /dbagiashare mount, in this case a failure is excpected.
 
-      
-  
+```
+Testing SSH connection between Pivot and other hosts...
+=======================================================
+
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.3.39 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.3.198 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.1.66 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.3.104 ...
+SSH[root]: OK
+mount point /dbagigashare does NOT exist.
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.3.211 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.1.247 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.2.145 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.3.25 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+---------------------------------------------------------------------------------------------
+Testing SSH as root from Pivot[10.0.3.104] to 10.0.3.245 ...
+SSH[root]: OK
+mount point /dbagigashare OK
+gsods user: OK
+
+```     
+The script will be finished with the following:
+```
+Extracting odsx zip file...
+Creatting symlink...
+Updating gs-license.txt [tryme]...
+Installing odsx...
+
+.
+.
+.
+
+Copying odsx configuration files to /dbagigashare ...
+
+
+========================================================
+To use odsx:
+
+        - Please update the file 'hosts.yaml' at /dbagigashare/current/odsx.
+        - Run logout & login as root
+        - cd /dbagiga/gs-odsx
+        - ./odsx.py
+
+Log file: lab17_prereq.log
+
+```
+
+When odsx requires a pem (ssh private key) to connect remote hosts, update the app.config file, for example:
+```
+cluster.usingPemFile=True
+cluster.pemFile=aharon_ami.pem
+
+```
 Run below will start displaying various menu options 
 
 ./odsx.py
