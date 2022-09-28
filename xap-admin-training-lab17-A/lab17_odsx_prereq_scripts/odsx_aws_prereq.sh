@@ -244,7 +244,7 @@ chmod 400 $ssh_key |tee -a ${logfile}
 while read current_host;
 do
   echo "Running prerequisits script on remote host[${current_host}] ..." |tee -a ${logfile}
-  ssh -tt -q -i ${ssh_key} -o ConnectTimeout=3 -o PasswordAuthentication=no -o StrictHostKeyChecking=no ${aws_user}@${current_host} << EOF >/dev/null
+  ssh -tt -q -i ${ssh_key} -o ConnectTimeout=3 -o PasswordAuthentication=no -o StrictHostKeyChecking=no ${aws_user}@${current_host} << EOF |tee -a ${logfile} /dev/null
 #!/usr/bin/bash
 # Enable root login
 sudo sed -e 's/^PermitRootLogin.*/PermitRootLogin without-password/g' -i /etc/ssh/sshd_config
@@ -263,10 +263,9 @@ id -u gsods  &>/dev/null || useradd gsods
 # Create a mountpoint to pivot:/dbagigashare
 if [ ! -d /dbagigashare ]; then
 	mkdir /dbagigashare
-	mkdir -p /dbagigashare
 	LINE="${pivot_ip}:/dbagigashare"
 	FILE=/etc/fstab
-	grep -q ${pivot_ip}:/dbagigashare ${FILE} || echo '${pivot_ip}:/dbagigashare   /dbagigashare   nfs defaults 0 0' >> {$FILE}
+	grep -q ${LINE} ${FILE} || echo '${pivot_ip}:/dbagigashare   /dbagigashare   nfs defaults 0 0' >> ${FILE}
 	
 fi
 mount -a

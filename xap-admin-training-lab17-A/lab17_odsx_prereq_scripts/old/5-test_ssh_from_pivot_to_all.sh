@@ -8,7 +8,7 @@ read -p "ssh_key file: " sshkey
 for host in $(cat ${hostsfile});do
 	
 	echo "Connecting to:" ${host}
-	ssh -i ${sshkey} ${awsuser}@${host} '[[ `df -h | grep "/dbagigashare" |wc -l` -eq 1 ]] && echo ${host}: OK || echo FAILED' 
+	ssh -i ${sshkey} -o ConnectTimeout=3 -o PasswordAuthentication=no -o StrictHostKeyChecking=no  ${awsuser}@${host} '[[ `df -h | grep "/dbagiga" |wc -l` -eq 1 ]] && echo ${host}: OK || echo FAILED' 
 	echo "============================================================"
 	echo
 done
