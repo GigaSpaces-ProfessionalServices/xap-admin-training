@@ -161,6 +161,7 @@ Running prerequisits script on remote host[10.0.3.245] ...
 
 ```
 After a while the script will test ssh connection as root and dbagigashare mount point.
+<br />
 NOTE: The Pivot should not have a /dbagiashare mount, in this case a failure is excpected.
 
 ```
