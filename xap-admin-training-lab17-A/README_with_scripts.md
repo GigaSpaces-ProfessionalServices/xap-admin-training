@@ -232,7 +232,7 @@ Copying odsx configuration files to /dbagigashare ...
 To use odsx:
 
         - Please update the file 'hosts.yaml' at /dbagigashare/current/odsx.
-        - Run logout & login as root
+        - Logout & login as root
         - cd /dbagiga/gs-odsx
         - ./odsx.py
 
