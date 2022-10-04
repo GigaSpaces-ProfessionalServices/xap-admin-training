@@ -17,7 +17,7 @@ ensure that you have the following installed on your local machine or a VM: <br 
 
 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-[Helm](https://docs.helm.sh/using_helm/#quickstart-guide) <br />
+[helm](https://docs.helm.sh/using_helm/#quickstart-guide) <br />
 Important: Previous versions of this lab supported Helm 2 only. 
 As of XAP 15.5, Helm 3 is supported in XAP 15.5 release.
 This lab has been updated to support Helm 3.
@@ -71,28 +71,35 @@ This lab has been updated to support Helm 3.
 ##### 1.1.2 Fetch the GigaSpaces Helm Charts from the GigaSpaces Repository 
 (The chart xap is unpacked in your current directory - this step is optional)
 
-    helm fetch gigaspaces/xap --version=15.8.0 --untar
+    helm pull gigaspaces/xap --version 16.2 --untar
+    helm pull gigaspaces/xap-pu --version 16.2 --untar
     
 #### 1.2  Deploy a Management Pod called testmanager:
 
     helm install testmanager gigaspaces/xap-manager
      
-#### 1.3  View and monitor kubernetes deployment
-##### 1.3.1 Verify that the pod is running
+#### 1.3 Deploy the xap-operator called operator:
+
+    helm install operator gigaspaces/xap-operator --version 16.2.0-m18 --set manager.name=testmanager
+
+
+#### 1.4  View and monitor kubernetes deployment
+##### 1.4.1 Verify that the pod is running
 
     kubectl get pods
     NAME                        READY   STATUS    RESTARTS   AGE
     testmanager-xap-manager-0   1/1     Running   0          5m48s
+    xap-operator-7755984c59     1/1     Running   0          4m24x
 
-##### 1.3.2 In a separate terminal open Minikube Dashboard. the browser will automatically open.
+##### 1.4.2 In a separate terminal open Minikube Dashboard. the browser will automatically open.
 
     minikube dashboard &
        
 ![Screenshot](./Pictures/Picture1.png)
 
-##### 1.3.3 Open Gigaspaces Ops Manager
+##### 1.4.3 Open Gigaspaces Ops Manager
 
-###### 1.3.3.1 Get the manager ip by running "Kubectl get services", the manager ip will be the EXTERNAL-IP. in this case 10.108.7.199
+###### 1.4.3.1 Get the manager ip by running "kubectl get services", the manager ip will be the EXTERNAL-IP. in this case 10.108.7.199
 
     kubectl get services
     NAME                              TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                        AGE
@@ -101,11 +108,11 @@ This lab has been updated to support Helm 3.
     testmanager-xap-manager-service   LoadBalancer   10.108.7.199   10.108.7.199   8090:32221/TCP,4174:31234/TCP,8200:31837/TCP   19s
                                    
                                    
-###### 1.3.3.2 Open Gigaspaces Ops Manager by browsing to <EXTERNAL-IP>:8090 
+###### 1.4.3.2 Open Gigaspaces Ops Manager by browsing to <EXTERNAL-IP>:8090 
 
 ![Screenshot](./Pictures/Picture2.png)
 
-#### 1.4  Generate the process and feeder jars and upload them
+#### 1.5  Generate the process and feeder jars and upload them
 
 1. `cd <GS_HOME>/examples/data-app/event-processing`
 2. `./build.sh package`
@@ -119,7 +126,7 @@ This lab has been updated to support Helm 3.
     [data-feeder.jar] successfully uploaded
     Resource URL: http://10.108.7.199:8090/v2/resources/data-feeder.jar
     
-#### 1.5 Deploy a Data Pod with the processor service
+#### 1.6 Deploy a Data Pod with the processor service
 
 `helm install processor gigaspaces/xap-pu --set manager.name=testmanager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
 
@@ -129,7 +136,7 @@ This lab has been updated to support Helm 3.
     processor-xap-pu-2-0        0/1     Running   0          11s
     testmanager-xap-manager-0   1/1     Running   0          18m
 
-#### 1.5 Deploy a Data Pod with the feeder service
+#### 1.7 Deploy a Data Pod with the feeder service
 
 `helm install feeder gigaspaces/xap-pu --set manager.name=testmanager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
 
@@ -141,13 +148,13 @@ This lab has been updated to support Helm 3.
     processor-xap-pu-2-1        1/1     Running   0          174m
     testmanager-xap-manager-0   1/1     Running   0          3h21m
     
-#### 1.6 View and monitor GS kubernetes deployment
+#### 1.8 View and monitor GS kubernetes deployment
 
-##### 1.6.1 Minikube dashboard
+##### 1.8.1 Minikube dashboard
 
 ![Screenshot](./Pictures/Picture3.png)
 
-##### 1.6.1 GS Ops Manager 
+##### 1.8.2 GS Ops Manager 
 
 Click on "Monitor my services"<br>
 
