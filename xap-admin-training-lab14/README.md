@@ -76,7 +76,7 @@ This lab has been updated to support Helm 3.
     
 #### 1.2  Deploy a Management Pod called testmanager:
 
-    helm install testmanager gigaspaces/xap-manager
+    helm install testmanager gigaspaces/xap-manager --version 16.2
      
 #### 1.3 Deploy the xap-operator called operator:
 
@@ -151,6 +151,11 @@ This lab has been updated to support Helm 3.
     processor-xap-pu-3              1/1     Running   0          20m
     testmanager-xap-manager-0       1/1     Running   0          29m
     xap-operator-5566dd4587-4kwcq   1/1     Running   0          27m
+    
+    kubectl get pus
+    NAME        STATUS
+    feeder      DEPLOYED
+    processor   DEPLOYED
 
 #### 1.8 View and monitor GS kubernetes deployment
 
