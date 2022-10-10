@@ -142,7 +142,7 @@ This lab has been updated to support Helm 3.
 
 ##### Deploy the Processor Service
    
-`helm install processor gigaspaces/xap-pu --version 16.2 --set manager.name=testmanager,partitions=2,ha=true,pu.dynamic-partitioning=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
+`helm install processor gigaspaces/xap-pu --version 16.2 --set manager.name=testmanager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
 
 ```
     kubectl get pod
@@ -257,40 +257,6 @@ Query the data:<br/>
    Looking at the minikube dashboard pods view:
    ![Screenshot](./Pictures/Picture11.png)
 
-#### Horizontally Scale Processor Service
-
-1. 
-    `$GS_HOME/bin/gs.sh --server 10.108.7.199 pu scale-horizontal processor 1`
-
-    **The result should be:**<br/>
-    Request ID     d68580a4-a020-4cbe-b7b2-8ad57aa14098
-
-    Status can be tracked using the command: request status d68580a4-a020-4cbe-b7b2-8ad57aa14098
-
-   `$GS_HOME/bin/gs.sh --server 10.108.7.199 request status d68580a4-a020-4cbe-b7b2-8ad57aa14098`<br/>
-
-    **Finally the result should be:**<br/>
-
-    REQUEST DETAILS    
-    ID                 d68580a4-a020-4cbe-b7b2-8ad57aa14098                             
-    Description        Scale partitions of processing unit: [processor], target: [1]    
-    Status             successful                                                       
-    Status Url         http://10.108.7.199:8090/v2/pus/processor                       
-    Submitted By       anonymous                                                        
-    Submitted From     172.17.0.1                                                       
-    Submitted At       2022-10-05 17:33:51                                              
-    Completed At       2022-10-05 17:33:52
-
-2. There should be a single partition:<br/>
-   Looking at GS Ops manager service view:<br/>
-
-   ![Screenshot](./Pictures/Picture12.png)<br/>
-
-   Looking at the Space Overview view:<br/>
-   ![Screenshot](./Pictures/Picture13.png)
-
-3. No data is lost and feeder is still working:<br/>
-   ![Screenshot](./Pictures/Picture14.png)
 
 
 ### Cleanup
