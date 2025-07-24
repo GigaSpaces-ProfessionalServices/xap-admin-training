@@ -1,17 +1,20 @@
-# GS 1 click deploy script 
+# gs-admin-training - lab01-one_lick_deploy
 
-For help please run:<br>
-* ./deploy-gs.sh -h
+## One-Click-Deploy
+This section of the lab provides an alternative to a manual installation previously described in the introduction.
 
-For interactive mode run:<br>
-* ./deploy-gs.sh
+For help please run:
+`./deploy-gs.sh -h`
 
-For silent (unattended) mode run:<br>
-* ./deploy-gs.sh --silent
+For interactive mode run:  
+`./deploy-gs.sh`
 
-When running the script on aws centos instance please copy the following files to the aws instance:<br>
+For silent (unattended) mode run:  
+`./deploy-gs.sh --silent`
 
-1. scp -i lab_training_by_am.pem ~/xap-admin-training/xap-admin-training-lab1.1-one-click-deploy/deploy-gs.sh centos@\<aws public IP\>:.
+When running the script on aws RHEL instance please copy the following files to the AWS instance:  
 
-2. scp -i lab_training_by_am.pem ~/xap-admin-training/xap-admin-training-lab1.1-one-click-deploy/gs_installation.properties centos@\<aws public IP\>:.
-
+```
+scp -i lab_training_by_am.pem ~/gs-admin-training/lab01-gs_setup/one_click_deploy/deploy-gs.sh centos@\<aws public IP>:.
+scp -i lab_training_by_am.pem ~/gs-admin-training/lab01-gs_setup/one_click_deploy/gs_installation.properties centos@\<aws public IP>:.
+```
