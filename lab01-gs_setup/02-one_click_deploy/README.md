@@ -15,6 +15,6 @@ For silent (unattended) mode run:
 When running the script on aws RHEL instance please copy the following files to the AWS instance:  
 
 ```
-scp -i lab_training_by_am.pem ~/gs-admin-training/lab01-gs_setup/02-one_click_deploy/deploy-gs.sh centos@<aws public IP>:.
-scp -i lab_training_by_am.pem ~/gs-admin-training/lab01-gs_setup/02-one_click_deploy/gs_installation.properties centos@<aws public IP>:.
+scp -i lab_training_by_am.pem ~/gs-admin-training/lab01-gs_setup/02-one_click_deploy/deploy-gs.sh ec2-user@<aws public IP>:.
+scp -i lab_training_by_am.pem ~/gs-admin-training/lab01-gs_setup/02-one_click_deploy/gs_installation.properties ec2-user@<aws public IP>:.
 ```
