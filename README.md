@@ -1,4 +1,4 @@
-# xap-admin-training
+# gs-admin-training
 
 This Git contains relevant labs for GigaSpaces Admin Training.
 Course syllabus can be found:
