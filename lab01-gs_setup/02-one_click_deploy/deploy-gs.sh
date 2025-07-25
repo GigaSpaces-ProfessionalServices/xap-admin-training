@@ -101,9 +101,9 @@ function installJdk() {
     if [ "16.4.3" == "$gsVersion" ]; then
       #sudo yum -y install java-1.8.0-openjdk
       #sudo yum -y install java-1.8.0-openjdk-devel
-      sudo yum install -y java-11-openjdk-devel.x86_64
+      sudo yum install -y java-11-openjdk-devel
     else
-      sudo yum -y install java-17-openjdk-devel.x86_64
+      sudo yum -y install java-17-openjdk-devel
     fi
   elif [ "ubuntu" == "$osType" ]; then
     if [ "16.4.3" == "$gsVersion" ]; then
