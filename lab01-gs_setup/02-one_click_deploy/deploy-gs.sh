@@ -1,222 +1,278 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [ "$1" == "-h" ]; then
-	 echo "Usage: `basename $0` --silent"
-	 echo For silent installation with key value properties file
-	 echo no parameters for interactive installation
-	 exit 0
-elif [ "$1" == "--silent" ]; then
-        if [ -f gs_installation.properties ]; then
-            source gs_installation.properties
-        fi
+function product_types() {
+  echo "List of available product types:"
+  echo "[1] xap"
+
+  while true; do
+    read -p 'Select product type by name or number:[1] ' -e gsType
+      case $gsType in
+        ""|"1"|"xap")
+        # user pressed enter |user typed 1 enter|user typed xap enter
+          gsType=xap;
+          break;;
+        * ) echo 'Please enter product name or menu item number.';;
+      esac
+    done
+}
+
+function product_versions() {
+  echo "List of available product versions:"
+  echo "[1] 17.1.2 - Compatible with Java 17"
+  echo "[2] 17.0.0 - Compatible with Java 17"
+  echo "[3] 16.4.3 - Compatible with Java 8,11"
+
+  while true; do
+    read -p 'Select product version by name or number:[1] ' -e gsVersion
+      case $gsVersion in
+        ""|"1"|"17.1.2")
+          # user pressed enter |user typed 1 enter|user typed 17.1.2 enter
+          gsVersion=17.1.2;
+          break;;
+        "2"|"17.0.0")
+          gsVersion=17.0.0;
+          break;;
+        "3"|"16.4.3")
+          gsVersion=16.4.3;
+          break;;
+        * ) echo 'Please enter product version or menu item number.';;
+      esac
+  done
+}
+
+function get_installation_type() {
+  echo "List of available installation types:"
+  echo "[1] local"
+  echo "[2] cluster"
+  # only configures multiple manager servers, doesn't actually run a cluster
+
+  while true; do
+    read -p 'Select installation type:[1] ' -e gsManagerServers
+    case $gsManagerServers in
+      ""|"1"|"local") read -p 'To override default localhost enter hostname or ip address:[localhost] ' -e host1;
         if [ -z "$host1" ]; then
-        gsManagerServers=localhost
-        host1=localhost
+          gsManagerServers=localhost
+          host1="localhost"
         else
-        gsManagerServers=$host1
-        fi
-        if [ ! -z "$host2" ]; then
-        gsManagerServers=$host1,$host2
-        fi
-        if [ ! -z "$host3" ]; then
-        gsManagerServers=$host1,$host2,$host3
-        fi
-else
-	echo List of available product types:
-	echo [1] xap
-	echo [2] insightedge
-
-	while true; do
-            read -p 'Select product type by name or number:[' -i 1']' -e gsType
-	    case $gsType in
-		1]1|1]|1]xap) gsType=xap; break;;
-		1]2|1]insightedge) gsType=insightedge; break;;
-		* ) echo 'Please enter product name or number: ';;
-	    esac
-	done
-
-	echo List of available product versions:
-	echo [1] 15.5.1
-	echo [2] 15.2.0
-	echo [3] 15.0.0
-
-	while true; do
-	    read -p 'Select product version by name or number:[' -i 1']' -e gsVersion
-	    case $gsVersion in
-		1]1|1]|1]15.5.1) gsVersion=15.5.1; break;;
-		1]2|1]15.2.0) gsVersion=15.2.0; break;;
-		1]3|1]15.0.0) gsVersion=15.0.0; break;;
-		* ) echo 'Please enter product name or number: ';;
-	    esac
-	done
-
-	echo List of available installation types:
-	echo [1] local
-	echo [2] cluster
-
-	while true; do
-	    read -p 'Select installation type:[' -i 1']' -e gsManagerServers
-	    case $gsManagerServers in
-		1]1|1]|1]local) read -p "To override default localhost enter machine host or ip: " -e host1;
-                        if [ -z "$host1" ]
-                        then
-                            gsManagerServers=localhost
-                            host1=localhost
-                        else
-                            gsManagerServers=$host1
-                        fi;
-			break;;
-		1]2|1]cluster)
-		echo please enter 3 GS manager hosts:
-		read -p 'Enter Host #1:' -e host1;
-		gsManagerServers=$host1
-		read -p 'Enter Host #2:' -e host2;
-		gsManagerServers=$gsManagerServers,$host2
-		read -p 'Enter Host #3:' -e host3;
-		gsManagerServers=$gsManagerServers,$host3
-		 break;;
-		* ) echo 'Please enter installation type by name or number: ';;
-	    esac
-	done
-	read -p "To override default GS_NIC_ADDRESS [Default is the machine hostname]: " -e nicAddr;
-	read -p "To override default number of containers to rise [Default is none]: " -e containerCnt;
-	if [ ! -z "$containerCnt" ]
-    then
-		read -p "To override default containers heap [Default is 512m] please specify units (m/g): " -e containerMem;
-		if [ ! -z "$containerMem" ]
-		then
-		       export GS_GSC_OPTIONS="-Xmx$containerMem -Xms$containerMem"
-		fi;
-    fi;
-
-    echo List of available machine OS types:
-	echo [1] centos
-	echo [2] ubuntu
-
-	while true; do
-            read -p 'Select machine os type by name or number:[' -i 1']' -e osType
-	    case $osType in
-		1]1|1]|1]centos) osType=centos; break;;
-		1]2|1]ubuntu) osType=ubuntu; break;;
-		* ) echo 'Please enter machine os type by name or number: ';;
-	    esac
-	done
-fi
-
-function installRemoteJava {
-    if [ "$osType" == "centos" ]; then
-	    sudo yum -y install java-1.8.0-openjdk
-	    sudo yum -y install java-1.8.0-openjdk-devel
-	elif [ "$osType" == "ubuntu" ]; then
-	    sudo apt -y install openjdk-8-jdk
-	fi
-	echo "install Remote JDK - Done!"
-}
-
-function installZip {
-    if [ "$osType" == "centos" ]; then
-	    sudo yum -y install unzip
-	elif [ "$osType" == "ubuntu" ]; then
-	    sudo apt -y install unzip
-	fi
-	echo "install ZIP - Done!"
-}
-
-function installWget {
-    if [ "$osType" == "centos" ]; then
-	    sudo yum -y install wget
-	elif [ "$osType" == "ubuntu" ]; then
-	    sudo apt -y install wget
-	fi
-	echo "install wget - Done!"
-}
-
-function downloadGS {
-	wget https://gigaspaces-releases-eu.s3.amazonaws.com/${gsType}/${gsVersion}/gigaspaces-${gsType}-enterprise-${gsVersion}.zip
-	echo "download GS - Done!"
-}
-
-function unzipGS {
-        unzip gigaspaces-${gsType}-enterprise-${gsVersion}.zip
-	echo "unzipping GS - Done!"
-}
-
-function activateGS {
-        if [ "$gsVersion" == "15.5.1" ]; then
-		    license="Product=InsightEdge;Version=15.5;Type=ENTERPRISE;Customer=demo_DEV;Expiration=2020-Nov-24;Hash=YiiSYZQMIPSmOQYPCPS6"
-        elif [ "$gsVersion" == "15.2.0" ]; then
-		    license="Product=InsightEdge;Version=15.2;Type=ENTERPRISE;Customer=demo_DEV;Expiration=2020-Nov-24;Hash=YVPQhPkEWBRluNvMO9Sx"
-	    elif [ "$gsVersion" == "15.0.0" ]; then
-		    license="Product=InsightEdge;Version=15.0;Type=ENTERPRISE;Customer=demo_DEV;Expiration=2020-Nov-24;Hash=QpNXYXYUV6SQNWPRURZW"
-        fi
-        echo $license>gigaspaces-${gsType}-enterprise-${gsVersion}/gs-license.txt
-	echo "activating GS - Done!"
-}
-
-function startGS {
-	if [ -z "$containerCnt" ]
-        then
-		nohup gigaspaces-${gsType}-enterprise-${gsVersion}/bin/gs.sh host run-agent --auto &
-        else
-                if [ ! -z "$containerMem" ]
-                then
-                       export GS_GSC_OPTIONS="-Xmx$containerMem -Xms$containerMem"
-                fi;
-		nohup gigaspaces-${gsType}-enterprise-${gsVersion}/bin/gs.sh host run-agent --auto --gsc=$containerCnt &
+          gsManagerServers=$host1
         fi;
-	echo "starting GS - Done!"
-        echo "GS Web-UI http://localhost:8099"
-        echo "GS Ops Manager http://localhost:8090"
+        break;;
+      "2"|"cluster")
+        echo "Please enter 3 GS manager hosts:"
+        read -p 'Enter Host #1: ' -e host1;
+        gsManagerServers=$host1
+        read -p 'Enter Host #2: ' -e host2;
+        gsManagerServers=$gsManagerServers,$host2
+        read -p 'Enter Host #3: ' -e host3;
+        gsManagerServers=$gsManagerServers,$host3
+        break;;
+      * ) echo 'Please enter installation type by name or menu item number.';;
+    esac
+  done
 }
 
-function settingGsManagers {
-        echo "settingGsManagers - Done!"
-        echo "setting manager GS"
-        echo -e "\nexport GS_MANAGER_SERVERS=$gsManagerServers">>gigaspaces-${gsType}-enterprise-${gsVersion}/bin/setenv-overrides.sh
-        echo "setting manager GS - Done!"
+function get_gsc_options() {
+  read -p 'To override default number of containers to raise [Default is none]: ' -e containerCnt;
+
+  read -p 'To override default containers heap [Default is 512m] please specify units (m/g): ' -e containerMem;
 }
 
-function settingNicAddr {
-        echo "settingNicAddr - Done!"
-        echo "setting nic address GS"
-        echo -e "export GS_NIC_ADDRESS=$nicAddr">>gigaspaces-${gsType}-enterprise-${gsVersion}/bin/setenv-overrides.sh
-        echo "setting nic address GS - Done!"
+function get_os_type() {
+  echo "List of available Linux OS types:"
+  echo "[1] rhel"
+  echo "[2] ubuntu"
+
+  while true; do
+    read -p 'Select OS type by name or number:[1] ' -e osType
+    case $osType in
+      ""|"1"|"rhel")
+        osType=rhel;
+        break;;
+      "2"|"ubuntu")
+        osType=ubuntu;
+        break;;
+      * ) echo 'Please enter machine os type by name or number.';;
+    esac
+  done
 }
 
-function endAnnouncement {
-echo "#######################################################"
-echo "SUMMARY :  SYSTEM INSTALLED SUCCESSFULLY"
-echo DATE `date +"%D"` / TIME `date +"%T"`
-echo "VERSION ${gsType}"
-echo "URL for OpsManager :  <http://$host1:8090>"
-echo "URL for GS web-ui :   <http://$host1:8099>"
-echo "Rest :   <http://$host1:8090/v2 >"
-if [ "$gsType" == "insightedge" ]; then
-echo "URL for Zeppelin NoteBook <http://$host1:9090>"
-fi
-echo "#######################################################"
+function installJdk() {
+  if [ "rhel" == "$osType" ]; then
+    if [ "16.4.3" == "$gsVersion" ]; then
+      #sudo yum -y install java-1.8.0-openjdk
+      #sudo yum -y install java-1.8.0-openjdk-devel
+      sudo yum install -y java-11-openjdk-devel.x86_64
+    else
+      sudo yum -y install java-17-openjdk-devel.x86_64
+    fi
+  elif [ "ubuntu" == "$osType" ]; then
+    if [ "16.4.3" == "$gsVersion" ]; then
+      sudo apt install -y openjdk-11-jdk
+    else
+      sudo apt install -y openjdk-17-jdk
+    fi
+  fi
+  echo "Install JDK - Done!"
 }
 
-echo "setup java"
-installRemoteJava
-echo "setp zip"
-installZip
-echo "install wget"
-installWget
-echo "Download GS"
-downloadGS
-echo "unzipping GS"
-unzipGS
-echo "activating GS"
-activateGS
-echo "starting settingGsManagers"
-settingGsManagers
-if [ ! -z "$nicAddr" ]
-then
-    echo "starting settingNicAddr"
-    settingNicAddr
-fi
-echo "starting GS"
-startGS
-echo "ending the Installation"
-endAnnouncement
+function installZip() {
+  if [ "rhel" == "$osType" ]; then
+    sudo yum install -y unzip
+  elif [ "ubuntu" == "$osType" ]; then
+    sudo apt install -y unzip
+  fi
+  echo "Install zip - Done!"
+}
+
+function installWget() {
+  if [ "rhel" == "$osType" ]; then
+    sudo yum install -y wget
+  elif [ "ubuntu" == "$osType" ]; then
+    sudo apt install -y wget
+  fi
+  echo "Install wget - Done!"
+}
+
+function downloadGS() {
+  URL="https://gs-releases-us-east-1.s3.amazonaws.com/smart-cache/${gsVersion}/gigaspaces-smart-cache-enterprise-${gsVersion}.zip"
+  wget ${URL}
+  echo "Download GS - Done!"
+}
+
+function unzipGS() {
+  unzip gigaspaces-smart-cache-enterprise-${gsVersion}.zip
+  echo "Unzipping GS - Done!"
+}
+
+function activateGS() {
+  echo "tryme">gigaspaces-smart-cache-enterprise-${gsVersion}/gs-license.txt
+  echo "Activating GS - Done!"
+}
+
+function settingGsManagers() {
+  echo 'Setting GS Manager(s)'
+  echo -e "\nexport GS_MANAGER_SERVERS=$gsManagerServers">>gigaspaces-smart-cache-enterprise-${gsVersion}/bin/setenv-overrides.sh
+  echo 'Setting GS Manager(s) - Done!'
+}
+
+function startGS() {
+  if [ ! -z "$containerMem" ]; then
+    echo -e "\nexport GS_GSC_OPTIONS=-Xms$containerMem -Xmx$containerMem">>gigaspaces-smart-cache-enterprise-${gsVersion}/bin/setenv-overrides.sh
+  fi
+
+  if [ -z "$containerCnt" ]; then
+    nohup gigaspaces-smart-cache-enterprise-${gsVersion}/bin/gs.sh host run-agent --auto &
+  else 
+    nohup gigaspaces-smart-cache-enterprise-${gsVersion}/bin/gs.sh host run-agent --auto --gsc=$containerCnt &
+  fi;
+  echo "Starting GS - Done!"
+}
+
+#function settingNicAddr() {
+#  echo "settingNicAddr - Done!"
+#  echo "setting nic address GS"
+#  echo -e "export GS_NIC_ADDRESS=$nicAddr">>gigaspaces-${gsType}-enterprise-${gsVersion}/bin/setenv-overrides.sh
+#  echo "setting nic address GS - Done!"
+#}
+
+function endAnnouncement() {
+  echo "#######################################################"
+  echo "SUMMARY :  SYSTEM INSTALLED SUCCESSFULLY"
+  echo "DATE `date +"%D"` / TIME `date +"%T"`"
+  echo "VERSION ${gsType}"
+  echo "GS_MANAGER_SERVERS : $gsManagerServers"
+  echo "URL for OpsManager :  http://$host1:8090"
+  echo "URL for GS Web-ui  :  http://$host1:8099"
+  echo "REST               :  http://$host1:8090/v2"
+  echo "#######################################################"
+}
+
+
+function main() {
+  if [ "$1" == "-h" ]; then
+    echo "Usage: `basename $0`"
+    echo
+    echo "Options:"
+    echo "For interactive installation do not use any parameters."
+    echo "  --silent  For silent installation with key value properties file."
+    echo "  -h        This help message."
+    exit 0
+  elif [ "$1" == "--silent" ]; then
+    if [ -f gs_installation.properties ]; then
+      source gs_installation.properties
+    fi
+    if [ -z "$host1" ]; then
+      gsManagerServers=localhost
+      host1=localhost
+    else
+      gsManagerServers=$host1
+    fi
+    if [ ! -z "$host2" ]; then
+      gsManagerServers=$host1,$host2
+    fi
+    if [ ! -z "$host3" ]; then
+      gsManagerServers=$host1,$host2,$host3
+    fi
+  else
+
+    product_types
+
+    #echo "debug: $gsType"
+
+    product_versions
+
+    #echo "debug: $gsVersion"
+
+    get_installation_type
+
+    #echo "debug: $gsManagerServers"
+    #echo "debug: $host1"
+
+    #read -p "To override default GS_NIC_ADDRESS [Default is the machine hostname]: " -e nicAddr;
+
+    get_gsc_options
+
+    #echo "debug: $containerCnt"
+    #echo "debug: $containerMem"
+
+    get_os_type
+
+    #echo "debug: $osType"
+  fi
+
+  echo "Setting up Java..."
+  installJdk
+
+  echo "Installing zip..."
+  installZip
+
+  echo "Installng wget..."
+  installWget
+
+  echo "Downloading GigaSpaces..."
+  downloadGS
+
+  echo "Unzipping GigaSpaces..."
+  unzipGS
+
+  echo "Activating GigaSpaces..."
+  activateGS
+
+  echo 'Configuring GS Manager(s)...'
+  settingGsManagers
+
+#if [ ! -z "$nicAddr" ]; then
+#  echo "starting settingNicAddr"
+#  settingNicAddr
+#fi
+
+  echo "Starting GigaSpaces..."
+  startGS
+
+  echo "Ending the installation."
+  endAnnouncement
+}
+
+
+main $1
+
