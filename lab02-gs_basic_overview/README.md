@@ -1,41 +1,40 @@
-# xap-admin-training - lab2-guide
+# gs-admin-training - lab02-gs_basic_overview
 
 
 ## 	GS Overview
 
 ###### Lab Goals
-*   Be introduced and experienced Grid Service Components
+*   Be introduced to and experience Grid Service Components.
 
 ###### Lab Description
-In this lab you will start GS infrastructure services. Inspect the runtime grid in the GS-UI.
+In this lab you will start GS infrastructure services and inspect the runtime grid, aka service grid, in the GS-UI.
 
-## 1	Start XAP Infrastructure
+## 1	Start GS Infrastructure
 
-    a.	Goto $GS_HOME/bin
-    b.	./gs.sh host run-agent --auto --gsc=2
-    c.	Start gs-ui:
-            ./gs-ui.sh
+1. Goto `$GS_HOME/bin`
+2. Run: `./gs.sh host run-agent --auto --gsc=2`
+3. Start gs-ui using: `./gs-ui.sh`
     
 ## 2	Examine the running environment
     
-    a. Examine the ‘gigaspaces-manager.log’ Check the GSM and GSCs have started and registered successfully 
+1. Examine the ‘gigaspaces-manager.log’ Check the GSM and GSCs have started and registered successfully.  
 
 ![Screenshot](./Pictures/Picture1.png)
 
-    b.	Go to the gs-ui application
-    c.	Press the host tab
-    d.	Press on the gsc processes to see the process information and log.
+2. Go to the gs-ui application.
+3. Press the host tab.
+4. Press on the gsc processes to see the process information and log.
     
 ![Screenshot](./Pictures/Picture2.png)
 
-    e.	Open your browser and got localhost:8099
-    f.	Examine the webui console.
-    g.	You will learn more about it at a later session.
+5. Open your browser and go to `localhost:8099`
+6. Examine the Webui console.
+7. You will learn more about it at a later session.
     
 ![Screenshot](./Pictures/Picture3.png)
 
-    h. Open your browser and got localhost:8090
-    i. Examine GS ops manager.
-    j. You will learn more about it at a later session.
+8. Open your browser and go to `localhost:8090`
+9. Examine GS Ops Manager.
+10. You will learn more about it at a later session.
 
 ![Screenshot](./Pictures/Picture4.png)
