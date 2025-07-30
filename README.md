@@ -1,8 +1,7 @@
 # gs-admin-training
 
-This Git contains relevant labs for GigaSpaces Admin Training.
-Course syllabus can be found:
-https://docs.google.com/spreadsheets/d/10Svq6s90eDw-Ger8TJogyVWLy0FcdfSF3EgtilCd2XY/edit#gid=0
+This Git contains relevant labs for GigaSpaces Admin Training.  
+For more information please see our [course syllabus](https://docs.google.com/spreadsheets/d/10Svq6s90eDw-Ger8TJogyVWLy0FcdfSF3EgtilCd2XY/edit#gid=0).
 
 
 ## Following are the list of labs:
