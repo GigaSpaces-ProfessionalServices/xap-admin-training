@@ -21,7 +21,6 @@ https://docs.google.com/spreadsheets/d/10Svq6s90eDw-Ger8TJogyVWLy0FcdfSF3EgtilCd
 * Lab12 - GigaSpaces Java Admin API
 * Lab13 - Grid Security
 * Lab14 - Kubernetes
-* Lab15 - GSCTL
-* Lab16 - Storage Optimization
-* Lab17 - Gigaspaces ODSX
-* Lab18 - MemoryXtend
+* Lab15 - Storage Optimization
+* Lab16 - Gigaspaces ODSX
+* Lab17 - MemoryXtend
