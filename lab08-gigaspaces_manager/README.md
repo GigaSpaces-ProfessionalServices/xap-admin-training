@@ -1,78 +1,76 @@
-# xap-admin-training - lab8
+# gs-admin-training - lab08-gigaspaces_manager
 
-# GigaSpaces XAP manager 
+# GigaSpaces manager 
 
 ## Lab Goals
 
-**1.** See how easy it is to setup XAP cluster<br>
-**2.** Get familiar with XAP Manager capabilities<br />
+1. See how easy it is to setup a GigaSpaces cluster.
+2. Get familiar with GS Manager's capabilities.
 
 ## Lab Description
-In this lab we will focus on XAP Manager functionalities.<br>
-To better know its capabilities you will set up 4 machine cluster based on Vagrant<br>
+In this lab we will focus on the GS Manager functionality.  
+To better know its capabilities you will set up 4 machine cluster based on Vagrant.
 
 ### 1 Setup Vagrant framework on your machine
 
-#### 1.1 Install VirtualBox
+#### Install VirtualBox
 
 https://www.virtualbox.org/wiki/Downloads
 
-#### 1.2 Install Vagrant
+#### Install Vagrant
 
 https://www.vagrantup.com/downloads.html
 
-### 2 “vagrant up” and Provisioning your Virtual Machine
+### 2 "vagrant up" and Provisioning your Virtual Machine
 
-**1)**   `cd ~/xap-admin-training/xap-admin-training-lab8/Vagrant` <br>
-**2)**   `vagrant up` <br>
-**3)**  Wait until all 4 virtual machines are booted and ready.
+1. `cd ~/xap-admin-training/xap-admin-training-lab8/Vagrant`
+2. `vagrant up`
+3. Wait until all 4 virtual machines are booted and ready.
 
-See in the following screenshot node3 is done (booted and ready)and right afterwords node2 is starting booting...<br><br>
+See in the following screenshot node3 is done (booted and ready)and right afterwords node2 is starting booting...  
 ![Screenshot](./Pictures/Picture1.png)
 
-**Note:** For your convenient some more information on "How to Set Up a Local Linux Environment with Vagrant":<br>
+**Note:** For your convenient some more information on "How to Set Up a Local Linux Environment with Vagrant":  
 `https://medium.com/@JohnFoderaro/how-to-set-up-a-local-linux-environment-with-vagrant-163f0ba4da77`
 
 
-### 3 Explore the cluster:
+### 3 Explore the cluster
 
-Please enter the Web Management Console (Web UI)<br>
-It should be available on all manager machines: node1,node2 and node3.<br>
-On node4 you should'nt be able to use Web Management Console (Web UI) as it is a machine without XAP Manager.<br>
+Please enter the Web Management Console (Web UI).  
+It should be available on all manager machines: node1, node2 and node3.  
+On node4 you shouldn't be able to use Web Management Console (Web UI) as it is a machine without GS Manager.
 
-If you see the following, lab has been completed successfully by you :-)<br>
+If you see the following, lab has been completed successfully by you :-)
 
 ![Screenshot](./Pictures/Picture2.png)
 
-**Tip:**<br>
+**Tip:**  
 To login to the machines goto the Vagrant directory and run:<br>
     `vagrant ssh node1` (e.g. login to node1)
 
-### 4 explore Apache ZooKeeper under the hood (Optional Section if time permits)
+### 4 Explore Apache ZooKeeper under the hood (optional section if time permits)
 
-* `git clone https://github.com/DeemOpen/zkui.git`<br>
-
-* Follow the **Setup** instructions as appear in the readme:<br>
-  https://github.com/DeemOpen/zkui/blob/master/README.md
-
-* Explore GS ZK tree to better understand the concept.<br>
+ * `git clone https://github.com/DeemOpen/zkui.git`
+ * Follow the **Setup** instructions as appear in the readme:  
+   https://github.com/DeemOpen/zkui/blob/master/README.md
+ * Explore GS ZK tree to better understand the concept.
 
 ### 5 Note:
 
-* If you see the following error:<br/>
+ * If you see the following error:
 
 The IP address configured for the host-only network is not within the
 allowed ranges. Please update the address used to be within the allowed
 ranges and run the command again.
 
-Continue with the recommndations mentioned. <br/>
+Continue with the recommendations mentioned.
 
 Edit `/etc/vbox/networks.conf`, add the following:
 ```
       * 10.0.0.0/8 192.168.0.0/16
       * 2001::/64
 ```
-* To determine the ip address to access the ui <br/>
+ * To determine the ip address to access the ui:
 ```
 vagrant ssh node1
 ip address show
