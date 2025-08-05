@@ -138,7 +138,7 @@ Use the same instructions as used for the BillBuddyAccountFeeder.
 
 ### Change the BillBuddy application logic - we will just change a log message.
 
-1. Open ~/gs-admin-training/lab10-hot_deploy/BillBuddy_Space/src/main/java/com/gs/billbuddy/events/ProcessingFeePollingEventContainer.java class with IntelliJ.
+1. Open `~/gs-admin-training/lab10-hot_deploy/BillBuddy_Space/src/main/java/com/gs/billbuddy/events/ProcessingFeePollingEventContainer.java` class with IntelliJ.
 2. Verify that you see this line at the end of the class:
 ```
     log.info("ProcessingFeeTransaction updates merchants transactionFeeAmount. Merchant: " + merchant.getName() +
