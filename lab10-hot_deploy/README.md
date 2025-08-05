@@ -85,33 +85,33 @@ The steps are the same as you have done in lab05.
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
 ```
-3. Set IntelliJ path variables (under preferences).
+
+3. Open a new terminal and navigate to `$GS_HOME/bin/`
+           
+4. Use the gs CLI to deploy BillBuddy_Space.  
+   `./gs.sh pu deploy BillBuddyPU ~/gs-admin-training/lab10-hot_deploy/BillBuddy_Space/target/BillBuddy_Space.jar`
+
+#### 3	Run BillBuddyAccountFeeder from Intellij
+
+1. Set IntelliJ path variables (under preferences).
 
 ###### Add GS_LOOKUP_GROUPS & GS_LOOKUP_LOCATORS
-
-4. Copy the `~/gs-admin-training/lab10-hot_deploy/runConfigurations` directory into Intellij's .idea directory and restart Intellij.
+2. Copy the `~/gs-admin-training/lab10-hot_deploy/runConfigurations` directory into Intellij's .idea directory and restart Intellij.
 ```
   cd ~/gs-admin-training/lab10-hot_deploy
   cp -r runConfigurations .idea/
 ```
 
-6. Open a new terminal and navigate to `$GS_HOME/bin/`
-           
-7. Use the gs CLI to deploy BillBuddy_Space.  
-   `./gs.sh pu deploy BillBuddyPU ~/gs-admin-training/lab10-hot_deploy/BillBuddy_Space/target/BillBuddy_Space.jar`
-
-#### 3	Run BillBuddyAccountFeeder from Intellij
-
-1. From Intellij run configuration select BillBuddyAccountFeeder and run it.
+3. From Intellij run configuration select BillBuddyAccountFeeder and run it.
 
 ###### This application writes Users, Merchants and Contracts to the Space
  
-2. Validate Users and Merchants were written to the space using the web Management Console (`localhost:8099`).  
+4. Validate Users and Merchants were written to the space using the web Management Console (`localhost:8099`).  
    Go to: Spaces Tab -> Data Types.
  
 ![Screenshot](./Pictures/Picture1.png)
 
-3. Query the list of Users by executing the following SQL:  
+5. Query the list of Users by executing the following SQL:  
    Note: Click the Data Type Name and the sql will be created for you:  
    `SELECT * FROM com.gs.billbuddy.model.User WHERE rownum<5000`
     
