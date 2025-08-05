@@ -65,7 +65,7 @@ The steps are the same as you have done in lab05.
 2. Start gs-agent with local Manager server and 4 GSCs:
    `./gs.sh host run-agent --auto --gsc=4`
     
-#### 2	Deploy BillBuddy_Space
+#### 2	Deploy BillBuddy_Space.jar
     
 1. Open `$GS_TRAINING_HOME/lab10-hot_deploy` project with Intellij (open pom.xml).
 2. Run `mvn install`
@@ -90,11 +90,15 @@ The steps are the same as you have done in lab05.
 ###### Add GS_LOOKUP_GROUPS & GS_LOOKUP_LOCATORS
 
 4. Copy the `~/gs-admin-training/lab10-hot_deploy/runConfigurations` directory into Intellij's .idea directory and restart Intellij.
+```
+  cd ~/gs-admin-training/lab10-hot_deploy
+  cp -r runConfigurations ./idea/
+```
 
-5. Open a new terminal and navigate to `$GS_HOME/bin/`
+6. Open a new terminal and navigate to `$GS_HOME/bin/`
            
-6. Use the gs CLI to deploy BillBuddy_Space.  
-   `./gs.sh pu deploy BillBuddy-Space ~/gs-admin-training/lab10-hot_deploy/BillBuddy_Space/target/BillBuddy_Space.jar`
+7. Use the gs CLI to deploy BillBuddy_Space.  
+   `./gs.sh pu deploy BillBuddyPU ~/gs-admin-training/lab10-hot_deploy/BillBuddy_Space/target/BillBuddy_Space.jar`
 
 #### 3	Run BillBuddyAccountFeeder from Intellij
 
