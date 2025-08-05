@@ -198,7 +198,7 @@ Use the same instructions as used for the BillBuddyAccountFeeder.
 
 1. Run the following curl command:
 ```
-        curl -X PUT --header 'Accept: application/json' 'http://localhost:8090/v2/update/updatePu?oldResource=BillBuddy_Space.jar&newResource=BillBuddy_Space_V2.jar'
+  curl -X PUT --header 'Accept: application/json' 'http://localhost:8090/v2/update/updatePu?oldResource=BillBuddy_Space.jar&newResource=BillBuddy_Space_V2.jar'
 ```        
 2. Verify that the return code is 0.
 ```
