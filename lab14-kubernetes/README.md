@@ -1,31 +1,26 @@
-# xap-admin-training - lab14
+# gs-admin-training - lab14-kubernetes
 
 # Kubernetes & Vertical scaling
 
 ## Lab Goals
 
-Get experience with running XAP PU on Kubernetes cluster. <br />
-Perform scale of a stateful pu. <br/>
+Get experience with running a XAP PU on a Kubernetes cluster.  
+Perform scale of a stateful pu.
 
 ## Lab Description
-In this lab we will deploy xap-manager, xap-operator, stateful processor pu and stateless feeder. <br />
-We will perform scaling of the processor pu.<br />
+In this lab we will deploy xap-manager, xap-operator, a stateful processor pu and a stateless feeder.  
+We will perform scaling of the processor pu.
 
 ## Prerequisites
-Before beginning to work with the data grid and xap,
-ensure that you have the following installed on your local machine or a VM: <br />
+Before beginning to work with the data grid and xap, ensure that you have the following installed on your local machine or VM:
 
-[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+ * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-[helm](https://docs.helm.sh/using_helm/#quickstart-guide)
-
-Important: Previous versions of this lab supported Helm 2 only. As of XAP 15.5, Helm 3 is supported in XAP 15.5 release.
-
-This lab has been updated to support Helm 3.
-
-[minikube](https://kubernetes.io/docs/setup/minikube/) <br />
-
-[docker engine](https://docs.docker.com/engine/install/) <br />
+ * [helm](https://docs.helm.sh/using_helm/#quickstart-guide)  
+   Important: Previous versions of this lab supported Helm 2 only. As of XAP 15.5, Helm 3 is supported in XAP 15.5 release.  
+   This lab has been updated to support Helm 3.
+ * [minikube](https://kubernetes.io/docs/setup/minikube/)
+ * [docker engine](https://docs.docker.com/engine/install/)
 
 ### minikube Setup ###
 1. Configure memory and cpu:
@@ -37,14 +32,12 @@ This lab has been updated to support Helm 3.
     
 2. After installation, configure the VM driver
 
-    Note: If you installed VirtualBox as the Hypervisor run the following. This step is optional as minikube now prefers to use Docker as the VM driver.
+   Note: If you installed VirtualBox as the Hypervisor run the following. This step is optional as minikube now prefers to use Docker as the VM driver.
 
-    `minikube config set vm-driver virtualbox`
+   `minikube config set vm-driver virtualbox`
 
-3. Start Minikube:
-
-    `minikube start`
-    
+3. Start Minikube:  
+   `minikube start`
 ```    
     😄  minikube v1.17.1 on Ubuntu 18.04
         ▪ KUBECONFIG=/home/dixson/kubeconfig
@@ -63,9 +56,8 @@ This lab has been updated to support Helm 3.
     🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
 
-4. In a separate terminal expose the Minikube LoadBalancer:
-
-    `minikube tunnel`
+4. In a separate terminal expose the Minikube LoadBalancer:  
+   `minikube tunnel`
 
 
 ### Application Deployment
@@ -79,18 +71,16 @@ This lab has been updated to support Helm 3.
     The charts are unpacked in your current directory. This step is optional.
     
     ```
-    helm pull gigaspaces/xap --version 16.2 --untar
-    helm pull gigaspaces/xap-pu --version 16.2 --untar
+    helm pull gigaspaces/xap    --version 17.1.2 --untar
+    helm pull gigaspaces/xap-pu --version 17.1.2 --untar
     ```
 
 #### Manager and Operator deployment   
-1. Deploy a Management Pod called testmanager:
+1. Deploy a Management Pod called testmanager:  
+   `helm install testmanager gigaspaces/xap-manager --version 17.1.2`
 
-    `helm install testmanager gigaspaces/xap-manager --version 16.2`
-
-2. Deploy the xap-operator called operator:
-
-    `helm install operator gigaspaces/xap-operator --version 16.2 --set manager.name=testmanager`
+2. Deploy the xap-operator called operator:  
+   `helm install operator gigaspaces/xap-operator --version 17.1.2 --set manager.name=testmanager`
 
 ##### View and monitor kubernetes deployment
 3. Verify that the pod is running
@@ -107,7 +97,7 @@ This lab has been updated to support Helm 3.
 
 ![Screenshot](./Pictures/Picture1.png)
 
-5. Open Gigaspaces Ops Manager <br />
+5. Open Gigaspaces Ops Manager
     Get the manager ip by running `kubectl get services`, the manager ip will be the __EXTERNAL-IP__, in this case 10.108.7.199
 
     ```
@@ -118,7 +108,7 @@ This lab has been updated to support Helm 3.
     testmanager-xap-manager-service   LoadBalancer   10.108.7.199   10.108.7.199   8090:32221/TCP,4174:31234/TCP,8200:31837/TCP   19s
     ```
 
-    Open Gigaspaces Ops Manager by browsing to <EXTERNAL-IP>:8090
+    Open Gigaspaces Ops Manager by browsing to `<EXTERNAL-IP>:8090`
 
 ![Screenshot](./Pictures/Picture2.png)
 
