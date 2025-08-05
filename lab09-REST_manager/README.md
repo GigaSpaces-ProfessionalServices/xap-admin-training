@@ -1,33 +1,30 @@
-# xap-admin-training - lab9
+# gs-admin-training - lab09-REST_Manager
 
-# GigaSpaces Rest Manager API 
+# GigaSpaces REST Manager API 
 
 ## Lab Goals
 
-**1.** Explore from close GS Rest Manager API <br />
-**2.** Get familiar with GS Rest Manager API capabilities<br />
+1. Explore from close GS REST Manager API.
+2. Get familiar with GS REST Manager API capabilities.
 
 ## Lab Description
-In this lab we will focus on GigaSpaces Rest Manager API.<br>
-To better know its capabilities you will use GS Rest Manager API for your convenience.
+In this lab we will focus on GigaSpaces REST Manager API.  
 
-### 1 Run XAP on your local machine
+### 1 Run GigaSpaces on your local machine
 
  * `cd $GS_HOME/bin` 
  * `./gs.sh host run-agent --auto` 
    
-### 2 GS Rest Manager API
+### 2 GS REST Manager API
 
-* Click on:<br>
-http://localhost:8090/v2
+* Click on:  
+  `http://localhost:8090/v2`
 
 ![Screenshot](./Pictures/Picture1.png)
 
 ### 3 Deploy the Bill Buddy Application
 
-Please follow the steps you did in lab 5 but this time perform all steps (including raising the GSCs) by only using GS Manager API. <br>
-The final result should be the same as in lab 5.
+Please follow the steps you did in lab05 but this time perform all steps (including raising the GSCs) by only using the GS REST Manager API.  
+The final result should be the same as in lab05.
 
-
-
-   
+ 
