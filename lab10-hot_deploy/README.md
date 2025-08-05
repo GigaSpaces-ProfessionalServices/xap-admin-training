@@ -92,7 +92,7 @@ The steps are the same as you have done in lab05.
 4. Copy the `~/gs-admin-training/lab10-hot_deploy/runConfigurations` directory into Intellij's .idea directory and restart Intellij.
 ```
   cd ~/gs-admin-training/lab10-hot_deploy
-  cp -r runConfigurations ./idea/
+  cp -r runConfigurations .idea/
 ```
 
 6. Open a new terminal and navigate to `$GS_HOME/bin/`
