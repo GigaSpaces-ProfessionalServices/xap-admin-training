@@ -26,7 +26,7 @@ We will:
 
 ### Add the Custom Rest Upgrade Plugin
 
-#### 1  Clone the plugin
+1. Clone the github CustomRestPlugins repository.
 ```
     $ git clone https://github.com/GigaSpaces-ProfessionalServices/CustomRestPlugins.git
     Cloning into 'CustomRestPlugins'...
@@ -36,8 +36,7 @@ We will:
     remote: Total 12 (delta 1), reused 12 (delta 1), pack-reused 0
     Unpacking objects: 100% (12/12), 3.04 KiB | 389.00 KiB/s, done.
 ```    
-
-#### 2  Build the project
+2. Build the project.
 ```        
     $ cd CustomRestPlugins/
     $ mvn install
@@ -53,7 +52,10 @@ We will:
     [INFO] Finished at: 2020-04-21T18:33:28+03:00
     [INFO] ------------------------------------------------------------------------
 ```
-#### 3  Copy updatePlugin/target/updatePlugin.jar to ${GS_HOME}/lib/platform/manager/plugins/
+3. Install the custom rest plugin.  
+   Copy updatePlugin/target/updatePlugin.jar to `${GS_HOME}/lib/platform/manager/plugins/`
+
+**Note:** For more information on extending the REST Manager, please visit our [online documentation](https://docs.gigaspaces.com/latest/admin/xap-manager-rest-pluggable.html).
  
 ### Run the BillBuddy application.
 The steps are the same as you have done in lab05.
