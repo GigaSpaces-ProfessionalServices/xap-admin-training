@@ -221,6 +221,6 @@ Use the GS CLI. We will elaborate more on its capabilities on the next lesson an
 
 ![Screenshot](./Pictures/Picture10.png)
 
-2. Go to the GSA console and verify the change in the log message.
+2. Go to the GSA console log and verify the change in the log message.
 
 ![Screenshot](./Pictures/Picture11.png)
