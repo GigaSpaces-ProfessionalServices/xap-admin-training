@@ -9,7 +9,7 @@
 
 ## Lab Description
 In this lab we will focus on GigaSpaces Metrics functionalities.  
-To better know its capabilities you will use InfluxDB and Grafana to configure GS metrics integerated solution.
+To better know its capabilities you will use InfluxDB and Grafana to configure GS metrics integrated solution.
 
 ### 1 Download and install InfluxDB and Grafana
 
