@@ -21,24 +21,24 @@ https://www.virtualbox.org/wiki/Downloads
 
 https://www.vagrantup.com/downloads.html
 
-### 2 "vagrant up" and Provisioning your Virtual Machine
+### 2 "vagrant up" and provisioning your virtual machine
 
-1. `cd ~/xap-admin-training/xap-admin-training-lab8/Vagrant`
+1. `cd ~/gs-admin-training/lab08-gigaspaces_manager/Vagrant`
 2. `vagrant up`
 3. Wait until all 4 virtual machines are booted and ready.
 
-See in the following screenshot node3 is done (booted and ready)and right afterwords node2 is starting booting...  
+See in the following screenshot node3 is done (booted and ready) and immediately after node2 has started to boot...  
 ![Screenshot](./Pictures/Picture1.png)
 
-**Note:** For your convenient some more information on "How to Set Up a Local Linux Environment with Vagrant":  
+**Note:** For more information on "How to Set Up a Local Linux Environment with Vagrant":  
 `https://medium.com/@JohnFoderaro/how-to-set-up-a-local-linux-environment-with-vagrant-163f0ba4da77`
 
 
 ### 3 Explore the cluster
 
-Please enter the Web Management Console (Web UI).  
+Please enter the Web Management Console (web-ui).  
 It should be available on all manager machines: node1, node2 and node3.  
-On node4 you shouldn't be able to use Web Management Console (Web UI) as it is a machine without GS Manager.
+On node4 you shouldn't be able to use Web Management Console (web-ui) as it is a machine without GS Manager.
 
 If you see the following, lab has been completed successfully by you :-)
 
@@ -53,7 +53,7 @@ To login to the machines goto the Vagrant directory and run:<br>
  * `git clone https://github.com/DeemOpen/zkui.git`
  * Follow the **Setup** instructions as appear in the readme:  
    https://github.com/DeemOpen/zkui/blob/master/README.md
- * Explore GS ZK tree to better understand the concept.
+ * Explore GS ZK tree to better understand GigaSpaces and the information stored in ZK.
 
 ### 5 Note:
 
@@ -78,7 +78,7 @@ ip address show
 For example:
 | Node | IP Address |
 |------|------------|
-| Node1 | http://10.211.55.101:8099/ |
-| Node2 | http://10.211.55.102:8099/ |
-| Node3 | http://10.211.55.103:8099/ |
-| Node4 | 10.211.55.104 (No webui or Manager running)|     
+| Node1 | http://10.211.55.101:8090/ |
+| Node2 | http://10.211.55.102:8090/ |
+| Node3 | http://10.211.55.103:8090/ |
+| Node4 | 10.211.55.104 (No web-ui or GigaSpaces Manager running)|     

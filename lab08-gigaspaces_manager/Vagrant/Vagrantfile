@@ -2,24 +2,29 @@ Vagrant.require_version ">= 1.4.3"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-	numNodes = 4
-	r = numNodes..1
-	(r.first).downto(r.last).each do |i|
-		config.vm.define "node#{i}" do |node|
-		        node.vm.box = "centos/7"
-		        #node.vm.box = "generic/ubuntu1804"
-			node.vm.provider "virtualbox" do |v|
-			  v.name = "node#{i}"
-			  v.customize ["modifyvm", :id, "--memory", "3072"]
-			end
-			if i < 10
-				node.vm.network :private_network, ip: "10.211.55.10#{i}"
-			else
-				node.vm.network :private_network, ip: "10.211.55.1#{i}"
-			end
-			node.vm.hostname = "node#{i}"
-			node.vm.provision "shell", path: "scripts/setup-centos-hosts.sh", args: "-t #{numNodes}" 
-			node.vm.provision "shell", path: "scripts/deploy_gs.sh", args: "node1,node2,node3"
-		end
-	end
+    numNodes = 4
+    r = numNodes..1
+    (r.first).downto(r.last).each do |i|
+        config.vm.define "node#{i}" do |node|
+                #node.vm.box = "generic/ubuntu1804"
+                #node.vm.box = "centos/7"
+                #config.vm.box_version = "2004.01"
+                # connecting to yum repo didn't work on centos
+                # rhel didn't let me install an older version of Java
+                config.vm.box = "ubuntu/jammy64"
+                config.vm.box_version = "20241002.0.0"
+            node.vm.provider "virtualbox" do |v|
+                v.name = "node#{i}"
+                v.customize ["modifyvm", :id, "--memory", "3072"]
+            end
+            if i < 10
+                node.vm.network :private_network, ip: "10.211.55.10#{i}"
+            else
+                node.vm.network :private_network, ip: "10.211.55.1#{i}"
+            end
+            node.vm.hostname = "node#{i}"
+            node.vm.provision "shell", path: "scripts/setup-centos-hosts.sh", args: "-t #{numNodes}" 
+            node.vm.provision "shell", path: "scripts/deploy_gs.sh", args: "node1,node2,node3"
+        end
+    end
 end
