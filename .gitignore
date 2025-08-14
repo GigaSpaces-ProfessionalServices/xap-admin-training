@@ -17,6 +17,10 @@ target/
 *.iml
 .settings
 
+# Vagrant #
+###########
+.vagrant
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
