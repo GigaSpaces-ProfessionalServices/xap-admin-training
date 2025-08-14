@@ -4,7 +4,7 @@
 
 ## Lab Goals
 
-1. Explore GigaSpace Java Admin API’s capabilities.
+1. Explore GigaSpaces Java Admin API’s capabilities.
 2. Learn to capture the alerts using the GigaSpace Java Admin APIs.
 
 ## Lab Description
