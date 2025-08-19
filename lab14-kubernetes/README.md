@@ -71,7 +71,7 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     The charts are unpacked in your current directory. This step is optional.
     
     ```
-    helm pull gigaspaces/xap    --version 17.1.2 --untar
+    helm pull gigaspaces/dih    --version 17.1.2 --untar
     helm pull gigaspaces/xap-pu --version 17.1.2 --untar
     ```
 
