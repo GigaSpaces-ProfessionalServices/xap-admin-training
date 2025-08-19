@@ -56,17 +56,17 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
 
-4. In a separate terminal expose the Minikube LoadBalancer:  
+4. In a separate terminal expose the minikube load balancer:  
    `minikube tunnel`
 
 
 ### Application Deployment
 ####  helm repo setup 
-1. Add xap Helm Repo to the Repo List
+1. Add GigaSpaces helm repository to the repository list
 
     `helm repo add gigaspaces https://resources.gigaspaces.com/helm-charts`
 
-2. Fetch the GigaSpaces Helm Charts from the GigaSpaces Repository
+2. Fetch the GigaSpaces Helm charts from the GigaSpaces repository
 
     The charts are unpacked in your current directory. This step is optional.
     
@@ -76,10 +76,10 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     ```
 
 #### Manager and Operator deployment   
-1. Deploy a Management Pod called manager:  
+1. Deploy a **xap-manager** pod called manager:  
    `helm install manager gigaspaces/xap-manager --version 17.1.2`
 
-2. Deploy the xap-operator called operator:  
+2. Deploy the xap-operator and name it operator. The xap-operator is responsible for deployment of PUs and managing the **pu** Custom Resource Definition:  
    `helm install operator gigaspaces/xap-operator --version 17.1.2 --set manager.name=manager`
 
 ##### View and monitor kubernetes deployment
@@ -91,7 +91,7 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     xap-operator-5566dd4587-4kwcq   1/1     Running   0          25m
     ```
     
-4. In a separate terminal open Minikube Dashboard. The browser will automatically open.
+4. In a separate terminal open the Minikube Dashboard. The browser will automatically open.
 
     `minikube dashboard &`
 
@@ -121,18 +121,19 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
 
     (Starts an interactive session)
 
-4. `pu upload $GS_HOME/examples/data-app/event-processing/processor/target/data-processor.jar` <br/>
-   **The result should be:**<br/>
+4. `pu upload $GS_HOME/examples/data-app/event-processing/processor/target/data-processor.jar`  
+   **The result should be:**  
    [data-processor.jar] successfully uploaded
    Resource URL: http://10.108.7.199:8090/v2/resources/data-processor.jar
-5. `pu upload $GS_HOME/examples/data-app/event-processing/feeder/target/data-feeder.jar` <br/>
-   **The result should be:**<br/>
+5. `pu upload $GS_HOME/examples/data-app/event-processing/feeder/target/data-feeder.jar`  
+   **The result should be:**  
    [data-feeder.jar] successfully uploaded
    Resource URL: http://10.108.7.199:8090/v2/resources/data-feeder.jar
 
 ##### Deploy the Processor Service
-   
-`helm install processor gigaspaces/xap-pu --version 16.2 --set manager.name=manager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
+```   
+helm install processor gigaspaces/xap-pu --version 17.1.2 --set manager.name=manager,partitions=2,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar
+```
 
 ```
     kubectl get pod
@@ -146,9 +147,9 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
 ```
     
 ##### Deploy the feeder service
-
-`helm install feeder gigaspaces/xap-pu --version 16.2 --set manager.name=manager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
-
+```
+helm install feeder gigaspaces/xap-pu --version 17.1.2 --set manager.name=manager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar
+```
 ```
     kubectl get pod
     NAME                        READY   STATUS    RESTARTS   AGE
@@ -157,7 +158,7 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     processor-xap-pu-1              1/1     Running   0          20m
     processor-xap-pu-2              1/1     Running   0          20m
     processor-xap-pu-3              1/1     Running   0          20m
-    manager-xap-manager-0       1/1     Running   0          29m
+    manager-xap-manager-0           1/1     Running   0          29m
     xap-operator-5566dd4587-4kwcq   1/1     Running   0          27m
     
     kubectl get pus
@@ -168,21 +169,21 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
 
 ##### View and monitor GS kubernetes deployment
 
-1. Minikube dashboard
+1. minikube dashboard
 
 ![Screenshot](./Pictures/Picture3.png)
 
 2. GS Ops Manager
 
-Click on "Monitor my services" <br/>
+Click on "Monitor my services"  
 
 ![Screenshot](./Pictures/Picture4.png)
 
-Click on "Space" <br/>
+Click on "Space"  
 
 ![Screenshot](./Pictures/Picture5.png)
 
-Query the data:<br/>
+Query the data:  
 
 ![Screenshot](./Pictures/Picture6.png)
 
@@ -192,7 +193,7 @@ Query the data:<br/>
 
 1. Review current RAM occupied by the processor service.
 
-   Click on the processor service <br/>
+   Click on the processor service  
 
    ![Screenshot](./Pictures/Picture7.png)
 
@@ -200,25 +201,25 @@ Query the data:<br/>
 
    ![Screenshot](./Pictures/Picture8.png)
 
-3. Click on Space overview: <br/>
+3. Click on Space overview:  
 
    ![Screenshot](./Pictures/Picture9.png)
 
-#### Perform memory scale using GS CLI
+#### Perform memory scale using the GS CLI
 
 1. Scale the processor service
 
     `$GS_HOME/bin/gs.sh --server 10.108.7.199 pu scale-vertical --memory=600Mi processor`
 
 
-   **The result should be:**<br/>
+   **The result should be:**  
    Request ID     1
 
    Status can be tracked using the command: request status 1
 
-   `request status 1`<br/>
+   `request status 1`  
 
-   **The result should be:**<br/>
+   **The result should be:**  
    REQUEST DETAILS    
    ID                 1                                                      
    Description        Patch request for StatefulSet: [processor-xap-pu-2]    
@@ -227,8 +228,8 @@ Query the data:<br/>
    Submitted From     192.168.99.1                                           
    Submitted At       2020-07-08 09:52:23
 
-   **Finally the result should be:**<br/>
-   `request status 1`<br/>
+   **Finally the result should be:**  
+   `request status 1`  
 
    REQUEST DETAILS    
    ID                 1                                                      
@@ -239,23 +240,24 @@ Query the data:<br/>
    Submitted At       2020-07-08 09:52:23                                    
    Completed At       2020-07-08 09:54:28
 
-3. Partition 2 Memory should be bigger:<br/>
-   Looking at GS Ops manager service view:<br/>
+3. Partition 2's memory should have increased:  
+   The GS Ops manager service view is below:  
 
    ![Screenshot](./Pictures/Picture10.png)
 
-   Looking at the minikube dashboard pods view:
+   The minikube dashboard pods view is below:
    ![Screenshot](./Pictures/Picture11.png)
 
 
 
 ### Cleanup
 ##### Undeploy the services
+```
     helm del feeder
     helm del processor
     helm del operator
     helm del manager
-
+```
 ##### Delete and stop the minikube
     minikube delete
   
