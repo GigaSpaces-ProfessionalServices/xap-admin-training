@@ -76,18 +76,18 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     ```
 
 #### Manager and Operator deployment   
-1. Deploy a Management Pod called testmanager:  
-   `helm install testmanager gigaspaces/xap-manager --version 17.1.2`
+1. Deploy a Management Pod called manager:  
+   `helm install manager gigaspaces/xap-manager --version 17.1.2`
 
 2. Deploy the xap-operator called operator:  
-   `helm install operator gigaspaces/xap-operator --version 17.1.2 --set manager.name=testmanager`
+   `helm install operator gigaspaces/xap-operator --version 17.1.2 --set manager.name=manager`
 
 ##### View and monitor kubernetes deployment
 3. Verify that the pod is running
     ```
     kubectl get pods
     NAME                        READY   STATUS    RESTARTS   AGE
-    testmanager-xap-manager-0       1/1     Running   0          26m
+    manager-xap-manager-0           1/1     Running   0          26m
     xap-operator-5566dd4587-4kwcq   1/1     Running   0          25m
     ```
     
@@ -104,8 +104,8 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     kubectl get services
     NAME                              TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                        AGE
     kubernetes                        ClusterIP      10.96.0.1      <none>         443/TCP                                        4m17s
-    testmanager-xap-manager-hs        ClusterIP      None           <none>         2181/TCP,2888/TCP,3888/TCP,4174/TCP            19s
-    testmanager-xap-manager-service   LoadBalancer   10.108.7.199   10.108.7.199   8090:32221/TCP,4174:31234/TCP,8200:31837/TCP   19s
+    manager-xap-manager-hs            ClusterIP      None           <none>         2181/TCP,2888/TCP,3888/TCP,4174/TCP            19s
+    manager-xap-manager-service       LoadBalancer   10.108.7.199   10.108.7.199   8090:32221/TCP,4174:31234/TCP,8200:31837/TCP   19s
     ```
 
     Open Gigaspaces Ops Manager by browsing to `<EXTERNAL-IP>:8090`
@@ -132,7 +132,7 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
 
 ##### Deploy the Processor Service
    
-`helm install processor gigaspaces/xap-pu --version 16.2 --set manager.name=testmanager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
+`helm install processor gigaspaces/xap-pu --version 16.2 --set manager.name=manager,partitions=2,ha=true,readinessProbe.enabled=true,resourceUrl=http://10.108.7.199:8090/v2/resources/data-processor.jar`
 
 ```
     kubectl get pod
@@ -141,13 +141,13 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     processor-xap-pu-1              1/1     Running   0          19m
     processor-xap-pu-2              1/1     Running   0          19m
     processor-xap-pu-3              1/1     Running   0          18m
-    testmanager-xap-manager-0       1/1     Running   0          28m
+    manager-xap-manager-0           1/1     Running   0          28m
     xap-operator-5566dd4587-4kwcq   1/1     Running   0          26m
 ```
     
 ##### Deploy the feeder service
 
-`helm install feeder gigaspaces/xap-pu --version 16.2 --set manager.name=testmanager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
+`helm install feeder gigaspaces/xap-pu --version 16.2 --set manager.name=manager,resourceUrl=http://10.108.7.199:8090/v2/resources/data-feeder.jar`
 
 ```
     kubectl get pod
@@ -157,7 +157,7 @@ Before beginning to work with the data grid and xap, ensure that you have the fo
     processor-xap-pu-1              1/1     Running   0          20m
     processor-xap-pu-2              1/1     Running   0          20m
     processor-xap-pu-3              1/1     Running   0          20m
-    testmanager-xap-manager-0       1/1     Running   0          29m
+    manager-xap-manager-0       1/1     Running   0          29m
     xap-operator-5566dd4587-4kwcq   1/1     Running   0          27m
     
     kubectl get pus
@@ -254,7 +254,7 @@ Query the data:<br/>
     helm del feeder
     helm del processor
     helm del operator
-    helm del testmanager
+    helm del manager
 
 ##### Delete and stop the minikube
     minikube delete
